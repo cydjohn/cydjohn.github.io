@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="好久没写博客了，因为中间发生了很多事，心情很乱，没有心思写博客，改写日记。。。现在又来了美帝开始读研究生，感觉博客还是要继续写。虽然这写东西并不能称作为博客，因为自己写的几乎就是照搬网上的一些东西，更像是一堆技术笔记。不过管他的，反正除了我自己又没人看……  之前登录阿里云都是像这样： 1ssh username@IP 然后这几天上课，发现教授要求用公钥私钥登录，免去了写密码的步骤，感觉十分方便">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过公钥登录阿里云">
+<meta property="og:url" content="http://caoyudong.com/2016/09/17/通过公钥登录阿里云/index.html">
+<meta property="og:site_name" content="BAZINGA">
+<meta property="og:description" content="好久没写博客了，因为中间发生了很多事，心情很乱，没有心思写博客，改写日记。。。现在又来了美帝开始读研究生，感觉博客还是要继续写。虽然这写东西并不能称作为博客，因为自己写的几乎就是照搬网上的一些东西，更像是一堆技术笔记。不过管他的，反正除了我自己又没人看……  之前登录阿里云都是像这样： 1ssh username@IP 然后这几天上课，发现教授要求用公钥私钥登录，免去了写密码的步骤，感觉十分方便">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://caoyudong.com/image/5f898949-d22a-4196-8647-1d71693267c3.png">
+<meta property="og:image" content="http://caoyudong.com/image/3d76a3c9-f64f-49bc-bea4-e91b3cf19f1c.png">
+<meta property="og:updated_time" content="2018-09-12T05:56:07.709Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过公钥登录阿里云">
+<meta name="twitter:description" content="好久没写博客了，因为中间发生了很多事，心情很乱，没有心思写博客，改写日记。。。现在又来了美帝开始读研究生，感觉博客还是要继续写。虽然这写东西并不能称作为博客，因为自己写的几乎就是照搬网上的一些东西，更像是一堆技术笔记。不过管他的，反正除了我自己又没人看……  之前登录阿里云都是像这样： 1ssh username@IP 然后这几天上课，发现教授要求用公钥私钥登录，免去了写密码的步骤，感觉十分方便">
+<meta name="twitter:image" content="http://caoyudong.com/image/5f898949-d22a-4196-8647-1d71693267c3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://caoyudong.com/2016/09/17/通过公钥登录阿里云/"/>
+
+
+
+
+
+  <title>通过公钥登录阿里云 | BAZINGA</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BAZINGA</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">BAZINGA's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2016/09/17/通过公钥登录阿里云/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">通过公钥登录阿里云</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-17T17:39:37-05:00">
+                2016-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>好久没写博客了，因为中间发生了很多事，心情很乱，没有心思写博客，改写日记。。。现在又来了美帝开始读研究生，感觉博客还是要继续写。虽然这写东西并不能称作为博客，因为自己写的几乎就是照搬网上的一些东西，更像是一堆技术笔记。不过管他的，反正除了我自己又没人看……</p>
+</blockquote>
+<p>之前登录阿里云都是像这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@IP</span><br></pre></td></tr></table></figure>
+<p>然后这几天上课，发现教授要求用公钥私钥登录，免去了写密码的步骤，感觉十分方便（虽然是老技术，自己之前也知道，但是从来都没折腾过，所以一直用着密码登录，真是没有一点点求知欲）。</p>
+<a id="more"></a>
+<p>具体操作如下：</p>
+<h2 id="创建-ssh-autorized-keys文件"><a href="#创建-ssh-autorized-keys文件" class="headerlink" title="创建~/.ssh/autorized_keys文件"></a>创建<code>~/.ssh/autorized_keys</code>文件</h2><p>我的阿里云用的是Ubuntu，没有<code>~/.ssh/autorized_keys</code>，所以要自己手动创建一个</p>
+<p>首先登录到客户端，根目录下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh</span><br></pre></td></tr></table></figure>
+<p>给<code>~/.ssh</code>文件夹赋予权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>常用修改权限的命令：</p>
+</blockquote>
+<blockquote>
+<p>chmod 600 ××× （只有所有者有读和写的权限）</p>
+</blockquote>
+<blockquote>
+<p> chmod 644 ××× （所有者有读和写的权限，组用户只有读的权限）</p>
+</blockquote>
+<blockquote>
+<p>chmod 700 ××× （只有所有者有读和写以及执行的权限）</p>
+</blockquote>
+<blockquote>
+<p>chmod 666 ××× （每个人都有读和写的权限）</p>
+</blockquote>
+<blockquote>
+<p>chmod 777 ××× （每个人都有读和写以及执行的权限）</p>
+</blockquote>
+<p>然后通过新建一个<code>autorized_keys</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.ssh/autorized_keys</span><br></pre></td></tr></table></figure>
+<h2 id="修改-etc-ssh-sshd-config"><a href="#修改-etc-ssh-sshd-config" class="headerlink" title="修改/etc/ssh/sshd_config"></a>修改<code>/etc/ssh/sshd_config</code></h2><p>通过vim打开/etc/ssh/sshd_config文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>取消这一行的注释</p>
+<p><img src="../../../../image/5f898949-d22a-4196-8647-1d71693267c3.png" alt=""> </p>
+<p>然后重启ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
+<h2 id="添加自己的公钥"><a href="#添加自己的公钥" class="headerlink" title="添加自己的公钥"></a>添加自己的公钥</h2><p>公钥可以自己生成一个，然后自己保管好私钥就好。由于我的电脑是Mac，就直接用自己的了。</p>
+<p>我的公钥在自己电脑的<code>~/.ssh/</code>目录下，通过SCP命令上传到自己的服务器，注意IP后面有个冒号！！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#本地命令</span></span><br><span class="line">scp id_rsa.pub username@IP:</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../image/3d76a3c9-f64f-49bc-bea4-e91b3cf19f1c.png" alt=""></p>
+<p>然后回到服务器根目录，通过命令，将公钥添加到 <code>~/.ssh/authorized_keys</code>文件里 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#服务器命令</span></span><br><span class="line">cat *.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>然后就可以直接通过命令登录了，不再需要输入密码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@IP</span><br></pre></td></tr></table></figure>
+<hr>
+<p>对于亚马逊云（AWS）的Amazon Linux，这个Linux里面以及有了<code>~/.ssh/authorized_keys</code>文件，无需创建，直接添加公钥就好～</p>
+<blockquote>
+<p>这个学校明明那么有钱，却不给学生租点服务器，要学生自己去租亚马逊云。。。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/22/pdfMiner-UnicodeEncodeError/" rel="next" title="pdfMiner UnicodeEncodeError">
+                <i class="fa fa-chevron-left"></i> pdfMiner UnicodeEncodeError
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/28/pip和easy-install/" rel="prev" title="pip和easy_install">
+                pip和easy_install <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">BAZINGA</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-ssh-autorized-keys文件"><span class="nav-number">1.</span> <span class="nav-text">创建~/.ssh/autorized_keys文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-etc-ssh-sshd-config"><span class="nav-number">2.</span> <span class="nav-text">修改/etc/ssh/sshd_config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加自己的公钥"><span class="nav-number">3.</span> <span class="nav-text">添加自己的公钥</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BAZINGA</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
