@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://caoyudong.com/"/>
-  <updated>2018-09-12T05:56:07.687Z</updated>
+  <updated>2018-09-25T03:03:06.761Z</updated>
   <id>http://caoyudong.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CMMotionActivityManager</title>
+    <link href="http://caoyudong.com/2018/09/24/CMMotionActivityManager/"/>
+    <id>http://caoyudong.com/2018/09/24/CMMotionActivityManager/</id>
+    <published>2018-09-25T02:14:44.000Z</published>
+    <updated>2018-09-25T03:03:06.761Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在很多应用都需要检测用户的运动情况，而iPhone上有一整套传感器可以帮助开发者确定用户的运动状况例如 气压计，陀螺仪，磁强计，加速度传感器和GPS模块，然而这些传感器模块的数据需要通过CPU计算得到判断得到结果，如果一直在后台运行程序来不断获取数据容易让app变得十分耗电，比如美国的一家新型保险公司root。他们通过app来检测得到用户的驾驶数据，然后通过计算得到用户的驾驶习惯，评估之后会给出用户相应的保险报价。比如这个人加速过快或者转弯过猛就说明这个人驾驶习惯不好，保险费用就会相对来说高一些。然后我下载了这个app之后惊奇的发现，就算半夜我没开车它也一直在后台获取我的数据，导致我手机一晚上耗电百分之十几（新的iPhone 8P，平时一晚上大约掉1%的电）</p><p><img src="../image/e64605d8-66a1-4f4f-89e4-48773ff416a8.JPG" alt=""></p><a id="more"></a><h2 id="M系列协处理器"><a href="#M系列协处理器" class="headerlink" title="M系列协处理器"></a>M系列协处理器</h2><p>对于这个问题，苹果有更好的解决办法了。自从2013年的iPhone5s之后每一台iPhone和Apple Watch上都装上了<strong>M系列</strong>协处理器。通过这个专用硬件系统可以将所有传感器处理工作从CPU上卸载掉，从而减少电量的使用。CMMotionActivityManager 由 Core Motion 框架提供。Core Motion 通过调用<strong>M系列</strong>协处理器来获取用户运动情况。</p><h2 id="CMMotionActivity"><a href="#CMMotionActivity" class="headerlink" title="CMMotionActivity"></a>CMMotionActivity</h2><p>CMMotionActivity 对每种运动都会有个布尔值属性，并且还有一个设备是否处于静止状态的属性。也就是说用户可能同时处于多个状态，比如开着车突然停在了红灯前，那么 automotive和 stationary都会为 ture。</p><p>属性列表如下：</p><table><thead><tr><th style="text-align:left">属性</th><th style="text-align:left">解释</th></tr></thead><tbody><tr><td style="text-align:left">stationary</td><td style="text-align:left">禁止状态</td></tr><tr><td style="text-align:left">walking</td><td style="text-align:left">走路</td></tr><tr><td style="text-align:left">running</td><td style="text-align:left">跑步</td></tr><tr><td style="text-align:left">cycling</td><td style="text-align:left">自行车</td></tr><tr><td style="text-align:left">automotive</td><td style="text-align:left">交通工具（如果是在陆地上可以视为开车，如果是在水里可以视为在坐船）</td></tr><tr><td style="text-align:left">unknown</td><td style="text-align:left">无法识别</td></tr></tbody></table><p>为了方便理解我自己写了个app，放几张截图来解释下，其中红色背景代表熟悉布尔值为<code>false</code>的情况，绿色为<code>true</code>的情况：</p><p>这是你在开车 <em>（刚开始开车不会识别，大约行驶1分钟之后显示为在开车）</em>：</p><p><img src="../image/d7fbe7a4-ae14-45bf-a3e7-1cb23e7f2640.PNG" alt=""></p><p>这是你开车停到了红灯前：</p><p><img src="../image/359d0179-68d9-4e40-8bab-f4f927cafd66.PNG" alt=""></p><p>这是手机放着不动：</p><p><img src="../image/7aff2260-cb42-4b58-8d23-87a981ddb981.PNG" alt=""></p><p>这是跑步或者你快速的摇手机：</p><p><img src="../image/e62d20ad-05a2-46d7-9e40-ec072d1a07c2.PNG" alt=""></p><p>这是人在走路或者慢慢的摇手机：</p><p><img src="../image/8113be39-f23f-408d-b3c1-686b937caee3.PNG" alt=""></p><h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> CoreMotion</span><br><span class="line"><span class="keyword">let</span> manager = <span class="type">CMMotionActivityManager</span>()</span><br><span class="line">manager.startActivityUpdates(to: .main) &#123; (activity) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> activity = activity <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> activity.walking &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"🚶‍"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> activity.running &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"🏃‍"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> activity.cycling &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"🚴‍"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> activity.automotive &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"🚗"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> activity.stationary &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"🛑"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><a href="https://developer.apple.com/documentation/coremotion/cmmotionactivity" target="_blank" rel="noopener">https://developer.apple.com/documentation/coremotion/cmmotionactivity</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在很多应用都需要检测用户的运动情况，而iPhone上有一整套传感器可以帮助开发者确定用户的运动状况例如 气压计，陀螺仪，磁强计，加速度传感器和GPS模块，然而这些传感器模块的数据需要通过CPU计算得到判断得到结果，如果一直在后台运行程序来不断获取数据容易让app变得十分耗电，比如美国的一家新型保险公司root。他们通过app来检测得到用户的驾驶数据，然后通过计算得到用户的驾驶习惯，评估之后会给出用户相应的保险报价。比如这个人加速过快或者转弯过猛就说明这个人驾驶习惯不好，保险费用就会相对来说高一些。然后我下载了这个app之后惊奇的发现，就算半夜我没开车它也一直在后台获取我的数据，导致我手机一晚上耗电百分之十几（新的iPhone 8P，平时一晚上大约掉1%的电）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../image/e64605d8-66a1-4f4f-89e4-48773ff416a8.JPG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://caoyudong.com/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title>259. 3Sum Smaller</title>
@@ -519,25 +540,6 @@
     
     
       <category term="算法" scheme="http://caoyudong.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>13. Roman to Integer</title>
-    <link href="http://caoyudong.com/2018/04/12/13-Roman-to-Integer/"/>
-    <id>http://caoyudong.com/2018/04/12/13-Roman-to-Integer/</id>
-    <published>2018-04-13T03:13:15.000Z</published>
-    <updated>2018-09-12T05:56:07.685Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given a roman numeral, convert it to an integer.</p><p>Input is guaranteed to be within the range from 1 to 3999.</p><a id="more"></a><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>罗马数字共有7个，即Ⅰ（1）、Ⅴ（5）、Ⅹ（10）、Ⅼ（50）、Ⅽ（100）、Ⅾ（500）和Ⅿ（1000）。</p><ul><li>重复数次：一个罗马数字重复几次，就表示这个数的几倍。</li><li>右加左减：<ul><li>在较大的罗马数字的右边记上较小的罗马数字，表示大数字加小数字。</li><li>在较大的罗马数字的左边记上较小的罗马数字，表示大数字减小数字。</li><li>左减的数字有限制，仅限于I、X、C。比如45不可以写成VL，只能是XLV<br>但是，左减时不可跨越一个位值。比如，99不可以用IC（ {\displaystyle 100-1} 100-1）表示，而是用XCIX（ {\displaystyle [100-10]+[10-1]} [100-10]+[10-1]）表示。（等同于阿拉伯数字每位数字分别表示。）</li><li>左减数字必须为一位，比如8写成VIII，而非IIX。</li><li>右加数字不可连续超过三位，比如14写成XIV，而非XIIII。（见下方“数码限制”一项。）</li></ul></li></ul><blockquote><p>参考自<a href="https://zh.wikipedia.org/wiki/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97" target="_blank" rel="noopener">维基百科</a></p></blockquote><p>所以从右往左依次读取每一个字符，比较他们的大小。如果右边一位字符的值大于当前字符的值，就在总结果里面减去当前的值，如果大于或等于当前的值就在总结果加上当前的值。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt; romanMap = &#123;&#123;<span class="string">'I'</span>,<span class="number">1</span>&#125;,&#123;<span class="string">'V'</span>,<span class="number">5</span>&#125;,&#123;<span class="string">'X'</span>,<span class="number">10</span>&#125;,&#123;<span class="string">'L'</span>,<span class="number">50</span>&#125;,&#123;<span class="string">'C'</span>,<span class="number">100</span>&#125;,&#123;<span class="string">'D'</span>,<span class="number">500</span>&#125;,&#123;<span class="string">'M'</span>,<span class="number">1000</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">int</span> result = romanMap[s[s.size()<span class="number">-1</span>]];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = s.size()<span class="number">-2</span>;i&gt;=<span class="number">0</span>;i--) &#123;</span><br><span class="line">        <span class="keyword">if</span>(romanMap[s[i]]&gt;=romanMap[s[i+<span class="number">1</span>]]) &#123;</span><br><span class="line">            result+=romanMap[s[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            result-=romanMap[s[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h2&gt;&lt;p&gt;Given a roman numeral, convert it to an integer.&lt;/p&gt;
-&lt;p&gt;Input is guaranteed to be within the range from 1 to 3999.&lt;/p&gt;
-    
-    </summary>
-    
     
   </entry>
   

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CMMotionActivityManager]]></title>
+    <url>%2F2018%2F09%2F24%2FCMMotionActivityManager%2F</url>
+    <content type="text"><![CDATA[现在很多应用都需要检测用户的运动情况，而iPhone上有一整套传感器可以帮助开发者确定用户的运动状况例如 气压计，陀螺仪，磁强计，加速度传感器和GPS模块，然而这些传感器模块的数据需要通过CPU计算得到判断得到结果，如果一直在后台运行程序来不断获取数据容易让app变得十分耗电，比如美国的一家新型保险公司root。他们通过app来检测得到用户的驾驶数据，然后通过计算得到用户的驾驶习惯，评估之后会给出用户相应的保险报价。比如这个人加速过快或者转弯过猛就说明这个人驾驶习惯不好，保险费用就会相对来说高一些。然后我下载了这个app之后惊奇的发现，就算半夜我没开车它也一直在后台获取我的数据，导致我手机一晚上耗电百分之十几（新的iPhone 8P，平时一晚上大约掉1%的电） M系列协处理器对于这个问题，苹果有更好的解决办法了。自从2013年的iPhone5s之后每一台iPhone和Apple Watch上都装上了M系列协处理器。通过这个专用硬件系统可以将所有传感器处理工作从CPU上卸载掉，从而减少电量的使用。CMMotionActivityManager 由 Core Motion 框架提供。Core Motion 通过调用M系列协处理器来获取用户运动情况。 CMMotionActivityCMMotionActivity 对每种运动都会有个布尔值属性，并且还有一个设备是否处于静止状态的属性。也就是说用户可能同时处于多个状态，比如开着车突然停在了红灯前，那么 automotive和 stationary都会为 ture。 属性列表如下： 属性 解释 stationary 禁止状态 walking 走路 running 跑步 cycling 自行车 automotive 交通工具（如果是在陆地上可以视为开车，如果是在水里可以视为在坐船） unknown 无法识别 为了方便理解我自己写了个app，放几张截图来解释下，其中红色背景代表熟悉布尔值为false的情况，绿色为true的情况： 这是你在开车 （刚开始开车不会识别，大约行驶1分钟之后显示为在开车）： 这是你开车停到了红灯前： 这是手机放着不动： 这是跑步或者你快速的摇手机： 这是人在走路或者慢慢的摇手机： 核心代码12345678910111213141516171819202122import CoreMotionlet manager = CMMotionActivityManager()manager.startActivityUpdates(to: .main) &#123; (activity) in guard let activity = activity else &#123; return &#125; if activity.walking &#123; print("🚶‍") &#125; if activity.running &#123; print("🏃‍") &#125; if activity.cycling &#123; print("🚴‍") &#125; if activity.automotive &#123; print("🚗") &#125; if activity.stationary &#123; print("🛑") &#125;&#125; https://developer.apple.com/documentation/coremotion/cmmotionactivity]]></content>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[259. 3Sum Smaller]]></title>
     <url>%2F2018%2F07%2F17%2F259-3Sum-Smaller%2F</url>
     <content type="text"><![CDATA[题目Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 &lt;= i &lt; j &lt; k &lt; nthat satisfy the condition nums[i] + nums[j] + nums[k] &lt; target. Example: Input: nums = [-2,0,1,3], and target = 2Output: 2Explanation: Because there are two triplets which sums are less than 2: [-2,0,1] [-2,0,3] 思路跟 3Sum 类似，但是这题只用求count个数。所以当second 和 third满足条件时，[second,third]这个区间都满足条件，于是 计算count += third - second就可以了。 代码123456789101112131415161718192021//C++int threeSumSmaller(vector&lt;int&gt;&amp; nums, int target) &#123; if(nums.size()&lt;3) return 0; int count = 0; sort(nums.begin(),nums.end()); for(int first = 0;first&lt;nums.size()-2;first++) &#123; int second = first + 1; int third = nums.size()-1; while(second&lt;third) &#123; if(nums[first] + nums[second] + nums[third]&lt;target) &#123; count += third - second; second ++; &#125; else &#123; third --; &#125; &#125; &#125; return count;&#125;]]></content>
@@ -604,7 +612,7 @@
   </entry>
   <entry>
     <title><![CDATA[OS X系统上安装树莓派Raspbian系统]]></title>
-    <url>%2F2015%2F12%2F03%2FOS%20X%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F%2F</url>
+    <url>%2F2015%2F12%2F03%2FOS-X%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F%2F</url>
     <content type="text"><![CDATA[首先去官网下载一个Raspbin 下载完成之后得到一个压缩包，解压之后得到一个镜像文件 2015-11-21-raspbian-jessie.img。 然后准备一张SD卡，最好8G以上吧。 图形化界面安装 将SD卡插入Mac上的读卡器。 点击屏幕左上角苹果标志，关于本机-&gt;系统报告,找到USB-&gt;Card Reader-&gt;BSD。找到一个类似于 diskn的数据，比如我的是 disk2。 用磁盘工具抹掉SD卡，SD卡文件格式必须为 FAT32，如果不是自己用磁盘工具重新格式化（launchpad-&gt;其他-&gt;磁盘工具）。 在终端输入 1sudo dd bs=1m if=path_of_your_image.img of=/dev/rdiskn 其中path_of_your_image.img是你放镜像文件的路径，rdiskn中n是你之前看的diskn那个数字，我的是2，所以就是rdisk2 如果命令失效，就用diskn代替rdiskn。 用命令行安装1.打开终端2.输入 1diskutil list 找到你的SD卡的磁盘号，我的是disk2。 3.抹除SD卡 输入来抹除SD卡1diskutil unmountDisk /dev/diskn #n需要替换成数字 例如我的是这样 1diskutil unmountDisk /dev/disk2 4.把镜像拷到SD卡上 1sudo dd bs=1m if=image.img of=/dev/rdiskn #n需要替换成数字 例如我的是 1sudo dd bs=1m if=2015-11-21-raspbian-jessie.img of=/dev/rdisk2 如果出现dd: invalid number &#39;1m&#39;，就把1m换车1M。 时间很慢，大约需要5分多钟，没有进度条，慢慢等喽 官方安装教程]]></content>
       <tags>
         <tag>树莓派</tag>
@@ -612,7 +620,7 @@
   </entry>
   <entry>
     <title><![CDATA[EI CAPTAIN设置使用三根手指拖动窗口]]></title>
-    <url>%2F2015%2F11%2F08%2FEI%20CAPTAIN%E8%AE%BE%E7%BD%AE%E4%BD%BF%E7%94%A8%E4%B8%89%E6%A0%B9%E6%89%8B%E6%8C%87%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%2F</url>
+    <url>%2F2015%2F11%2F08%2FEI-CAPTAIN%E8%AE%BE%E7%BD%AE%E4%BD%BF%E7%94%A8%E4%B8%89%E6%A0%B9%E6%89%8B%E6%8C%87%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%2F</url>
     <content type="text"><![CDATA[前几天手贱抹了磁盘，废了好大的劲才把系统重新装回来。结果设置触控板的时候发现，原来系统上的三根手指拖动窗口的选项不见了！！找了很多地方终于在这个网上找到了。(其实一开始就用谷歌哪来那么多事，怪我手贱用百度浪费了好多时间……) 打开系统偏好设置-&gt;辅助功能 找到鼠标与触控板—&gt;触控板选项… 勾选启用拖移-&gt;三指拖移就可以了]]></content>
       <tags>
         <tag>Mac</tag>
@@ -620,7 +628,7 @@
   </entry>
   <entry>
     <title><![CDATA[Could not launch “My App” process launch failed： Security]]></title>
-    <url>%2F2015%2F11%2F08%2FCould%20not%20launch%20%E2%80%9CMy%20App%E2%80%9D%20process%20launch%20failed%EF%BC%9A%20Security%2F</url>
+    <url>%2F2015%2F11%2F08%2FCould-not-launch-%E2%80%9CMy-App%E2%80%9D-process-launch-failed%EF%BC%9A-Security%2F</url>
     <content type="text"><![CDATA[iOS9真机调试的时候，Xcode会弹出Could not launch &quot;My App&quot; process launch failed: Security。 这时会发现手机上已经安装了你的应用了。点击应用又会弹出 当时我就跪了！！设置那么大！！你让我去哪里找！！！ 把设置遍历了一遍终于找到了： 设置 -&gt; 通用 -&gt; 描述文件 -&gt; “你真机运行的AppleID” 选择信任 然后就可以了。]]></content>
       <tags>
         <tag>IOS</tag>
@@ -782,7 +790,7 @@
   </entry>
   <entry>
     <title><![CDATA[CUICatalog：Invalid asset name supplied：(null)]]></title>
-    <url>%2F2015%2F09%2F07%2FCUICatalog%EF%BC%9AInvalid%20asset%20name%20supplied%EF%BC%9A(null)%2F</url>
+    <url>%2F2015%2F09%2F07%2FCUICatalog%EF%BC%9AInvalid-asset-name-supplied%EF%BC%9A-null%2F</url>
     <content type="text"><![CDATA[今天遇到了个神奇的问题： 122015-09-06 14:32:32.246 B-smart[1056:65917] CUICatalog: Invalid asset name supplied: (null)2015-09-06 14:32:32.246 B-smart[1056:65917] Could not load the &quot;(null)&quot; image referenced from a nib in the bundle with identifier &quot;com.scut.B-smart&quot; 查了下，这个提示的意思是说你用了这个方法：[UIImage imageNamed:name];但是这个name却是空的，所以就报了这个错了。 解决方法，在项目中搜索[UIImage imageNamed:,然后打印看看所谓的name是否为空。找到后替换。]]></content>
       <tags>
         <tag>IOS</tag>
