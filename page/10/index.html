@@ -319,6 +319,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/10/27/SwiftyJSON/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/10/27/SwiftyJSON/" itemprop="url">
+                  SwiftyJSON
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-10-27 13:39:53" itemprop="dateCreated datePublished" datetime="2015-10-27T13:39:53-05:00">2015-10-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-12 00:56:07" itemprop="dateModified" datetime="2018-09-12T00:56:07-05:00">2018-09-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/10/27/SwiftyJSON/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/10/27/SwiftyJSON/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://github.com/SwiftyJSON/SwiftyJSON" target="_blank" rel="noopener">SwiftyJSON</a>是用swift写的一款处理JSON数据的库。我个人觉得非常好用～</p>
+<p>为什么好用呢？借用下作者的例子：以前，我们需要向下面这样处理JSON数据，来得到一个人的名字：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="type">JSONObject</span>: <span class="type">AnyObject</span>? = <span class="type">NSJSONSerialization</span>.<span class="type">JSONObjectWithData</span>(data, options: <span class="literal">nil</span>, error: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> statusesArray = <span class="type">JSONObject</span> <span class="keyword">as</span>? [<span class="type">AnyObject</span>],</span><br><span class="line">   <span class="keyword">let</span> status = statusesArray[<span class="number">0</span>] <span class="keyword">as</span>? [<span class="type">String</span>: <span class="type">AnyObject</span>],</span><br><span class="line">   <span class="keyword">let</span> user = status[<span class="string">"user"</span>] <span class="keyword">as</span>? [<span class="type">String</span>: <span class="type">AnyObject</span>],</span><br><span class="line">   <span class="keyword">let</span> username = user[<span class="string">"name"</span>] <span class="keyword">as</span>? <span class="type">String</span> &#123;</span><br><span class="line">    <span class="comment">// Finally we got the username</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很不优雅……</p>
+<p>但是用了SwiftJSON之后这样就可以得到了</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = <span class="type">JSON</span>(data: dataFromNetworking)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> userName = json[<span class="number">0</span>][<span class="string">"user"</span>][<span class="string">"name"</span>].string&#123;</span><br><span class="line">  <span class="comment">//Now you got your value</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而且随便玩，完全不用担心程序崩溃。如果数组访问越界或者数据不存在它自动返回<code>nil</code></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/10/27/SwiftyJSON/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/10/27/Alamofire/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1831,205 +2005,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/09/24/Shadowsocks使用教程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BAZINGA">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/24/Shadowsocks使用教程/" itemprop="url">
-                  Shadowsocks使用教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2015-09-24 01:16:24" itemprop="dateCreated datePublished" datetime="2015-09-24T01:16:24-05:00">2015-09-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-12 00:56:07" itemprop="dateModified" datetime="2018-09-12T00:56:07-05:00">2018-09-12</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/09/24/Shadowsocks使用教程/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/09/24/Shadowsocks使用教程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>Shadowsocks（中文名称：影梭）是使用Python、C++、C#等语言开发的、基于Apache许可证的开放源代码软件，用于保护网络流量、加密数据传输。Shadowsocks使用Socks5代理方式。</p>
-</blockquote>
-<blockquote>
-<p>Shadowsocks分为服务器端和客户端。在使用之前，需要先将服务器端部署到服务器上面，然后通过客户端连接并创建本地代理。</p>
-</blockquote>
-<blockquote>
-<p>在中国大陆，本工具也被广泛用于突破防火长城（GFW），以浏览被封锁、屏蔽或干扰的内容。在2015年8月22日，Shadowsocks原作者Clowwindy称受到了中国政府的压力，宣布停止维护此项目并移除其用户页面所载的源代码。</p>
-</blockquote>
-<p><strong>但是如果人在国外，就可以反过来，通过国内的服务器去下载和访问一些“有版权问题”的资源。由于传输数据被加密过，外国政府一般不可能知道你下载或者访问了什么，只知道你链接了一个中国的服务器(当然，如果用了什么好莱坞电影里面那种黑科技查出来了我也没办法……）</strong></p>
-<h2 id="Windows端"><a href="#Windows端" class="headerlink" title="Windows端"></a>Windows端</h2><p>先到这里下载windows客户端<a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks-windows/releases</a></p>
-<p><img src="http://i1.piimg.com/567571/3cebd7e6a08c6b16.png" alt=""></p>
-<p>然后，解压，双击打开</p>
-<p>填入地址密码端口号等信息，然后点击<code>确定</code></p>
-<p><img src="http://i1.piimg.com/567571/be5646c90c5f1b35.png" alt=""></p>
-<p>然后在通知栏找到小飞机标志，打开<code>全局模式</code>，打开代理就可以正常使用了（如图：</p>
-<p><img src="http://p1.bqimg.com/567571/c25a92c442852751.png" alt=""></p>
-<h2 id="Mac端"><a href="#Mac端" class="headerlink" title="Mac端"></a>Mac端</h2><ul>
-<li>先从这里下载程序<a href="https://github.com/shadowsocks/shadowsocks-iOS/releases" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks-iOS/releases</a></li>
-</ul>
-<p><img src="http://i1.piimg.com/567571/b078ee3235b03e4a.png" alt=""></p>
-<ul>
-<li>然后双击下载文件，将程序拖入<code>Applications</code>中</li>
-</ul>
-<p><img src="http://i1.piimg.com/567571/03d584a3b478e03e.png" alt=""></p>
-<p>之后在lunchpad中找到ShadowsocksX，点击运行，可以在电脑右上角看到这个标志</p>
-<p><img src="http://i1.piimg.com/567571/126a757dee254e9b.png" alt=""></p>
-<p>点击“Servers”-&gt; “Open Server Preferences”</p>
-<p><img src="http://i1.piimg.com/567571/62cd073e960c7dc1.png" alt=""></p>
-<p>点击“➕”号添加一个服务器</p>
-<p><img src="http://i1.piimg.com/567571/dd9d627b7b57b853.png" alt=""></p>
-<p>填入地址密码端口号等信息，然后点击<code>OK</code></p>
-<p>然后选全局模式，打开Shadowsocks，就可以用了</p>
-<p><img src="http://i1.piimg.com/567571/252aec0c8adeaac8.png" alt=""></p>
-<h3 id="服务器是阿里云顶配，100M带宽，下东西嗖嗖嗖的"><a href="#服务器是阿里云顶配，100M带宽，下东西嗖嗖嗖的" class="headerlink" title="服务器是阿里云顶配，100M带宽，下东西嗖嗖嗖的"></a>服务器是阿里云顶配，100M带宽，下东西嗖嗖嗖的</h3><p><img src="http://i1.piimg.com/567571/5109201685d772a7.png" alt=""></p>
-<h3 id="网易音乐等东西也可以正常用，跟国内一样"><a href="#网易音乐等东西也可以正常用，跟国内一样" class="headerlink" title="网易音乐等东西也可以正常用，跟国内一样"></a>网易音乐等东西也可以正常用，跟国内一样</h3><p><img src="http://i1.piimg.com/567571/ee3445ba962101a6.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2077,7 +2052,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">126</span>
+                    <span class="site-state-item-count">127</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

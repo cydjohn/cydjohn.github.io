@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://caoyudong.com/"/>
-  <updated>2018-10-19T05:38:06.132Z</updated>
+  <updated>2018-12-02T08:21:26.686Z</updated>
   <id>http://caoyudong.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RTMP Ubuntu 18.04 配置</title>
+    <link href="http://caoyudong.com/2018/12/02/RTMP-Ubuntu-18-04-%E9%85%8D%E7%BD%AE/"/>
+    <id>http://caoyudong.com/2018/12/02/RTMP-Ubuntu-18-04-配置/</id>
+    <published>2018-12-02T08:20:10.000Z</published>
+    <updated>2018-12-02T08:21:26.686Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Digital Ocean Ubuntu 18.04 x64</p></blockquote><h2 id="安装-Nginx-和-Nginx-RTMP"><a href="#安装-Nginx-和-Nginx-RTMP" class="headerlink" title="安装 Nginx 和 Nginx-RTMP"></a>安装 Nginx 和 Nginx-RTMP</h2><p>首先下载依赖</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev</span><br></pre></td></tr></table></figure><p>创建一个工作目录（可以起别的名字</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/working</span><br><span class="line"><span class="built_in">cd</span> ~/working</span><br></pre></td></tr></table></figure><p>下载<code>Nginx</code>和<code>Nginx-RTMP</code>源码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget  http://nginx.org/download/nginx-1.15.7.tar.gz</span><br><span class="line">wget https://github.com/arut/nginx-rtmp-module/archive/master.zip</span><br></pre></td></tr></table></figure><p>安装一个解压工具</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install unzip</span><br></pre></td></tr></table></figure><p>解压</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  nginx-1.15.7</span><br><span class="line">unzip master.zip</span><br></pre></td></tr></table></figure><p>进入<code>nginx</code>目录</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>  nginx-1.15.7</span><br></pre></td></tr></table></figure><p>添加编译的配置，把 <code>nginx-rtmp</code>模块加到里面（后面的<code>--without-http_gzip_module</code>应该可以不加，但是如果在<code>digital ocean</code>上不添加会报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master --without-http_gzip_module</span><br></pre></td></tr></table></figure><p>编译<code>nginx</code>和<code>nginx-rtmp</code>模块</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure><p>安装nginx初始化脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://raw.github.com/JasonGiedymin/nginx-init-ubuntu/master/nginx -O /etc/init.d/nginx</span><br><span class="line">sudo chmod +x /etc/init.d/nginx</span><br><span class="line">sudo update-rc.d nginx defaults</span><br></pre></td></tr></table></figure><p>测试nginx（运行了sudo service nginx start看能否访问那个服务器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx start</span><br><span class="line">sudo service nginx stop</span><br></pre></td></tr></table></figure><h2 id="安装-FFmpeg"><a href="#安装-FFmpeg" class="headerlink" title="安装 FFmpeg"></a>安装 FFmpeg</h2><p>添加 FFmpeg PPA（Personal Package Archives）.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next</span><br><span class="line">Update the package lists.</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure><p>安装 FFmpeg.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ffmpeg</span><br></pre></td></tr></table></figure><h2 id="修改-Nginx-RTMP-和-FFmpeg-配置文件"><a href="#修改-Nginx-RTMP-和-FFmpeg-配置文件" class="headerlink" title="修改 Nginx-RTMP 和 FFmpeg 配置文件"></a>修改 <code>Nginx-RTMP</code> 和 <code>FFmpeg</code> 配置文件</h2><p>打开<code>Nginx</code>配置文件（这里vi或者vim都可以</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure><p>在末尾复制粘贴以下信息</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">            listen 1935;</span><br><span class="line">            chunk_size 4096;</span><br><span class="line"></span><br><span class="line">            application live &#123;</span><br><span class="line">                    live on;</span><br><span class="line">                    record off;</span><br><span class="line">                    exec ffmpeg -i rtmp://localhost/live/$name -threads 1 -c:v libx264 -profile:v baseline -b:v 350K -s 640x360 -f flv -c:a aac -ac 1 -strict -2 -b:a 56k rtmp://localhost/live360p/$name;</span><br><span class="line">            &#125;</span><br><span class="line">            application live360p &#123;</span><br><span class="line">                    live on;</span><br><span class="line">                    record off;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>最后    </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure><p>这时候就配置好了。</p><p>iOS同学可以用 <a href="https://github.com/LaiFengiOS/LFLiveKit" target="_blank" rel="noopener">https://github.com/LaiFengiOS/LFLiveKit</a> 来测试，如果配置成功可直接连上。</p><blockquote><p>需要修改<code>LFLivePreview.m</code>的第364行：@”rtmp://&lt;服务器IP&gt;:1935/live/test”， test 那里可以随意取名字.      </p><p><code>rtmp://138.68.7.200:1935/live/test</code> 这是我自己配置的服务器，我已经确定可以使用了</p></blockquote><blockquote><p>参考自 <a href="https://www.vultr.com/docs/setup-nginx-rtmp-on-ubuntu-14-04" target="_blank" rel="noopener">https://www.vultr.com/docs/setup-nginx-rtmp-on-ubuntu-14-04</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;Digital Ocean Ubuntu 18.04 x64&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;安装-Nginx-和-Nginx-RTMP&quot;&gt;&lt;a href=&quot;#安装-Nginx-和-Nginx-RTMP&quot; class=&quot;head
+      
+    
+    </summary>
+    
+    
+      <category term="网络" scheme="http://caoyudong.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>Angular2+项目中添加Bootstrap</title>
@@ -503,29 +529,6 @@
 &lt;p&gt;string convert(string text, int nRows);&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;convert(&amp;quot;PAYPALISHIRING&amp;quot;, 3)&lt;/code&gt; should return &lt;code&gt;&amp;quot;PAHNAPLSIIGYIR&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://caoyudong.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>458. Poor Pigs</title>
-    <link href="http://caoyudong.com/2018/04/16/458-Poor-Pigs/"/>
-    <id>http://caoyudong.com/2018/04/16/458-Poor-Pigs/</id>
-    <published>2018-04-17T01:23:41.000Z</published>
-    <updated>2018-09-12T05:56:07.688Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>There are 1000 buckets, one and only one of them contains poison, the rest are filled with water. They all look the same. If a pig drinks that poison it will die within 15 minutes. What is the minimum amount of pigs you need to figure out which bucket contains the poison within one hour.</p><p>Answer this question, and write an algorithm for the follow-up general case.</p><p><strong>Follow-up:</strong></p><p>If there are n buckets and a pig drinking poison will die within m minutes, how many pigs (x) you need to figure out the “poison” bucket within p minutes? There is exact one bucket with poison.</p><a id="more"></a><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>看了别人一个特别吊的思路：<a href="https://leetcode.com/problems/poor-pigs/discuss/94266/Another-explanation-and-solution" target="_blank" rel="noopener">https://leetcode.com/problems/poor-pigs/discuss/94266/Another-explanation-and-solution</a></p><p>假设我们有两只猪，喝了有毒的水之后15分钟死亡，一共有60分钟，那么我们最多可以在25个桶里找到有毒的那一桶。方法如下，将25个桶排列成<code>5X5</code>的一块：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1  2  3  4   5</span><br><span class="line">6  7  8  9  10</span><br><span class="line">11 12 13 14 15</span><br><span class="line">16 17 18 19 20</span><br><span class="line">21 22 23 24 25</span><br></pre></td></tr></table></figure><p>然后我们用第一只猪喝每一行的水，第二只猪喝每一列的水。比如，第一只猪喝<code>1,2,3,4,5</code>号桶的水，然后等15分钟，再喝<code>6,7,8,9,10</code> 号桶的水，然后再等15分钟；第二只猪喝<code>1,6,11,16,21</code>号桶的水，等15分钟再喝<code>2,7,12,17,22</code>号桶的水，以此类推。。。</p><p>我们一共有60分钟，毒药发作时间是15分钟，那么我们在规定时间内一共可以测4轮。假设第一只猪第三轮死了，我们可以确定有毒的那桶在第三行，第二只猪第四轮死了，我们就可以确定有毒那桶在第三行第四列，也就是19。</p><p>假设我们有三只猪，我们就可以用一个<code>5x5x5</code>的立方体来测，一共125桶水。</p><p>综上所诉我们可以的到公式</p><p>\[<br>    buckets = (\frac{minutesToTest}{minutesToDie})^{pigs}<br>\]</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poorPigs</span><span class="params">(<span class="keyword">int</span> buckets, <span class="keyword">int</span> minutesToDie, <span class="keyword">int</span> minutesToTest)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pigs = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">pow</span>((minutesToTest/minutesToDie+<span class="number">1</span>),pigs) &lt; buckets) &#123;</span><br><span class="line">        pigs++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pigs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h2&gt;&lt;p&gt;There are 1000 buckets, one and only one of them contains poison, the rest are filled with water. They all look the same. If a pig drinks that poison it will die within 15 minutes. What is the minimum amount of pigs you need to figure out which bucket contains the poison within one hour.&lt;/p&gt;
-&lt;p&gt;Answer this question, and write an algorithm for the follow-up general case.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Follow-up:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;If there are n buckets and a pig drinking poison will die within m minutes, how many pigs (x) you need to figure out the “poison” bucket within p minutes? There is exact one bucket with poison.&lt;/p&gt;
     
     </summary>
     

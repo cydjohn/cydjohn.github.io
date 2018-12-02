@@ -319,6 +319,199 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2018/12/02/RTMP-Ubuntu-18-04-配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/02/RTMP-Ubuntu-18-04-配置/" itemprop="url">
+                  RTMP Ubuntu 18.04 配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-02 02:20:10 / Modified: 02:21:26" itemprop="dateCreated datePublished" datetime="2018-12-02T02:20:10-06:00">2018-12-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/02/RTMP-Ubuntu-18-04-配置/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/12/02/RTMP-Ubuntu-18-04-配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Digital Ocean Ubuntu 18.04 x64</p>
+</blockquote>
+<h2 id="安装-Nginx-和-Nginx-RTMP"><a href="#安装-Nginx-和-Nginx-RTMP" class="headerlink" title="安装 Nginx 和 Nginx-RTMP"></a>安装 Nginx 和 Nginx-RTMP</h2><p>首先下载依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev</span><br></pre></td></tr></table></figure>
+<p>创建一个工作目录（可以起别的名字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/working</span><br><span class="line"><span class="built_in">cd</span> ~/working</span><br></pre></td></tr></table></figure>
+<p>下载<code>Nginx</code>和<code>Nginx-RTMP</code>源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget  http://nginx.org/download/nginx-1.15.7.tar.gz</span><br><span class="line">wget https://github.com/arut/nginx-rtmp-module/archive/master.zip</span><br></pre></td></tr></table></figure>
+<p>安装一个解压工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install unzip</span><br></pre></td></tr></table></figure>
+<p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  nginx-1.15.7</span><br><span class="line">unzip master.zip</span><br></pre></td></tr></table></figure>
+<p>进入<code>nginx</code>目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>  nginx-1.15.7</span><br></pre></td></tr></table></figure>
+<p>添加编译的配置，把 <code>nginx-rtmp</code>模块加到里面（后面的<code>--without-http_gzip_module</code>应该可以不加，但是如果在<code>digital ocean</code>上不添加会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master --without-http_gzip_module</span><br></pre></td></tr></table></figure>
+<p>编译<code>nginx</code>和<code>nginx-rtmp</code>模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>安装nginx初始化脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://raw.github.com/JasonGiedymin/nginx-init-ubuntu/master/nginx -O /etc/init.d/nginx</span><br><span class="line">sudo chmod +x /etc/init.d/nginx</span><br><span class="line">sudo update-rc.d nginx defaults</span><br></pre></td></tr></table></figure>
+<p>测试nginx（运行了sudo service nginx start看能否访问那个服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx start</span><br><span class="line">sudo service nginx stop</span><br></pre></td></tr></table></figure>
+<h2 id="安装-FFmpeg"><a href="#安装-FFmpeg" class="headerlink" title="安装 FFmpeg"></a>安装 FFmpeg</h2><p>添加 FFmpeg PPA（Personal Package Archives）.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next</span><br><span class="line">Update the package lists.</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<p>安装 FFmpeg.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ffmpeg</span><br></pre></td></tr></table></figure>
+<h2 id="修改-Nginx-RTMP-和-FFmpeg-配置文件"><a href="#修改-Nginx-RTMP-和-FFmpeg-配置文件" class="headerlink" title="修改 Nginx-RTMP 和 FFmpeg 配置文件"></a>修改 <code>Nginx-RTMP</code> 和 <code>FFmpeg</code> 配置文件</h2><p>打开<code>Nginx</code>配置文件（这里vi或者vim都可以</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>在末尾复制粘贴以下信息</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">            listen 1935;</span><br><span class="line">            chunk_size 4096;</span><br><span class="line"></span><br><span class="line">            application live &#123;</span><br><span class="line">                    live on;</span><br><span class="line">                    record off;</span><br><span class="line">                    exec ffmpeg -i rtmp://localhost/live/$name -threads 1 -c:v libx264 -profile:v baseline -b:v 350K -s 640x360 -f flv -c:a aac -ac 1 -strict -2 -b:a 56k rtmp://localhost/live360p/$name;</span><br><span class="line">            &#125;</span><br><span class="line">            application live360p &#123;</span><br><span class="line">                    live on;</span><br><span class="line">                    record off;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
+<p>这时候就配置好了。</p>
+<p>iOS同学可以用 <a href="https://github.com/LaiFengiOS/LFLiveKit" target="_blank" rel="noopener">https://github.com/LaiFengiOS/LFLiveKit</a> 来测试，如果配置成功可直接连上。</p>
+<blockquote>
+<p>需要修改<code>LFLivePreview.m</code>的第364行：@”rtmp://&lt;服务器IP&gt;:1935/live/test”， test 那里可以随意取名字.      </p>
+<p><code>rtmp://138.68.7.200:1935/live/test</code> 这是我自己配置的服务器，我已经确定可以使用了</p>
+</blockquote>
+<blockquote>
+<p>参考自 <a href="https://www.vultr.com/docs/setup-nginx-rtmp-on-ubuntu-14-04" target="_blank" rel="noopener">https://www.vultr.com/docs/setup-nginx-rtmp-on-ubuntu-14-04</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2018/10/19/Angular2-项目中添加Bootstrap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1832,176 +2025,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2018/06/13/Electron-autoUpdater-自动更新/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BAZINGA">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/13/Electron-autoUpdater-自动更新/" itemprop="url">
-                  Electron autoUpdater 自动更新
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-13 22:54:43" itemprop="dateCreated datePublished" datetime="2018-06-13T22:54:43-05:00">2018-06-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-12 00:56:07" itemprop="dateModified" datetime="2018-09-12T00:56:07-05:00">2018-09-12</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/13/Electron-autoUpdater-自动更新/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/13/Electron-autoUpdater-自动更新/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Electron是一款可以使用 JavaScript，HTML 和 CSS构建跨平台桌面应用的框架。但是当用户获取下一个版本的时候，只能下载重新安装一遍下一个版本，十分僵硬，于是我们需要引入一个Electron自动更新的方法。</p>
-<p>有多种方法可以更新Electron应用. 最简单并且获得官方支持的方法是利用内置的Squirrel框架和Electron的<code>autoUpdater</code>模块。但是目前<code>autoUpdater</code>只有 macOS 和 Window 支持该功能。在 Linux 上没有对自动更新程序的内置支持。</p>
-<p>然而，各种谷歌到的官方文档和博客实在是太坑，感觉讲的都不是很详细，我这里记录汇总并加点自己的观点。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/13/Electron-autoUpdater-自动更新/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2049,7 +2072,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">126</span>
+                    <span class="site-state-item-count">127</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
