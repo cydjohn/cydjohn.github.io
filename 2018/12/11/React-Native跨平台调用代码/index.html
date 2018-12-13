@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="BAZINGA">
 <meta property="og:description" content="有时候React-Native需要访问原生API，但是官方并没有封装，这时候就需要自己手动调用原生代码，比如调用安卓的Toast，比如需要调用某些硬件接口。这篇文章主要记录了如何调用安卓和iOS原生方法。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-12-12T05:33:53.756Z">
+<meta property="og:updated_time" content="2018-12-13T04:27:10.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React-Native跨平台调用代码">
 <meta name="twitter:description" content="有时候React-Native需要访问原生API，但是官方并没有封装，这时候就需要自己手动调用原生代码，比如调用安卓的Toast，比如需要调用某些硬件接口。这篇文章主要记录了如何调用安卓和iOS原生方法。">
@@ -365,12 +365,24 @@
                 
               
 
-              <time title="Created: 2018-12-11 23:31:38 / Modified: 23:33:53" itemprop="dateCreated datePublished" datetime="2018-12-11T23:31:38-06:00">2018-12-11</time>
+              <time title="Created: 2018-12-11 23:31:38" itemprop="dateCreated datePublished" datetime="2018-12-11T23:31:38-06:00">2018-12-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 22:27:10" itemprop="dateModified" datetime="2018-12-12T22:27:10-06:00">2018-12-12</time>
               
             
           </span>
@@ -439,7 +451,7 @@
 <blockquote>
 <p>注意是MainApplication.java不是MainActivity.java，之前弄错了bug调的我怀疑人生。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">            <span class="keyword">new</span> MainReactPackage(),</span><br><span class="line">            <span class="keyword">new</span> CustomToastPackage()); <span class="comment">// &lt;-- package name.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">            <span class="keyword">new</span> MainReactPackage(),</span><br><span class="line">            <span class="keyword">new</span> CustomToastPackages()); <span class="comment">// &lt;-- package name.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="回调消息-1"><a href="#回调消息-1" class="headerlink" title="回调消息"></a>回调消息</h2><p>安卓也可以直接实现一个Promise给React-Native。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ReactMethod</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getMessage</span><span class="params">(String message, Promise promise)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        WritableMap data = Arguments.createMap();</span><br><span class="line">        data.putString(<span class="string">"status"</span>,<span class="string">"success"</span>);</span><br><span class="line">        data.putString(<span class="string">"message"</span>, message + <span class="string">" (promise)"</span>);</span><br><span class="line">        promise.resolve(data);</span><br><span class="line">    &#125; <span class="keyword">catch</span>(IllegalViewOperationException e)&#123;</span><br><span class="line">        promise.reject(<span class="string">"error"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中注释@ReactMethod是为了将方法暴露给JavaScript。加了@ReactMethod后会将Java变量类型一一映射成JavaScript的变量类型</p>
