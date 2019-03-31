@@ -1007,7 +1007,7 @@
   <entry>
     <title><![CDATA[如何让Markdown图片居中]]></title>
     <url>%2F2015%2F07%2F15%2F%E5%A6%82%E4%BD%95%E8%AE%A9markdown%E5%9B%BE%E7%89%87%E5%B1%85%E4%B8%AD%2F</url>
-    <content type="text"><![CDATA[一般在MarkDown中通过 &apos;![](url)&apos; 添加图片看到的都是这样的： 但是如果我想让图片居中该怎么做呢？查了点资料之后发现可以这样： 123&lt;div style="text-align: center"&gt;&lt;img src="url"/&gt;&lt;/div&gt; 把这几行代码直接加到markdown里面就可以了，url换成图片的地址，就像这样： 相当于手动嵌入了HTML代码 或者 123&lt;center&gt;![](http://7xkfbb.com1.z0.glb.clouddn.com/15-7-16/95341796.jpg)&lt;/center&gt; 此图片只是为了纪念今天风云微博的优衣库事件～～]]></content>
+    <content type="text"><![CDATA[一般在MarkDown中通过 &apos;![](url)&apos; 添加图片看到的都是这样的： 但是如果我想让图片居中该怎么做呢？查了点资料之后发现可以这样： 123&lt;div style="text-align: center"&gt;&lt;img src="url"/&gt;&lt;/div&gt; 把这几行代码直接加到markdown里面就可以了，url换成图片的地址，就像这样： 相当于手动嵌入了HTML代码 或者 123&lt;center&gt;![](url)&lt;/center&gt;]]></content>
       <tags>
         <tag>Mac</tag>
       </tags>
