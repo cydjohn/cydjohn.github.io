@@ -3375,7 +3375,7 @@
   <entry>
     <title>Ubuntu16.04上使用Nginx部署Laravel应用程序</title>
     <url>/2019/05/21/Ubuntu16-04%E4%B8%8A%E4%BD%BF%E7%94%A8Nginx%E9%83%A8%E7%BD%B2Laravel%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="Ubuntu-16-04上使用Nginx部署Laravel应用程序"><a href="#Ubuntu-16-04上使用Nginx部署Laravel应用程序" class="headerlink" title="Ubuntu 16.04上使用Nginx部署Laravel应用程序"></a>Ubuntu 16.04上使用Nginx部署Laravel应用程序</h1><p>Laravel 是一个非常流行的PHP框架，以编码风格优雅著称，每行代码都非常简洁，富有表达力，并且拥有强大的组件开发生态，号称为web艺术家创造的PHP框架。我最近的个人项目尝试了下Laravel框架，部署的的时候遇到了一些坑，这里记录下。</p>
+    <content><![CDATA[<p>Laravel 是一个非常流行的PHP框架，以编码风格优雅著称，每行代码都非常简洁，富有表达力，并且拥有强大的组件开发生态，号称为web艺术家创造的PHP框架。我最近的个人项目尝试了下Laravel框架，部署的的时候遇到了一些坑，这里记录下。</p>
 <p>我用的服务器是DigitalOcean的Ubuntu 16.04 LTS，其他公司的服务器应该也大同小异，有一些公司甚至简化了安装流程，几乎不用改动配置文件就可以让自己的程序跑起来（比如阿里云</p>
 <a id="more"></a>
 
