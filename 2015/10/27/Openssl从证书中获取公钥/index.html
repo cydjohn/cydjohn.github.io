@@ -1,25 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta charset="utf-8">
+  
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"caoyudong.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
+  
+  <title>Openssl从证书中获取公钥 | BAZINGA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1openssl x509 -in ca.crt -pubkey 其中 －in 为输入文件名 结果：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Openssl从证书中获取公钥">
@@ -32,170 +19,79 @@
 <meta property="article:author" content="BAZINGA">
 <meta property="article:tag" content="openssl">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Openssl从证书中获取公钥 | BAZINGA</title>
   
+    <link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">BAZINGA</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">BAZINGA&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://caoyudong.com"></form>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BAZINGA</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Openssl从证书中获取公钥" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/" class="article-date">
+  <time datetime="2015-10-28T02:47:30.000Z" itemprop="datePublished">2015-10-27</time>
+</a>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
   </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Openssl从证书中获取公钥
+    </h1>
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BAZINGA">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Openssl从证书中获取公钥
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-10-27 19:47:30" itemprop="dateCreated datePublished" datetime="2015-10-27T19:47:30-07:00">2015-10-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-11 22:56:07" itemprop="dateModified" datetime="2018-09-11T22:56:07-07:00">2018-09-11</time>
-              </span>
-
-          
-
-        </div>
       </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
         <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> ca.crt -pubkey</span><br></pre></td></tr></table></figure>
 <p>其中 <code>－in</code> 为输入文件名</p>
@@ -203,193 +99,146 @@
 <a id="more"></a>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvLgG+bUnsMJCgAf/lGWh</span><br><span class="line">2vqn3ZgoKHwERvgVmgCdn8LPUwc2/kGf6ucmkHKE+VcZ7qQg7A/2K8PyDvs3K+qS</span><br><span class="line">SpkyeC0lhaUxYFJGmSjdeqDkLF+fJ5DcTgqi9sJJfozQN2Uk5ppsN76t4BEW7IW/</span><br><span class="line">a8NReMJ18iB3H18wcJQS0ml4pf/O5h3YxArbGl5LE2sWVRFvE9cSn/Vi+zjMP4e8</span><br><span class="line">FIMWi6snIhQpXUMQmP7ecCfzEAEtfVDEXa2Dzka+FJpnJNJ2nQXJIEWF55YOOe1D</span><br><span class="line">4gJAl9qsI8cVEnZK3fseqHpZ8kKY2SuGyNlsgEf7+DfUT/m3Igg+n2MsoxndtOUi</span><br><span class="line">GwIDAQAB</span><br><span class="line">-----END PUBLIC KEY-----</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIEnjCCA4agAwIBAgIJAN7TiN2CbZx9MA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD</span><br><span class="line">VQQGEwJDTjESMBAGA1UECBMJR3Vhbmdkb25nMRIwEAYDVQQHEwlHdWFuZ3pob3Ux</span><br><span class="line">EjAQBgNVBAoTCU9wZW5UQ0dBQTELMAkGA1UECxMCQ0ExFTATBgNVBAMTDE9wZW5U</span><br><span class="line">Q0dBQSBDQTEhMB8GCSqGSIb3DQEJARYSaW5mb0BvcGVudGNnYWEub3JnMB4XDTE1</span><br><span class="line">MTAyNzAxNTk0MVoXDTI1MTAyNDAxNTk0MVowgZAxCzAJBgNVBAYTAkNOMRIwEAYD</span><br><span class="line">VQQIEwlHdWFuZ2RvbmcxEjAQBgNVBAcTCUd1YW5nemhvdTESMBAGA1UEChMJT3Bl</span><br><span class="line">blRDR0FBMQswCQYDVQQLEwJDQTEVMBMGA1UEAxMMT3BlblRDR0FBIENBMSEwHwYJ</span><br><span class="line">KoZIhvcNAQkBFhJpbmZvQG9wZW50Y2dhYS5vcmcwggEiMA0GCSqGSIb3DQEBAQUA</span><br><span class="line">A4IBDwAwggEKAoIBAQC8uAb5tSewwkKAB/+UZaHa+qfdmCgofARG+BWaAJ2fws9T</span><br><span class="line">Bzb+QZ/q5yaQcoT5VxnupCDsD/Yrw/IO+zcr6pJKmTJ4LSWFpTFgUkaZKN16oOQs</span><br><span class="line">X58nkNxOCqL2wkl+jNA3ZSTmmmw3vq3gERbshb9rw1F4wnXyIHcfXzBwlBLSaXil</span><br><span class="line">/87mHdjECtsaXksTaxZVEW8T1xKf9WL7OMw/h7wUgxaLqyciFCldQxCY/t5wJ/MQ</span><br><span class="line">AS19UMRdrYPORr4Ummck0nadBckgRYXnlg457UPiAkCX2qwjxxUSdkrd+x6oelny</span><br><span class="line">QpjZK4bI2WyAR/v4N9RP+bciCD6fYyyjGd205SIbAgMBAAGjgfgwgfUwHQYDVR0O</span><br><span class="line">BBYEFDMpinnH9UEjObLR/BukzOSFRadVMIHFBgNVHSMEgb0wgbqAFDMpinnH9UEj</span><br><span class="line">ObLR/BukzOSFRadVoYGWpIGTMIGQMQswCQYDVQQGEwJDTjESMBAGA1UECBMJR3Vh</span><br><span class="line">bmdkb25nMRIwEAYDVQQHEwlHdWFuZ3pob3UxEjAQBgNVBAoTCU9wZW5UQ0dBQTEL</span><br><span class="line">MAkGA1UECxMCQ0ExFTATBgNVBAMTDE9wZW5UQ0dBQSBDQTEhMB8GCSqGSIb3DQEJ</span><br><span class="line">ARYSaW5mb0BvcGVudGNnYWEub3JnggkA3tOI3YJtnH0wDAYDVR0TBAUwAwEB/zAN</span><br><span class="line">BgkqhkiG9w0BAQsFAAOCAQEAZdsMS7WCCAOyER3yVozOQ4R9MLt1LW0RSK1I3JXx</span><br><span class="line">MScTHA/bHiFDMvK9CuOOvMZvnYjhHXPpCKIf8fgRTRfBA1lE3VUBEXj2WeH5wzNG</span><br><span class="line">wIXXhVUqB4kW1mqDwxfcLRvp7dof8dqFJ0AoCYAj7dUejrb51tzLNaXnr6/AatAS</span><br><span class="line">MwaIfchjJYT2XdeDMB60aiVlS7NITjUUOiRnW4GtCfxpqonccpUAYpljy0m1eMjv</span><br><span class="line">Qw0cgxI8FZh95xkZPSKVEOai95PAkeCX3ua8GIFrCbvuupALf/hMA4HpObk6uNn5</span><br><span class="line">rlJvvhklTtaotVIkQNCJG7h84Ah2VLUP2HiZVfHb/hADhA==</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/" data-id="ckcycccr3003feoqy505oaoex" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li></ul>
 
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/openssl/" rel="tag"># openssl</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2015/10/27/SwiftyJSON/" rel="prev" title="SwiftyJSON">
-      <i class="fa fa-chevron-left"></i> SwiftyJSON
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2015/10/28/C%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8Sqlite/" rel="next" title="C语言使用Sqlite">
-      C语言使用Sqlite <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">BAZINGA</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">131</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">28</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">BAZINGA</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
     </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/28/C%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8Sqlite/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C语言使用Sqlite
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/27/SwiftyJSON/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SwiftyJSON</div>
+    </a>
+  
+</nav>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+</article>
 
-<script src="/js/utils.js"></script>
+</section>
+        
+          <aside id="sidebar">
+  
+    
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/" rel="tag">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%EF%BC%83/" rel="tag">C＃</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electron/" rel="tag">Electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IOS/" rel="tag">IOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/" rel="tag">React-Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">cocoapods</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/" rel="tag">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoDB/" rel="tag">mongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pdfMiner/" rel="tag">pdfMiner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/" rel="tag">sqlite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" rel="tag">杂七杂八</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+    </div>
+  </div>
 
 
   
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 12.5px;">C#</a> <a href="/tags/C%EF%BC%83/" style="font-size: 12.5px;">C＃</a> <a href="/tags/Electron/" style="font-size: 12.5px;">Electron</a> <a href="/tags/IOS/" style="font-size: 20px;">IOS</a> <a href="/tags/Linux/" style="font-size: 11.25px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/React-Native/" style="font-size: 13.75px;">React-Native</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/hexo/" style="font-size: 11.25px;">hexo</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/leetcode/" style="font-size: 12.5px;">leetcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoDB/" style="font-size: 10px;">mongoDB</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/openssl/" style="font-size: 12.5px;">openssl</a> <a href="/tags/pdfMiner/" style="font-size: 10px;">pdfMiner</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/sqlite/" style="font-size: 11.25px;">sqlite</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 17.5px;">旅行</a> <a href="/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" style="font-size: 15px;">杂七杂八</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 16.25px;">树莓派</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.75px;">算法</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 12.5px;">网络</a>
+    </div>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li></ul>
+    </div>
+  </div>
 
 
   
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/">React-Native推送消息</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/21/Ubuntu16-04%E4%B8%8A%E4%BD%BF%E7%94%A8Nginx%E9%83%A8%E7%BD%B2Laravel%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">Ubuntu16.04上使用Nginx部署Laravel应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/11/React-Native%E8%B7%A8%E5%B9%B3%E5%8F%B0%E8%B0%83%E7%94%A8%E4%BB%A3%E7%A0%81/">React-Native跨平台调用代码</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/02/RTMP-Ubuntu-18-04-%E9%85%8D%E7%BD%AE/">RTMP Ubuntu 18.04 配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/19/Angular2-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%B7%BB%E5%8A%A0Bootstrap/">Angular2+项目中添加Bootstrap</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
 
   
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 BAZINGA<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
 </body>
 </html>
