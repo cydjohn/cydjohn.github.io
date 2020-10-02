@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://caoyudong.com/"/>
-  <updated>2020-08-27T05:05:45.394Z</updated>
+  <updated>2020-10-02T21:02:35.289Z</updated>
   <id>http://caoyudong.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>testtest</title>
+    <link href="http://caoyudong.com/2020/10/02/testtest/"/>
+    <id>http://caoyudong.com/2020/10/02/testtest/</id>
+    <published>2020-10-02T21:02:02.000Z</published>
+    <updated>2020-10-02T21:02:35.289Z</updated>
+    
+    <content type="html"><![CDATA[<p>testtest</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;testtest&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>C++，python运行速度比较程序</title>
@@ -471,29 +494,6 @@
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Explanation:&lt;/strong&gt; There is no common prefix among the input strings.&lt;br&gt;Note:&lt;/p&gt;
 &lt;p&gt;All given inputs are in lowercase letters &lt;code&gt;a-z&lt;/code&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="算法" scheme="http://caoyudong.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>371. Sum of Two Integers</title>
-    <link href="http://caoyudong.com/2018/04/24/371-Sum-of-Two-Integers/"/>
-    <id>http://caoyudong.com/2018/04/24/371-Sum-of-Two-Integers/</id>
-    <published>2018-04-24T07:34:12.000Z</published>
-    <updated>2018-09-12T05:56:07.688Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Calculate the sum of two integers a and b, but you are not allowed to use the operator <code>+</code> and <code>-</code>.</p><p><strong>Example:</strong></p><p>Given a = 1 and b = 2, return 3.</p><a id="more"></a><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>不能用 <code>+</code> 号或者 <code>-</code> 号，那就只能用位操作了。位操作有四种：</p><p><code>&amp;</code> 与操作（AND operation）： 2 (0010) &amp; 7 (0111) =&gt; 2 (0010)</p><p><code>|</code> 或操作 （OR operation）： 2 (0010) | 7 (0111) =&gt; 7 (0111)</p><p><code>^</code> 异或操作 （XOR operation）： 2 (0010) ^ 7 (0111) =&gt; 5 (0101)</p><p><code>~</code> 非操作 （NOT operation）： ~2(0010) =&gt; -3 (1101) <code>补码，见文末</code></p><p>其中，最左边一位是符号位，代表正负，比如</p><p>1111 代表 -1 （补码）</p><p>1110 代表 -2</p><p>这题两个位置全为1的地方需要进一位，不全为1的地方直接异或操作就好。于是我们用一个<code>carry</code>来记录进位，每次进位完需要左移一位。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">while</span>(b!=<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> carry = a &amp; b;</span><br><span class="line">        a = a ^ b;</span><br><span class="line">        b = carry&lt;&lt;<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getSubtract</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line"><span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line"><span class="keyword">int</span> borrow = (~a) &amp; b;</span><br><span class="line">a = a ^ b;</span><br><span class="line">b = borrow &lt;&lt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h2&gt;&lt;p&gt;Calculate the sum of two integers a and b, but you are not allowed to use the operator &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Given a = 1 and b = 2, return 3.&lt;/p&gt;
     
     </summary>
     
