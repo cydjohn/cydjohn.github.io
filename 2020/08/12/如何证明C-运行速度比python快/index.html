@@ -28,7 +28,7 @@
 <meta property="og:description" content="给别人上课的时候突然有了这个问题。 其实所有人都知道C++运行速度要比Python快许多倍，网上也有很多文章做了解释，但是如果面对一个小白最好的办法就是跑一个功能相同的程序给他看时间对比。然后我就想了个证明方法，感觉还挺直观的，这里记录下。方法就是用两种语言分别写两个冒泡排序，然后从文件中读取随机数，排序之后比较程序运行时间。选择用冒泡排序是因为O（n^2)复杂度，可以拉长程序运行时间，结果比较更">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-12T07:18:58.000Z">
-<meta property="article:modified_time" content="2020-08-27T05:05:45.394Z">
+<meta property="article:modified_time" content="2021-02-14T21:55:25.583Z">
 <meta property="article:author" content="BAZINGA">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-26 22:05:45" itemprop="dateModified" datetime="2020-08-26T22:05:45-07:00">2020-08-26</time>
+                <time title="Modified: 2021-02-14 13:55:25" itemprop="dateModified" datetime="2021-02-14T13:55:25-08:00">2021-02-14</time>
               </span>
 
           
@@ -228,7 +228,7 @@
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    randomNumberFile = open(<span class="string">'randomNumber.txt'</span>, <span class="string">'r'</span>).readlines()</span><br><span class="line">    numbers = randomNumberFile[<span class="number">0</span>].split(<span class="string">","</span>)</span><br><span class="line">    bubbleSort(numbers)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span><span class="params">(arr)</span>:</span> </span><br><span class="line">    n = len(arr) </span><br><span class="line">    <span class="comment"># Traverse through all array elements </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>): </span><br><span class="line">    <span class="comment"># range(n) also work but outer loop will repeat one time more than needed. </span></span><br><span class="line">        <span class="comment"># Last i elements are already in place </span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, n-i<span class="number">-1</span>): </span><br><span class="line">            <span class="comment"># traverse the array from 0 to n-i-1 </span></span><br><span class="line">            <span class="comment"># Swap if the element found is greater </span></span><br><span class="line">            <span class="comment"># than the next element </span></span><br><span class="line">            <span class="keyword">if</span> arr[j] &gt; arr[j+<span class="number">1</span>] : </span><br><span class="line">                arr[j], arr[j+<span class="number">1</span>] = arr[j+<span class="number">1</span>], arr[j] </span><br><span class="line"></span><br><span class="line">start_time = time.time()</span><br><span class="line">main()</span><br><span class="line">print(<span class="string">"--- %s seconds ---"</span> % (time.time() - start_time))</span><br></pre></td></tr></table></figure>
 
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>C++程序使用<code>make</code>编译完直接运行二进制文件一般要9～10秒钟，python程序一般需要 50 秒，快了将近五倍，可以看到明显的差距。</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>C++程序使用<code>make</code>编译完直接运行二进制文件一般要9～10秒钟，python程序一般需要 50 秒，快了将近五倍，可以在短时间内看出差距。</p>
 
     </div>
 
@@ -327,7 +327,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
