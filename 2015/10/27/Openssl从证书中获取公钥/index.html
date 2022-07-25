@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -13,14 +14,13 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"caoyudong.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="1openssl x509 -in ca.crt -pubkey 其中 －in 为输入文件名 结果：">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caoyudong.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1openssl x509 -in ca.crt -pubkey 其中 －in 为输入文件名 结果：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Openssl从证书中获取公钥">
 <meta property="og:url" content="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/index.html">
@@ -33,82 +33,50 @@
 <meta property="article:tag" content="openssl">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>Openssl从证书中获取公钥 | BAZINGA</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/","path":"2015/10/27/Openssl从证书中获取公钥/","title":"Openssl从证书中获取公钥"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Openssl从证书中获取公钥 | BAZINGA</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-68546647-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-68546647-1');
-      }
-    </script>
-
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-68546647-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BAZINGA</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <p class="site-title">BAZINGA</p>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
   </div>
@@ -121,29 +89,8 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
   </ul>
 </nav>
 
@@ -151,152 +98,18 @@
 
 
 </div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/cydjohn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BAZINGA">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Openssl从证书中获取公钥
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-10-27 19:47:30" itemprop="dateCreated datePublished" datetime="2015-10-27T19:47:30-07:00">2015-10-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-11 22:56:07" itemprop="dateModified" datetime="2018-09-11T22:56:07-07:00">2018-09-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> ca.crt -pubkey</span><br></pre></td></tr></table></figure>
-<p>其中 <code>－in</code> 为输入文件名</p>
-<p>结果：</p>
-<a id="more"></a>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvLgG+bUnsMJCgAf/lGWh</span><br><span class="line">2vqn3ZgoKHwERvgVmgCdn8LPUwc2/kGf6ucmkHKE+VcZ7qQg7A/2K8PyDvs3K+qS</span><br><span class="line">SpkyeC0lhaUxYFJGmSjdeqDkLF+fJ5DcTgqi9sJJfozQN2Uk5ppsN76t4BEW7IW/</span><br><span class="line">a8NReMJ18iB3H18wcJQS0ml4pf/O5h3YxArbGl5LE2sWVRFvE9cSn/Vi+zjMP4e8</span><br><span class="line">FIMWi6snIhQpXUMQmP7ecCfzEAEtfVDEXa2Dzka+FJpnJNJ2nQXJIEWF55YOOe1D</span><br><span class="line">4gJAl9qsI8cVEnZK3fseqHpZ8kKY2SuGyNlsgEf7+DfUT/m3Igg+n2MsoxndtOUi</span><br><span class="line">GwIDAQAB</span><br><span class="line">-----END PUBLIC KEY-----</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIEnjCCA4agAwIBAgIJAN7TiN2CbZx9MA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD</span><br><span class="line">VQQGEwJDTjESMBAGA1UECBMJR3Vhbmdkb25nMRIwEAYDVQQHEwlHdWFuZ3pob3Ux</span><br><span class="line">EjAQBgNVBAoTCU9wZW5UQ0dBQTELMAkGA1UECxMCQ0ExFTATBgNVBAMTDE9wZW5U</span><br><span class="line">Q0dBQSBDQTEhMB8GCSqGSIb3DQEJARYSaW5mb0BvcGVudGNnYWEub3JnMB4XDTE1</span><br><span class="line">MTAyNzAxNTk0MVoXDTI1MTAyNDAxNTk0MVowgZAxCzAJBgNVBAYTAkNOMRIwEAYD</span><br><span class="line">VQQIEwlHdWFuZ2RvbmcxEjAQBgNVBAcTCUd1YW5nemhvdTESMBAGA1UEChMJT3Bl</span><br><span class="line">blRDR0FBMQswCQYDVQQLEwJDQTEVMBMGA1UEAxMMT3BlblRDR0FBIENBMSEwHwYJ</span><br><span class="line">KoZIhvcNAQkBFhJpbmZvQG9wZW50Y2dhYS5vcmcwggEiMA0GCSqGSIb3DQEBAQUA</span><br><span class="line">A4IBDwAwggEKAoIBAQC8uAb5tSewwkKAB/+UZaHa+qfdmCgofARG+BWaAJ2fws9T</span><br><span class="line">Bzb+QZ/q5yaQcoT5VxnupCDsD/Yrw/IO+zcr6pJKmTJ4LSWFpTFgUkaZKN16oOQs</span><br><span class="line">X58nkNxOCqL2wkl+jNA3ZSTmmmw3vq3gERbshb9rw1F4wnXyIHcfXzBwlBLSaXil</span><br><span class="line">/87mHdjECtsaXksTaxZVEW8T1xKf9WL7OMw/h7wUgxaLqyciFCldQxCY/t5wJ/MQ</span><br><span class="line">AS19UMRdrYPORr4Ummck0nadBckgRYXnlg457UPiAkCX2qwjxxUSdkrd+x6oelny</span><br><span class="line">QpjZK4bI2WyAR/v4N9RP+bciCD6fYyyjGd205SIbAgMBAAGjgfgwgfUwHQYDVR0O</span><br><span class="line">BBYEFDMpinnH9UEjObLR/BukzOSFRadVMIHFBgNVHSMEgb0wgbqAFDMpinnH9UEj</span><br><span class="line">ObLR/BukzOSFRadVoYGWpIGTMIGQMQswCQYDVQQGEwJDTjESMBAGA1UECBMJR3Vh</span><br><span class="line">bmdkb25nMRIwEAYDVQQHEwlHdWFuZ3pob3UxEjAQBgNVBAoTCU9wZW5UQ0dBQTEL</span><br><span class="line">MAkGA1UECxMCQ0ExFTATBgNVBAMTDE9wZW5UQ0dBQSBDQTEhMB8GCSqGSIb3DQEJ</span><br><span class="line">ARYSaW5mb0BvcGVudGNnYWEub3JnggkA3tOI3YJtnH0wDAYDVR0TBAUwAwEB/zAN</span><br><span class="line">BgkqhkiG9w0BAQsFAAOCAQEAZdsMS7WCCAOyER3yVozOQ4R9MLt1LW0RSK1I3JXx</span><br><span class="line">MScTHA/bHiFDMvK9CuOOvMZvnYjhHXPpCKIf8fgRTRfBA1lE3VUBEXj2WeH5wzNG</span><br><span class="line">wIXXhVUqB4kW1mqDwxfcLRvp7dof8dqFJ0AoCYAj7dUejrb51tzLNaXnr6/AatAS</span><br><span class="line">MwaIfchjJYT2XdeDMB60aiVlS7NITjUUOiRnW4GtCfxpqonccpUAYpljy0m1eMjv</span><br><span class="line">Qw0cgxI8FZh95xkZPSKVEOai95PAkeCX3ua8GIFrCbvuupALf/hMA4HpObk6uNn5</span><br><span class="line">rlJvvhklTtaotVIkQNCJG7h84Ah2VLUP2HiZVfHb/hADhA==</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/openssl/" rel="tag"># openssl</a>
-          </div>
-
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2015/10/27/SwiftyJSON/" rel="prev" title="SwiftyJSON">
-      <i class="fa fa-chevron-left"></i> SwiftyJSON
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2015/10/28/C%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8Sqlite/" rel="next" title="C语言使用Sqlite">
-      C语言使用Sqlite <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
   
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
         </li>
@@ -305,42 +118,41 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">BAZINGA</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+        <a href="/archives/">
           <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author motion-element">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
       Links
     </div>
     <ul class="links-of-blogroll-list">
@@ -350,61 +162,154 @@
     </ul>
   </div>
 
+        </div>
       </div>
-
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+    </header>
 
-    <footer class="footer">
-      <div class="footer-inner">
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/10/27/Openssl%E4%BB%8E%E8%AF%81%E4%B9%A6%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%85%AC%E9%92%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Openssl从证书中获取公钥 | BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Openssl从证书中获取公钥
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-10-27 19:47:30" itemprop="dateCreated datePublished" datetime="2015-10-27T19:47:30-07:00">2015-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-09-11 22:56:07" itemprop="dateModified" datetime="2018-09-11T22:56:07-07:00">2018-09-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> ca.crt -pubkey</span><br></pre></td></tr></table></figure>
+<p>其中 <code>－in</code> 为输入文件名</p>
+<p>结果：</p>
+<span id="more"></span>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvLgG+bUnsMJCgAf/lGWh</span><br><span class="line">2vqn3ZgoKHwERvgVmgCdn8LPUwc2/kGf6ucmkHKE+VcZ7qQg7A/2K8PyDvs3K+qS</span><br><span class="line">SpkyeC0lhaUxYFJGmSjdeqDkLF+fJ5DcTgqi9sJJfozQN2Uk5ppsN76t4BEW7IW/</span><br><span class="line">a8NReMJ18iB3H18wcJQS0ml4pf/O5h3YxArbGl5LE2sWVRFvE9cSn/Vi+zjMP4e8</span><br><span class="line">FIMWi6snIhQpXUMQmP7ecCfzEAEtfVDEXa2Dzka+FJpnJNJ2nQXJIEWF55YOOe1D</span><br><span class="line">4gJAl9qsI8cVEnZK3fseqHpZ8kKY2SuGyNlsgEf7+DfUT/m3Igg+n2MsoxndtOUi</span><br><span class="line">GwIDAQAB</span><br><span class="line">-----END PUBLIC KEY-----</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIEnjCCA4agAwIBAgIJAN7TiN2CbZx9MA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD</span><br><span class="line">VQQGEwJDTjESMBAGA1UECBMJR3Vhbmdkb25nMRIwEAYDVQQHEwlHdWFuZ3pob3Ux</span><br><span class="line">EjAQBgNVBAoTCU9wZW5UQ0dBQTELMAkGA1UECxMCQ0ExFTATBgNVBAMTDE9wZW5U</span><br><span class="line">Q0dBQSBDQTEhMB8GCSqGSIb3DQEJARYSaW5mb0BvcGVudGNnYWEub3JnMB4XDTE1</span><br><span class="line">MTAyNzAxNTk0MVoXDTI1MTAyNDAxNTk0MVowgZAxCzAJBgNVBAYTAkNOMRIwEAYD</span><br><span class="line">VQQIEwlHdWFuZ2RvbmcxEjAQBgNVBAcTCUd1YW5nemhvdTESMBAGA1UEChMJT3Bl</span><br><span class="line">blRDR0FBMQswCQYDVQQLEwJDQTEVMBMGA1UEAxMMT3BlblRDR0FBIENBMSEwHwYJ</span><br><span class="line">KoZIhvcNAQkBFhJpbmZvQG9wZW50Y2dhYS5vcmcwggEiMA0GCSqGSIb3DQEBAQUA</span><br><span class="line">A4IBDwAwggEKAoIBAQC8uAb5tSewwkKAB/+UZaHa+qfdmCgofARG+BWaAJ2fws9T</span><br><span class="line">Bzb+QZ/q5yaQcoT5VxnupCDsD/Yrw/IO+zcr6pJKmTJ4LSWFpTFgUkaZKN16oOQs</span><br><span class="line">X58nkNxOCqL2wkl+jNA3ZSTmmmw3vq3gERbshb9rw1F4wnXyIHcfXzBwlBLSaXil</span><br><span class="line">/87mHdjECtsaXksTaxZVEW8T1xKf9WL7OMw/h7wUgxaLqyciFCldQxCY/t5wJ/MQ</span><br><span class="line">AS19UMRdrYPORr4Ummck0nadBckgRYXnlg457UPiAkCX2qwjxxUSdkrd+x6oelny</span><br><span class="line">QpjZK4bI2WyAR/v4N9RP+bciCD6fYyyjGd205SIbAgMBAAGjgfgwgfUwHQYDVR0O</span><br><span class="line">BBYEFDMpinnH9UEjObLR/BukzOSFRadVMIHFBgNVHSMEgb0wgbqAFDMpinnH9UEj</span><br><span class="line">ObLR/BukzOSFRadVoYGWpIGTMIGQMQswCQYDVQQGEwJDTjESMBAGA1UECBMJR3Vh</span><br><span class="line">bmdkb25nMRIwEAYDVQQHEwlHdWFuZ3pob3UxEjAQBgNVBAoTCU9wZW5UQ0dBQTEL</span><br><span class="line">MAkGA1UECxMCQ0ExFTATBgNVBAMTDE9wZW5UQ0dBQSBDQTEhMB8GCSqGSIb3DQEJ</span><br><span class="line">ARYSaW5mb0BvcGVudGNnYWEub3JnggkA3tOI3YJtnH0wDAYDVR0TBAUwAwEB/zAN</span><br><span class="line">BgkqhkiG9w0BAQsFAAOCAQEAZdsMS7WCCAOyER3yVozOQ4R9MLt1LW0RSK1I3JXx</span><br><span class="line">MScTHA/bHiFDMvK9CuOOvMZvnYjhHXPpCKIf8fgRTRfBA1lE3VUBEXj2WeH5wzNG</span><br><span class="line">wIXXhVUqB4kW1mqDwxfcLRvp7dof8dqFJ0AoCYAj7dUejrb51tzLNaXnr6/AatAS</span><br><span class="line">MwaIfchjJYT2XdeDMB60aiVlS7NITjUUOiRnW4GtCfxpqonccpUAYpljy0m1eMjv</span><br><span class="line">Qw0cgxI8FZh95xkZPSKVEOai95PAkeCX3ua8GIFrCbvuupALf/hMA4HpObk6uNn5</span><br><span class="line">rlJvvhklTtaotVIkQNCJG7h84Ah2VLUP2HiZVfHb/hADhA==</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/openssl/" rel="tag"># openssl</a>
+          </div>
+
         
 
-        
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/10/27/SwiftyJSON/" rel="prev" title="SwiftyJSON">
+                  <i class="fa fa-chevron-left"></i> SwiftyJSON
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/10/28/C%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8Sqlite/" rel="next" title="C语言使用Sqlite">
+                  C语言使用Sqlite <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
-  &copy; 2015 – 
+  &copy; 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">BAZINGA</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/utils.js"></script>
+  
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
 
 
 
@@ -414,42 +319,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'de6f6e5b077875cca55f',
-      clientSecret: 'a6c825094427a48f3476af87d9673767683fbd84',
-      repo        : 'cydjohn.github.io',
-      owner       : 'cydjohn',
-      admin       : ['cydjohn'],
-      id          : '154221c02a2a7dfa2cfa2cf3a61c9d2e',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cydjohn","repo":"cydjohn.github.io","client_id":"de6f6e5b077875cca55f","client_secret":"a6c825094427a48f3476af87d9673767683fbd84","admin_user":["cydjohn"],"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"154221c02a2a7dfa2cfa2cf3a61c9d2e"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>

@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -13,14 +14,13 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"caoyudong.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="给别人上课的时候突然有了这个问题。 其实所有人都知道C++运行速度要比Python快许多倍，网上也有很多文章做了解释，但是如果面对一个小白最好的办法就是跑一个功能相同的程序给他看时间对比。然后我就想了个证明方法，感觉还挺直观的，这里记录下。方法就是用两种语言分别写两个冒泡排序，然后从文件中读取随机数，排序之后比较程序运行时间。选择用冒泡排序是因为O（n^2)复杂度，可以拉长程序运行时间，结果比较更">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caoyudong.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="给别人上课的时候突然有了这个问题。 其实所有人都知道C++运行速度要比Python快许多倍，网上也有很多文章做了解释，但是如果面对一个小白最好的办法就是跑一个功能相同的程序给他看时间对比。然后我就想了个证明方法，感觉还挺直观的，这里记录下。方法就是用两种语言分别写两个冒泡排序，然后从文件中读取随机数，排序之后比较程序运行时间。选择用冒泡排序是因为O（n^2)复杂度，可以拉长程序运行时间，结果比较更">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++，python运行速度比较程序">
 <meta property="og:url" content="http://caoyudong.com/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/index.html">
@@ -33,82 +33,50 @@
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="http://caoyudong.com/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>C++，python运行速度比较程序 | BAZINGA</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://caoyudong.com/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/","path":"2020/08/12/如何证明C-运行速度比python快/","title":"C++，python运行速度比较程序"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++，python运行速度比较程序 | BAZINGA</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-68546647-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-68546647-1');
-      }
-    </script>
-
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-68546647-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BAZINGA</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <p class="site-title">BAZINGA</p>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
   </div>
@@ -121,29 +89,8 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
   </ul>
 </nav>
 
@@ -151,158 +98,18 @@
 
 
 </div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/cydjohn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BAZINGA">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          C++，python运行速度比较程序
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-12 00:18:58" itemprop="dateCreated datePublished" datetime="2020-08-12T00:18:58-07:00">2020-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-14 13:55:25" itemprop="dateModified" datetime="2021-02-14T13:55:25-08:00">2021-02-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>给别人上课的时候突然有了这个问题。 其实所有人都知道C++运行速度要比Python快许多倍，网上也有很多文章做了解释，但是如果面对一个小白最好的办法就是跑一个功能相同的程序给他看时间对比。然后我就想了个证明方法，感觉还挺直观的，这里记录下。方法就是用两种语言分别写两个冒泡排序，然后从文件中读取随机数，排序之后比较程序运行时间。选择用冒泡排序是因为O（n^2)复杂度，可以拉长程序运行时间，结果比较更直观， 快排结果不太理想，两个程序运行时间差距不大。</p>
-<a id="more"></a>
-
-<h2 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a>生成随机数</h2><p>这里只生成了三万个随机数，因为在我电脑上测试之后发现如果随机数比这多会导致python程序运行时间过长，有点浪费时间。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">a = []</span><br><span class="line">numbers = <span class="number">30000</span></span><br><span class="line">f = open(<span class="string">"randomNumber.txt"</span>, <span class="string">"a"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(numbers):</span><br><span class="line">    a.append(random.uniform(<span class="number">0</span>, <span class="number">1</span>)*numbers)</span><br><span class="line">    f.write(str(a[<span class="number">-1</span>])+<span class="string">","</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="keyword">bool</span> swapp = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">while</span>(swapp)&#123;</span><br><span class="line">        swapp = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; a.<span class="built_in">size</span>()<span class="number">-1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i]&gt;a[i+<span class="number">1</span>] )&#123;</span><br><span class="line">                a[i] += a[i+<span class="number">1</span>];</span><br><span class="line">                a[i+<span class="number">1</span>] = a[i] - a[i+<span class="number">1</span>];</span><br><span class="line">                a[i] -=a[i+<span class="number">1</span>];</span><br><span class="line">                swapp = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::chrono::steady_clock::time_point <span class="built_in">begin</span> = <span class="built_in">std</span>::chrono::steady_clock::now();</span><br><span class="line"></span><br><span class="line">    <span class="function">ifstream <span class="title">in</span><span class="params">(<span class="string">"randomNumber.txt"</span>, ifstream::in)</span></span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; lstNumbers;</span><br><span class="line">    <span class="keyword">while</span> ((!in.eof()) &amp;&amp; in)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">string</span> row;</span><br><span class="line">        in &gt;&gt; row;</span><br><span class="line">        replace(row.<span class="built_in">begin</span>(), row.<span class="built_in">end</span>(), <span class="string">','</span>, <span class="string">' '</span>); </span><br><span class="line">        <span class="function"><span class="built_in">stringstream</span> <span class="title">ss</span><span class="params">(row)</span></span>;</span><br><span class="line">        <span class="keyword">double</span> temp;</span><br><span class="line">        <span class="keyword">while</span> (ss &gt;&gt; temp)</span><br><span class="line">        &#123;</span><br><span class="line">            lstNumbers.push_back(temp);</span><br><span class="line">        &#125;</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">    in.<span class="built_in">close</span>();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;lstNumbers.<span class="built_in">size</span>()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    bubbleSort(lstNumbers);</span><br><span class="line">    <span class="built_in">std</span>::chrono::steady_clock::time_point <span class="built_in">end</span> = <span class="built_in">std</span>::chrono::steady_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Time difference = "</span> &lt;&lt; <span class="built_in">std</span>::chrono::duration_cast&lt;<span class="built_in">std</span>::chrono::milliseconds&gt;(<span class="built_in">end</span> - <span class="built_in">begin</span>).count() / <span class="number">1000.0</span> &lt;&lt; <span class="string">"[s]"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    randomNumberFile = open(<span class="string">'randomNumber.txt'</span>, <span class="string">'r'</span>).readlines()</span><br><span class="line">    numbers = randomNumberFile[<span class="number">0</span>].split(<span class="string">","</span>)</span><br><span class="line">    bubbleSort(numbers)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span><span class="params">(arr)</span>:</span> </span><br><span class="line">    n = len(arr) </span><br><span class="line">    <span class="comment"># Traverse through all array elements </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>): </span><br><span class="line">    <span class="comment"># range(n) also work but outer loop will repeat one time more than needed. </span></span><br><span class="line">        <span class="comment"># Last i elements are already in place </span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, n-i<span class="number">-1</span>): </span><br><span class="line">            <span class="comment"># traverse the array from 0 to n-i-1 </span></span><br><span class="line">            <span class="comment"># Swap if the element found is greater </span></span><br><span class="line">            <span class="comment"># than the next element </span></span><br><span class="line">            <span class="keyword">if</span> arr[j] &gt; arr[j+<span class="number">1</span>] : </span><br><span class="line">                arr[j], arr[j+<span class="number">1</span>] = arr[j+<span class="number">1</span>], arr[j] </span><br><span class="line"></span><br><span class="line">start_time = time.time()</span><br><span class="line">main()</span><br><span class="line">print(<span class="string">"--- %s seconds ---"</span> % (time.time() - start_time))</span><br></pre></td></tr></table></figure>
-
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>C++程序使用<code>make</code>编译完直接运行二进制文件一般要9～10秒钟，python程序一般需要 50 秒，快了将近五倍，可以在短时间内看出差距。</p>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/python/" rel="tag"># python</a>
-          </div>
-
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/" rel="prev" title="React-Native推送消息">
-      <i class="fa fa-chevron-left"></i> React-Native推送消息
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/" rel="next" title="10个TypeScript的坏习惯">
-      10个TypeScript的坏习惯 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
   
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
         </li>
@@ -311,43 +118,42 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">生成随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">结果</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">生成随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">结果</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">BAZINGA</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+        <a href="/archives/">
           <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author motion-element">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
       Links
     </div>
     <ul class="links-of-blogroll-list">
@@ -357,61 +163,160 @@
     </ul>
   </div>
 
+        </div>
       </div>
-
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+    </header>
 
-    <footer class="footer">
-      <div class="footer-inner">
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++，python运行速度比较程序 | BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++，python运行速度比较程序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-12 00:18:58" itemprop="dateCreated datePublished" datetime="2020-08-12T00:18:58-07:00">2020-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-02-14 13:55:25" itemprop="dateModified" datetime="2021-02-14T13:55:25-08:00">2021-02-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>给别人上课的时候突然有了这个问题。 其实所有人都知道C++运行速度要比Python快许多倍，网上也有很多文章做了解释，但是如果面对一个小白最好的办法就是跑一个功能相同的程序给他看时间对比。然后我就想了个证明方法，感觉还挺直观的，这里记录下。方法就是用两种语言分别写两个冒泡排序，然后从文件中读取随机数，排序之后比较程序运行时间。选择用冒泡排序是因为O（n^2)复杂度，可以拉长程序运行时间，结果比较更直观， 快排结果不太理想，两个程序运行时间差距不大。</p>
+<span id="more"></span>
+
+<h2 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a>生成随机数</h2><p>这里只生成了三万个随机数，因为在我电脑上测试之后发现如果随机数比这多会导致python程序运行时间过长，有点浪费时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">a = []</span><br><span class="line">numbers = <span class="number">30000</span></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;randomNumber.txt&quot;</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(numbers):</span><br><span class="line">    a.append(random.uniform(<span class="number">0</span>, <span class="number">1</span>)*numbers)</span><br><span class="line">    f.write(<span class="built_in">str</span>(a[-<span class="number">1</span>])+<span class="string">&quot;,&quot;</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bubbleSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="type">bool</span> swapp = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">while</span>(swapp)&#123;</span><br><span class="line">        swapp = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; a.<span class="built_in">size</span>()<span class="number">-1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i]&gt;a[i+<span class="number">1</span>] )&#123;</span><br><span class="line">                a[i] += a[i+<span class="number">1</span>];</span><br><span class="line">                a[i+<span class="number">1</span>] = a[i] - a[i+<span class="number">1</span>];</span><br><span class="line">                a[i] -=a[i+<span class="number">1</span>];</span><br><span class="line">                swapp = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">    <span class="function">ifstream <span class="title">in</span><span class="params">(<span class="string">&quot;randomNumber.txt&quot;</span>, ifstream::in)</span></span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; lstNumbers;</span><br><span class="line">    <span class="keyword">while</span> ((!in.<span class="built_in">eof</span>()) &amp;&amp; in)</span><br><span class="line">    &#123;</span><br><span class="line">        string row;</span><br><span class="line">        in &gt;&gt; row;</span><br><span class="line">        <span class="built_in">replace</span>(row.<span class="built_in">begin</span>(), row.<span class="built_in">end</span>(), <span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27; &#x27;</span>); </span><br><span class="line">        <span class="function">stringstream <span class="title">ss</span><span class="params">(row)</span></span>;</span><br><span class="line">        <span class="type">double</span> temp;</span><br><span class="line">        <span class="keyword">while</span> (ss &gt;&gt; temp)</span><br><span class="line">        &#123;</span><br><span class="line">            lstNumbers.<span class="built_in">push_back</span>(temp);</span><br><span class="line">        &#125;</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">    in.<span class="built_in">close</span>();</span><br><span class="line">    cout&lt;&lt;lstNumbers.<span class="built_in">size</span>()&lt;&lt;endl;</span><br><span class="line">    <span class="built_in">bubbleSort</span>(lstNumbers);</span><br><span class="line">    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::<span class="built_in">now</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Time difference = &quot;</span> &lt;&lt; std::chrono::<span class="built_in">duration_cast</span>&lt;std::chrono::milliseconds&gt;(end - begin).<span class="built_in">count</span>() / <span class="number">1000.0</span> &lt;&lt; <span class="string">&quot;[s]&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    randomNumberFile = <span class="built_in">open</span>(<span class="string">&#x27;randomNumber.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>).readlines()</span><br><span class="line">    numbers = randomNumberFile[<span class="number">0</span>].split(<span class="string">&quot;,&quot;</span>)</span><br><span class="line">    bubbleSort(numbers)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bubbleSort</span>(<span class="params">arr</span>): </span><br><span class="line">    n = <span class="built_in">len</span>(arr) </span><br><span class="line">    <span class="comment"># Traverse through all array elements </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>): </span><br><span class="line">    <span class="comment"># range(n) also work but outer loop will repeat one time more than needed. </span></span><br><span class="line">        <span class="comment"># Last i elements are already in place </span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n-i-<span class="number">1</span>): </span><br><span class="line">            <span class="comment"># traverse the array from 0 to n-i-1 </span></span><br><span class="line">            <span class="comment"># Swap if the element found is greater </span></span><br><span class="line">            <span class="comment"># than the next element </span></span><br><span class="line">            <span class="keyword">if</span> arr[j] &gt; arr[j+<span class="number">1</span>] : </span><br><span class="line">                arr[j], arr[j+<span class="number">1</span>] = arr[j+<span class="number">1</span>], arr[j] </span><br><span class="line"></span><br><span class="line">start_time = time.time()</span><br><span class="line">main()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;--- %s seconds ---&quot;</span> % (time.time() - start_time))</span><br></pre></td></tr></table></figure>
+
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>C++程序使用<code>make</code>编译完直接运行二进制文件一般要9～10秒钟，python程序一般需要 50 秒，快了将近五倍，可以在短时间内看出差距。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
         
 
-        
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/" rel="prev" title="React-Native推送消息">
+                  <i class="fa fa-chevron-left"></i> React-Native推送消息
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/" rel="next" title="10个TypeScript的坏习惯">
+                  10个TypeScript的坏习惯 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
-  &copy; 2015 – 
+  &copy; 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">BAZINGA</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/utils.js"></script>
+  
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
 
 
 
@@ -421,42 +326,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'de6f6e5b077875cca55f',
-      clientSecret: 'a6c825094427a48f3476af87d9673767683fbd84',
-      repo        : 'cydjohn.github.io',
-      owner       : 'cydjohn',
-      admin       : ['cydjohn'],
-      id          : '18d81eca2ff90bbaddd114286a899f27',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cydjohn","repo":"cydjohn.github.io","client_id":"de6f6e5b077875cca55f","client_secret":"a6c825094427a48f3476af87d9673767683fbd84","admin_user":["cydjohn"],"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"18d81eca2ff90bbaddd114286a899f27"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>

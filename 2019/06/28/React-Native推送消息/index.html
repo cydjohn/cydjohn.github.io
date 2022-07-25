@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -13,14 +14,13 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"caoyudong.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="这里我基本上直接用的react-native-push-notification， 但是使用途中还是遇到了几个小坑，费了一些时间才解决掉，这里记录下步骤。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caoyudong.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这里我基本上直接用的react-native-push-notification， 但是使用途中还是遇到了几个小坑，费了一些时间才解决掉，这里记录下步骤。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React-Native推送消息">
 <meta property="og:url" content="http://caoyudong.com/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/index.html">
@@ -43,82 +43,50 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://caoyudong.com/image/e67afc58-5231-4b21-908e-a58db0ab969b.png">
 
+
 <link rel="canonical" href="http://caoyudong.com/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>React-Native推送消息 | BAZINGA</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://caoyudong.com/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/","path":"2019/06/28/React-Native推送消息/","title":"React-Native推送消息"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React-Native推送消息 | BAZINGA</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-68546647-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-68546647-1');
-      }
-    </script>
-
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-68546647-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BAZINGA</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <p class="site-title">BAZINGA</p>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
   </div>
@@ -131,29 +99,8 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
   </ul>
 </nav>
 
@@ -161,63 +108,143 @@
 
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">2.</span> <span class="nav-text">iOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8E%A8%E9%80%81%E8%AF%81%E4%B9%A6"><span class="nav-number">2.1.</span> <span class="nav-text">获取推送证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">3.</span> <span class="nav-text">Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CFirebase"><span class="nav-number">4.1.</span> <span class="nav-text">注册Firebase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BAZINGA</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://gaomingfei.xyz/" title="http:&#x2F;&#x2F;gaomingfei.xyz&#x2F;" rel="noopener" target="_blank">高明飞的博客</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
 
-  <a href="https://github.com/cydjohn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+    <div class="main-inner post posts-expand">
 
-          <div class="content post posts-expand">
-            
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2019/06/28/React-Native%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="React-Native推送消息 | BAZINGA">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           React-Native推送消息
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-06-28 00:28:20" itemprop="dateCreated datePublished" datetime="2019-06-28T00:28:20-07:00">2019-06-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-06-27 22:34:02" itemprop="dateModified" datetime="2019-06-27T22:34:02-07:00">2019-06-27</time>
-              </span>
+      <time title="Created: 2019-06-28 00:28:20" itemprop="dateCreated datePublished" datetime="2019-06-28T00:28:20-07:00">2019-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2019-06-27 22:34:02" itemprop="dateModified" datetime="2019-06-27T22:34:02-07:00">2019-06-27</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -226,17 +253,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
+        <p>这里我基本上直接用的<a target="_blank" rel="noopener" href="https://github.com/zo0r/react-native-push-notification">react-native-push-notification</a>， 但是使用途中还是遇到了几个小坑，费了一些时间才解决掉，这里记录下步骤。</p>
+<span id="more"></span>
 
-      
-        <p>这里我基本上直接用的<a href="https://github.com/zo0r/react-native-push-notification" target="_blank" rel="noopener">react-native-push-notification</a>， 但是使用途中还是遇到了几个小坑，费了一些时间才解决掉，这里记录下步骤。</p>
-<a id="more"></a>
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-push-notification</span><br></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-push-notification </span><br></pre></td></tr></table></figure>
 <p>or</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add react-native-push-notification</span><br></pre></td></tr></table></figure>
 
 <p>然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native link react-native-push-notification</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native <span class="built_in">link</span> react-native-push-notification</span><br></pre></td></tr></table></figure>
 
 <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p>iOS 安装需要手动把<code>react-native-push-notification</code> 项目添加到自己的项目里面。</p>
 <p>右键点击工程目录下的<code>Libraries</code>-&gt;<code>Add Files</code></p>
@@ -251,43 +276,43 @@
 <p>如果找不到Remote notifications，说明你的开发者账号不支持推送，需要换一个账号（应该是要充了钱那种。</p>
 </blockquote>
 <p>在AppDelegate.m 中添加</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;React/RCTPushNotificationManager.h&gt;</span></span></span><br><span class="line">......</span><br><span class="line"> <span class="comment">// Required to register for notifications</span></span><br><span class="line"> - (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterUserNotificationSettings:(<span class="built_in">UIUserNotificationSettings</span> *)notificationSettings</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the register event.</span></span><br><span class="line"> - (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the notification event. You must call the completion handler after handling the remote notification.</span></span><br><span class="line"> - (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo</span><br><span class="line">                                                        fetchCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span>))completionHandler</span><br><span class="line"> &#123;</span><br><span class="line">   [RCTPushNotificationManager didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the registrationError event.</span></span><br><span class="line"> - (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the localNotification event.</span></span><br><span class="line"> - (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didReceiveLocalNotification:notification];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="string">&lt;React/RCTPushNotificationManager.h&gt;</span></span></span><br><span class="line">......</span><br><span class="line"> <span class="comment">// Required to register for notifications</span></span><br><span class="line"> - (<span class="type">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterUserNotificationSettings:(<span class="built_in">UIUserNotificationSettings</span> *)notificationSettings</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the register event.</span></span><br><span class="line"> - (<span class="type">void</span>)application:(<span class="built_in">UIApplication</span> *)application didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the notification event. You must call the completion handler after handling the remote notification.</span></span><br><span class="line"> - (<span class="type">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo</span><br><span class="line">                                                        fetchCompletionHandler:(<span class="type">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span>))completionHandler</span><br><span class="line"> &#123;</span><br><span class="line">   [RCTPushNotificationManager didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the registrationError event.</span></span><br><span class="line"> - (<span class="type">void</span>)application:(<span class="built_in">UIApplication</span> *)application didFailToRegisterForRemoteNotificationsWithError:(<span class="built_in">NSError</span> *)error</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Required for the localNotification event.</span></span><br><span class="line"> - (<span class="type">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification</span><br><span class="line"> &#123;</span><br><span class="line">  [RCTPushNotificationManager didReceiveLocalNotification:notification];</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="获取推送证书"><a href="#获取推送证书" class="headerlink" title="获取推送证书"></a>获取推送证书</h3><p>从<a href="https://developer.apple.com/account/" target="_blank" rel="noopener">苹果开发者中心</a>登录。</p>
+<h3 id="获取推送证书"><a href="#获取推送证书" class="headerlink" title="获取推送证书"></a>获取推送证书</h3><p>从<a target="_blank" rel="noopener" href="https://developer.apple.com/account/">苹果开发者中心</a>登录。</p>
 <p>选择 <code>Certificates</code> -&gt; <code>Identifiers &amp; Profiles</code> -&gt; <code>Keys ▸ All </code>， 点击 <code>+</code> 创建一个新的密钥。</p>
 <p>给密钥随便取个名字，比如<code>Push Notification Key</code> ， 然后选中<code>Apple Push Notifications service (APNs)</code>。</p>
 <p><img src="../../../../image/e01eb1db-fa4f-4bbf-8b5b-f158ab3efe5b.jpeg"></p>
-<p>点击<code>Continue</code> 然后<code>Confirm</code>，下载生成的密钥。密钥命名会像这样：<code>AuthKey_4SVKWF966R.p8</code>，其中 <code>4SVKWF966R</code> 就是 <code>Key ID</code>。此外我们还需要 <code>Team ID</code>，可以在<a href="https://developer.apple.com/account/#/membership" target="_blank" rel="noopener">这个页面</a>找到。</p>
+<p>点击<code>Continue</code> 然后<code>Confirm</code>，下载生成的密钥。密钥命名会像这样：<code>AuthKey_4SVKWF966R.p8</code>，其中 <code>4SVKWF966R</code> 就是 <code>Key ID</code>。此外我们还需要 <code>Team ID</code>，可以在<a target="_blank" rel="noopener" href="https://developer.apple.com/account/#/membership">这个页面</a>找到。</p>
 <h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>在 <code>AndroidManifest.xml</code>里面添加</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt; Only if you're using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WAKE_LOCK"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">permission</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">"$&#123;applicationId&#125;.permission.C2D_MESSAGE"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:protectionLevel</span>=<span class="string">"signature"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"$&#123;applicationId&#125;.permission.C2D_MESSAGE"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt; Only if you're using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.VIBRATE"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.RECEIVE_BOOT_COMPLETED"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">application</span> <span class="attr">....</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span>  <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.notification_channel_name"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:value</span>=<span class="string">"YOUR NOTIFICATION CHANNEL NAME"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span>  <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.notification_channel_description"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:value</span>=<span class="string">"YOUR NOTIFICATION CHANNEL DESCRIPTION"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Change the resource name to your App's accent color - or any other color you want --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span>  <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.notification_color"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:resource</span>=<span class="string">"@android:color/white"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Only if you're using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"com.google.android.gms.gcm.GcmReceiver"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:exported</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:permission</span>=<span class="string">"com.google.android.c2dm.permission.SEND"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.google.android.c2dm.intent.RECEIVE"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"$&#123;applicationId&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Only if you're using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Only if you're using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerServiceGcm"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:exported</span>=<span class="string">"false"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.google.android.c2dm.intent.RECEIVE"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;/ Only if you're using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Else &gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:exported</span>=<span class="string">"false"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.google.firebase.MESSAGING_EVENT"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;/Else&gt; --&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt; Only if you&#x27;re using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WAKE_LOCK&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">permission</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">&quot;$&#123;applicationId&#125;.permission.C2D_MESSAGE&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:protectionLevel</span>=<span class="string">&quot;signature&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;$&#123;applicationId&#125;.permission.C2D_MESSAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt; Only if you&#x27;re using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.VIBRATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">application</span> <span class="attr">....</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span>  <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.notification_channel_name&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:value</span>=<span class="string">&quot;YOUR NOTIFICATION CHANNEL NAME&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span>  <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.notification_channel_description&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:value</span>=<span class="string">&quot;YOUR NOTIFICATION CHANNEL DESCRIPTION&quot;</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Change the resource name to your App&#x27;s accent color - or any other color you want --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span>  <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.notification_color&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:resource</span>=<span class="string">&quot;@android:color/white&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Only if you&#x27;re using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.google.android.gms.gcm.GcmReceiver&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:exported</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:permission</span>=<span class="string">&quot;com.google.android.c2dm.permission.SEND&quot;</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;com.google.android.c2dm.intent.RECEIVE&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;$&#123;applicationId&#125;&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Only if you&#x27;re using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.BOOT_COMPLETED&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Only if you&#x27;re using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerServiceGcm&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:exported</span>=<span class="string">&quot;false&quot;</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;com.google.android.c2dm.intent.RECEIVE&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;/ Only if you&#x27;re using GCM or localNotificationSchedule() &gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- &lt; Else &gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:exported</span>=<span class="string">&quot;false&quot;</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;com.google.firebase.MESSAGING_EVENT&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;/Else&gt; --&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在 <code>android/app/src/res/values/colors.xml</code>里面添加 <strong>很关键！</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">"white"</span>&gt;</span>#FFF<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;white&quot;</span>&gt;</span>#FFF<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><code>android/settings.gradle</code>中（运行react-native link时应该自动添加了）：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">':react-native-push-notification'</span></span><br><span class="line"><span class="keyword">project</span>(<span class="string">':react-native-push-notification'</span>).projectDir = <span class="keyword">file</span>(‘..<span class="regexp">/node_modules/</span>react-<span class="keyword">native</span>-<span class="keyword">push</span>-notification<span class="regexp">/android')</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">&#x27;:react-native-push-notification&#x27;</span></span><br><span class="line"><span class="keyword">project</span>(<span class="string">&#x27;:react-native-push-notification&#x27;</span>).projectDir = <span class="keyword">file</span>(‘..<span class="regexp">/node_modules/</span>react-<span class="keyword">native</span>-<span class="keyword">push</span>-notification/android<span class="string">&#x27;)</span></span><br></pre></td></tr></table></figure>
 
 
 <p><code>MainApplication.java</code> 中（运行react-native link时应该自动添加了）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  <span class="comment">// &lt;--- Import Package</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> <span class="keyword">implements</span> <span class="title">ReactApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> ReactNativeHost mReactNativeHost = <span class="keyword">new</span> ReactNativeHost(<span class="keyword">this</span>) &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">getUseDeveloperSupport</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BuildConfig.DEBUG;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">          <span class="keyword">new</span> MainReactPackage(),</span><br><span class="line">          <span class="keyword">new</span> ReactNativePushNotificationPackage() <span class="comment">// &lt;---- Add the Package</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  <span class="comment">// &lt;--- Import Package</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainApplication</span> <span class="keyword">extends</span> <span class="title class_">Application</span> <span class="keyword">implements</span> <span class="title class_">ReactApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">ReactNativeHost</span> <span class="variable">mReactNativeHost</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReactNativeHost</span>(<span class="built_in">this</span>) &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">getUseDeveloperSupport</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> BuildConfig.DEBUG;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title function_">getPackages</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">          <span class="keyword">new</span> <span class="title class_">MainReactPackage</span>(),</span><br><span class="line">          <span class="keyword">new</span> <span class="title class_">ReactNativePushNotificationPackage</span>() <span class="comment">// &lt;---- Add the Package</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PushNotification = <span class="built_in">require</span>(<span class="string">'react-native-push-notification'</span>);</span><br><span class="line"></span><br><span class="line">PushNotification.configure(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// (optional) Called when Token is generated (iOS and Android)</span></span><br><span class="line">    onRegister: <span class="function"><span class="keyword">function</span>(<span class="params">token</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">'TOKEN:'</span>, token );</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// (required) Called when a remote or local notification is opened or received</span></span><br><span class="line">    onNotification: <span class="function"><span class="keyword">function</span>(<span class="params">notification</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">'NOTIFICATION:'</span>, notification );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// process the notification</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)</span></span><br><span class="line">        notification.finish(PushNotificationIOS.FetchResult.NoData);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)</span></span><br><span class="line">    senderID: <span class="string">"YOUR GCM (OR FCM) SENDER ID"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// IOS ONLY (optional): default: all - Permissions to register.</span></span><br><span class="line">    permissions: &#123;</span><br><span class="line">        alert: <span class="literal">true</span>,</span><br><span class="line">        badge: <span class="literal">true</span>,</span><br><span class="line">        sound: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Should the initial notification be popped automatically</span></span><br><span class="line">    <span class="comment">// default: true</span></span><br><span class="line">    popInitialNotification: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * (optional) default: true</span></span><br><span class="line"><span class="comment">      * - Specified if permissions (ios) and token (android and ios) will requested or not,</span></span><br><span class="line"><span class="comment">      * - if not, you must call PushNotificationsHandler.requestPermissions() later</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    requestPermissions: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">PushNotification</span> = <span class="built_in">require</span>(<span class="string">&#x27;react-native-push-notification&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">PushNotification</span>.<span class="title function_">configure</span>(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// (optional) Called when Token is generated (iOS and Android)</span></span><br><span class="line">    <span class="attr">onRegister</span>: <span class="keyword">function</span>(<span class="params">token</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>( <span class="string">&#x27;TOKEN:&#x27;</span>, token );</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// (required) Called when a remote or local notification is opened or received</span></span><br><span class="line">    <span class="attr">onNotification</span>: <span class="keyword">function</span>(<span class="params">notification</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>( <span class="string">&#x27;NOTIFICATION:&#x27;</span>, notification );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// process the notification</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)</span></span><br><span class="line">        notification.<span class="title function_">finish</span>(<span class="title class_">PushNotificationIOS</span>.<span class="property">FetchResult</span>.<span class="property">NoData</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)</span></span><br><span class="line">    <span class="attr">senderID</span>: <span class="string">&quot;YOUR GCM (OR FCM) SENDER ID&quot;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// IOS ONLY (optional): default: all - Permissions to register.</span></span><br><span class="line">    <span class="attr">permissions</span>: &#123;</span><br><span class="line">        <span class="attr">alert</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">badge</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">sound</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Should the initial notification be popped automatically</span></span><br><span class="line">    <span class="comment">// default: true</span></span><br><span class="line">    <span class="attr">popInitialNotification</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * (optional) default: true</span></span><br><span class="line"><span class="comment">      * - Specified if permissions (ios) and token (android and ios) will requested or not,</span></span><br><span class="line"><span class="comment">      * - if not, you must call PushNotificationsHandler.requestPermissions() later</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="attr">requestPermissions</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>其中：<br><code>onRegister()</code>获得的token为每个设备唯一的识别号，需要记录下来，推送会用到。</p>
 <p><code>senderID</code>是谷歌firebase的推送id，如果不用谷歌的firebase可以不用管这里。</p>
 <h3 id="注册Firebase"><a href="#注册Firebase" class="headerlink" title="注册Firebase"></a>注册Firebase</h3><p>我这里使用谷歌firebase，国内应该有别的推送服务比如极光推送，小米推送等等。</p>
-<p>先到<a href="https://console.firebase.google.com/" target="_blank" rel="noopener">firebase</a>创建一个项目，名字随便取。</p>
+<p>先到<a target="_blank" rel="noopener" href="https://console.firebase.google.com/">firebase</a>创建一个项目，名字随便取。</p>
 <p><img src="../../../../image/3166d13a-8c0e-4b80-8dee-7f74b3978d97.png"></p>
 <p>然后注册一个新的安卓应用，其中安卓软件包名就是<code>build.gradle</code> 文件中的 <code>applicationId</code></p>
 <p><img src="../../../../image/547bd056-5d86-4451-9e96-3b1d310286f3.png"></p>
 <p>点击下一步，根据提示下载<code>google-services.json</code><br>然后把“google-services.json”文件移至 Android 应用模块的根目录。</p>
 <p><img src="../../../../image/8804917f-21ed-4f63-b036-1620757b1d2b.png"></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>下载 <a href="https://github.com/onmyway133/PushNotifications" target="_blank" rel="noopener">Push Notification Tester</a>， 这是一个可以用来测试iOS消息推送的软件，软件界面如下。填入<code>Key ID</code>，<code>Team ID</code>，密钥，<code>bundle id</code>以及获取的设备码，点击send即可测试。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>下载 <a target="_blank" rel="noopener" href="https://github.com/onmyway133/PushNotifications">Push Notification Tester</a>， 这是一个可以用来测试iOS消息推送的软件，软件界面如下。填入<code>Key ID</code>，<code>Team ID</code>，密钥，<code>bundle id</code>以及获取的设备码，点击send即可测试。</p>
 <p><img src="../../../../image/210c34da-55a7-488c-98a3-929a868ab03f.png"></p>
 <hr>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/zo0r/react-native-push-notification" target="_blank" rel="noopener">https://github.com/zo0r/react-native-push-notification</a></p>
-<p><a href="https://facebook.github.io/react-native/docs/pushnotificationios.html#content" target="_blank" rel="noopener">https://facebook.github.io/react-native/docs/pushnotificationios.html#content</a></p>
-<p><a href="https://www.raywenderlich.com/8164-push-notifications-tutorial-getting-started" target="_blank" rel="noopener">https://www.raywenderlich.com/8164-push-notifications-tutorial-getting-started</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://github.com/zo0r/react-native-push-notification">https://github.com/zo0r/react-native-push-notification</a></p>
+<p><a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/docs/pushnotificationios.html#content">https://facebook.github.io/react-native/docs/pushnotificationios.html#content</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.raywenderlich.com/8164-push-notifications-tutorial-getting-started">https://www.raywenderlich.com/8164-push-notifications-tutorial-getting-started</a></p>
 
     </div>
 
@@ -295,182 +320,62 @@
     
     
 
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/React-Native/" rel="tag"># React-Native</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/05/21/Ubuntu16-04%E4%B8%8A%E4%BD%BF%E7%94%A8Nginx%E9%83%A8%E7%BD%B2Laravel%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" rel="prev" title="Ubuntu16.04上使用Nginx部署Laravel应用程序">
-      <i class="fa fa-chevron-left"></i> Ubuntu16.04上使用Nginx部署Laravel应用程序
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/" rel="next" title="C++，python运行速度比较程序">
-      C++，python运行速度比较程序 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/05/21/Ubuntu16-04%E4%B8%8A%E4%BD%BF%E7%94%A8Nginx%E9%83%A8%E7%BD%B2Laravel%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" rel="prev" title="Ubuntu16.04上使用Nginx部署Laravel应用程序">
+                  <i class="fa fa-chevron-left"></i> Ubuntu16.04上使用Nginx部署Laravel应用程序
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/" rel="next" title="C++，python运行速度比较程序">
+                  C++，python运行速度比较程序 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">2.</span> <span class="nav-text">iOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8E%A8%E9%80%81%E8%AF%81%E4%B9%A6"><span class="nav-number">2.1.</span> <span class="nav-text">获取推送证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">3.</span> <span class="nav-text">Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CFirebase"><span class="nav-number">4.1.</span> <span class="nav-text">注册Firebase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">BAZINGA</p>
-  <div class="site-description" itemprop="description"></div>
+    </footer>
+  </article>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">132</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">29</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://gaomingfei.xyz/" title="http:&#x2F;&#x2F;gaomingfei.xyz&#x2F;" rel="noopener" target="_blank">高明飞的博客</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
-  &copy; 2015 – 
+  &copy; 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">BAZINGA</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/utils.js"></script>
+  
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
 
 
 
@@ -480,42 +385,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'de6f6e5b077875cca55f',
-      clientSecret: 'a6c825094427a48f3476af87d9673767683fbd84',
-      repo        : 'cydjohn.github.io',
-      owner       : 'cydjohn',
-      admin       : ['cydjohn'],
-      id          : '7621cc93a608d3810991a245187df426',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cydjohn","repo":"cydjohn.github.io","client_id":"de6f6e5b077875cca55f","client_secret":"a6c825094427a48f3476af87d9673767683fbd84","admin_user":["cydjohn"],"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"7621cc93a608d3810991a245187df426"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>

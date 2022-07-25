@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -13,14 +14,13 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"caoyudong.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="https:&#x2F;&#x2F;github.com&#x2F;CocoaLumberjack&#x2F;CocoaLumberjack CocoaLumberjack是一款log框架，支持iOS和Mac。最大的好处就是可以把Log分成不同等级，方便调适，从此抛弃NSLog。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caoyudong.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="https:&#x2F;&#x2F;github.com&#x2F;CocoaLumberjack&#x2F;CocoaLumberjack CocoaLumberjack是一款log框架，支持iOS和Mac。最大的好处就是可以把Log分成不同等级，方便调适，从此抛弃NSLog。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocoaLumberjack">
 <meta property="og:url" content="http://caoyudong.com/2015/12/23/CocoaLumberjack/index.html">
@@ -35,82 +35,50 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://7xkfbb.com1.z0.glb.clouddn.com/15-12-23/42692645.jpg">
 
+
 <link rel="canonical" href="http://caoyudong.com/2015/12/23/CocoaLumberjack/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>CocoaLumberjack | BAZINGA</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://caoyudong.com/2015/12/23/CocoaLumberjack/","path":"2015/12/23/CocoaLumberjack/","title":"CocoaLumberjack"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CocoaLumberjack | BAZINGA</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-68546647-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-68546647-1');
-      }
-    </script>
-
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-68546647-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BAZINGA</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <p class="site-title">BAZINGA</p>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
   </div>
@@ -123,29 +91,8 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
   </ul>
 </nav>
 
@@ -153,63 +100,143 @@
 
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BE%93%E5%87%BA%E6%9C%89%E9%A2%9C%E8%89%B2%E7%9A%84Log%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">如何输出有颜色的Log？</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BAZINGA</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://gaomingfei.xyz/" title="http:&#x2F;&#x2F;gaomingfei.xyz&#x2F;" rel="noopener" target="_blank">高明飞的博客</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
 
-  <a href="https://github.com/cydjohn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+    <div class="main-inner post posts-expand">
 
-          <div class="content post posts-expand">
-            
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2015/12/23/CocoaLumberjack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CocoaLumberjack | BAZINGA">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           CocoaLumberjack
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2015-12-23 16:41:14" itemprop="dateCreated datePublished" datetime="2015-12-23T16:41:14-08:00">2015-12-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-11 22:56:07" itemprop="dateModified" datetime="2018-09-11T22:56:07-07:00">2018-09-11</time>
-              </span>
+      <time title="Created: 2015-12-23 16:41:14" itemprop="dateCreated datePublished" datetime="2015-12-23T16:41:14-08:00">2015-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-09-11 22:56:07" itemprop="dateModified" datetime="2018-09-11T22:56:07-07:00">2018-09-11</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -218,30 +245,28 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <p><a href="https://github.com/CocoaLumberjack/CocoaLumberjack" target="_blank" rel="noopener">https://github.com/CocoaLumberjack/CocoaLumberjack</a></p>
+        <p><a target="_blank" rel="noopener" href="https://github.com/CocoaLumberjack/CocoaLumberjack">https://github.com/CocoaLumberjack/CocoaLumberjack</a></p>
 <p>CocoaLumberjack是一款log框架，支持iOS和Mac。最大的好处就是可以把Log分成不同等级，方便调适，从此抛弃NSLog。</p>
 <p><img src="http://7xkfbb.com1.z0.glb.clouddn.com/15-12-23/42692645.jpg"></p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>CocoaPods:</strong></p>
 <p>在<code>Podfile</code>中加上：</p>
 <p>Objective-C</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span></span><br><span class="line">pod <span class="string">'CocoaLumberjack'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">&#x27;7.0&#x27;</span></span><br><span class="line">pod <span class="string">&#x27;CocoaLumberjack&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>Swift</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'8.0'</span></span><br><span class="line">pod <span class="string">'CocoaLumberjack/Swift'</span></span><br><span class="line">use_frameworks!</span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">&#x27;8.0&#x27;</span></span><br><span class="line">pod <span class="string">&#x27;CocoaLumberjack/Swift&#x27;</span></span><br><span class="line">use_frameworks!</span><br></pre></td></tr></table></figure>
 <p><em>或者：</em></p>
 <p><strong>Carthage</strong></p>
 <p>在<code>Cartfile</code>中加上：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">github &quot;CocoaLumberjack&#x2F;CocoaLumberjack&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">github &quot;CocoaLumberjack/CocoaLumberjack&quot;</span><br></pre></td></tr></table></figure>
 
 <p><em>或者手动安装</em></p>
 <blockquote>
 <p>好麻烦不想写了……官网上有😷😷😷。 大概意思就是把<code>CocoaLumberjack/Lumberjack.xcodeproj</code>拖到项目中，编译然后选自己项目对应的框架。</p>
 </blockquote>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>引入</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;CocoaLumberjack/CocoaLumberjack.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="string">&lt;CocoaLumberjack/CocoaLumberjack.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>Log分为以下几种，分别代表不同的等级</p>
 <ul>
@@ -253,20 +278,20 @@
 </ul>
 <p>严重度：<code>DDLogError</code>&gt;<code>DDLogWarn</code>&gt;<code>DDLogInfo</code>&gt;<code>DDLogDebug</code>&gt;<code>DDLogVerbose</code></p>
 <p>通过下面这个语句可以设置调适的时候在控制台输出哪个等级的Log：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> DDLogLevel ddLogLevel = DDLogLevelDebug;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">`DDLog`语法跟`<span class="built_in">NSLog</span>`语法一摸一样</span><br><span class="line"></span><br><span class="line">```objectivec</span><br><span class="line"><span class="comment">// Convert from this:</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Broken sprocket detected!"</span>);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"User selected file:%@ withSize:%u"</span>, filePath, fileSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">// To this:</span></span><br><span class="line">DDLogError(<span class="string">@"Broken sprocket detected!"</span>);</span><br><span class="line">DDLogVerbose(<span class="string">@"User selected file:%@ withSize:%u"</span>, filePath, fileSize);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> DDLogLevel ddLogLevel = DDLogLevelDebug;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">`DDLog`语法跟`<span class="built_in">NSLog</span>`语法一摸一样</span><br><span class="line"></span><br><span class="line">```objectivec</span><br><span class="line"><span class="comment">// Convert from this:</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;Broken sprocket detected!&quot;</span>);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;User selected file:%@ withSize:%u&quot;</span>, filePath, fileSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">// To this:</span></span><br><span class="line">DDLogError(<span class="string">@&quot;Broken sprocket detected!&quot;</span>);</span><br><span class="line">DDLogVerbose(<span class="string">@&quot;User selected file:%@ withSize:%u&quot;</span>, filePath, fileSize);</span><br></pre></td></tr></table></figure>
 
 <p>比如选了<code>DDLogLevelDebug</code>调试的时候只会在控制台输出<code>Debug</code>,<code>Info</code>,<code>Warn</code>和<code>Error</code>。</p>
 <p>swift用法</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//swift</span></span><br><span class="line"><span class="type">DDLog</span>.addLogger(<span class="type">DDTTYLogger</span>.sharedInstance()) <span class="comment">// TTY = Xcode console</span></span><br><span class="line"><span class="type">DDLog</span>.addLogger(<span class="type">DDASLLogger</span>.sharedInstance()) <span class="comment">// ASL = Apple System Logs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fileLogger: <span class="type">DDFileLogger</span> = <span class="type">DDFileLogger</span>() <span class="comment">// File Logger</span></span><br><span class="line">fileLogger.rollingFrequency = <span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>  <span class="comment">// 24 hours</span></span><br><span class="line">fileLogger.logFileManager.maximumNumberOfLogFiles = <span class="number">7</span></span><br><span class="line"><span class="type">DDLog</span>.addLogger(fileLogger)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="type">DDLogVerbose</span>(<span class="string">"Verbose"</span>);</span><br><span class="line"><span class="type">DDLogDebug</span>(<span class="string">"Debug"</span>);</span><br><span class="line"><span class="type">DDLogInfo</span>(<span class="string">"Info"</span>);</span><br><span class="line"><span class="type">DDLogWarn</span>(<span class="string">"Warn"</span>);</span><br><span class="line"><span class="type">DDLogError</span>(<span class="string">"Error"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//swift</span></span><br><span class="line"><span class="type">DDLog</span>.addLogger(<span class="type">DDTTYLogger</span>.sharedInstance()) <span class="comment">// TTY = Xcode console</span></span><br><span class="line"><span class="type">DDLog</span>.addLogger(<span class="type">DDASLLogger</span>.sharedInstance()) <span class="comment">// ASL = Apple System Logs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fileLogger: <span class="type">DDFileLogger</span> <span class="operator">=</span> <span class="type">DDFileLogger</span>() <span class="comment">// File Logger</span></span><br><span class="line">fileLogger.rollingFrequency <span class="operator">=</span> <span class="number">60</span><span class="operator">*</span><span class="number">60</span><span class="operator">*</span><span class="number">24</span>  <span class="comment">// 24 hours</span></span><br><span class="line">fileLogger.logFileManager.maximumNumberOfLogFiles <span class="operator">=</span> <span class="number">7</span></span><br><span class="line"><span class="type">DDLog</span>.addLogger(fileLogger)</span><br><span class="line"></span><br><span class="line"><span class="operator">...</span></span><br><span class="line"></span><br><span class="line"><span class="type">DDLogVerbose</span>(<span class="string">&quot;Verbose&quot;</span>);</span><br><span class="line"><span class="type">DDLogDebug</span>(<span class="string">&quot;Debug&quot;</span>);</span><br><span class="line"><span class="type">DDLogInfo</span>(<span class="string">&quot;Info&quot;</span>);</span><br><span class="line"><span class="type">DDLogWarn</span>(<span class="string">&quot;Warn&quot;</span>);</span><br><span class="line"><span class="type">DDLogError</span>(<span class="string">&quot;Error&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>Objective-C用法：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[DDLog addLogger:[DDTTYLogger sharedInstance]]; <span class="comment">// TTY = Xcode console</span></span><br><span class="line">[DDLog addLogger:[DDASLLogger sharedInstance]]; <span class="comment">// ASL = Apple System Logs</span></span><br><span class="line"></span><br><span class="line">DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; <span class="comment">// File Logger</span></span><br><span class="line">fileLogger.rollingFrequency = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>; <span class="comment">// 24 hour rolling</span></span><br><span class="line">fileLogger.logFileManager.maximumNumberOfLogFiles = <span class="number">7</span>;</span><br><span class="line">[DDLog addLogger:fileLogger];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">DDLogVerbose(<span class="string">@"Verbose"</span>);</span><br><span class="line">DDLogDebug(<span class="string">@"Debug"</span>);</span><br><span class="line">DDLogInfo(<span class="string">@"Info"</span>);</span><br><span class="line">DDLogWarn(<span class="string">@"Warn"</span>);</span><br><span class="line">DDLogError(<span class="string">@"Error"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[DDLog addLogger:[DDTTYLogger sharedInstance]]; <span class="comment">// TTY = Xcode console</span></span><br><span class="line">[DDLog addLogger:[DDASLLogger sharedInstance]]; <span class="comment">// ASL = Apple System Logs</span></span><br><span class="line"></span><br><span class="line">DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; <span class="comment">// File Logger</span></span><br><span class="line">fileLogger.rollingFrequency = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>; <span class="comment">// 24 hour rolling</span></span><br><span class="line">fileLogger.logFileManager.maximumNumberOfLogFiles = <span class="number">7</span>;</span><br><span class="line">[DDLog addLogger:fileLogger];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">DDLogVerbose(<span class="string">@&quot;Verbose&quot;</span>);</span><br><span class="line">DDLogDebug(<span class="string">@&quot;Debug&quot;</span>);</span><br><span class="line">DDLogInfo(<span class="string">@&quot;Info&quot;</span>);</span><br><span class="line">DDLogWarn(<span class="string">@&quot;Warn&quot;</span>);</span><br><span class="line">DDLogError(<span class="string">@&quot;Error&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<h3 id="如何输出有颜色的Log？"><a href="#如何输出有颜色的Log？" class="headerlink" title="如何输出有颜色的Log？"></a>如何输出有颜色的Log？</h3><p>首先要去安装一个Xcode插件<a href="https://github.com/robbiehanson/XcodeColors" target="_blank" rel="noopener">XcodeColors</a></p>
+<h3 id="如何输出有颜色的Log？"><a href="#如何输出有颜色的Log？" class="headerlink" title="如何输出有颜色的Log？"></a>如何输出有颜色的Log？</h3><p>首先要去安装一个Xcode插件<a target="_blank" rel="noopener" href="https://github.com/robbiehanson/XcodeColors">XcodeColors</a></p>
 <p><strong>安装方法</strong></p>
 <p>把项目下载下来，运行，然后重启Xcode。。。。点击<code>Load Bundle</code>就好</p>
 <p>然后在项目中加入这两个语句（可以写在<code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</code> 里面）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Standard lumberjack initialization</span><br><span class="line">[DDLog addLogger:[DDTTYLogger sharedInstance]];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; And we also enable colors</span><br><span class="line">[[DDTTYLogger sharedInstance] setColorsEnabled:YES];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Standard lumberjack initialization</span><br><span class="line">[DDLog addLogger:[DDTTYLogger sharedInstance]];</span><br><span class="line"></span><br><span class="line">// And we also enable colors</span><br><span class="line">[[DDTTYLogger sharedInstance] setColorsEnabled:YES];</span><br></pre></td></tr></table></figure>
 
 <p><strong>还没完！！！</strong></p>
 <p>然后在Xcode中设置：</p>
@@ -282,16 +307,17 @@
 </ul>
 <p><strong>自定义颜色</strong></p>
 <p>代码中加入：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Let's customize our colors.</span></span><br><span class="line"><span class="comment">// DDLogInfo : Pink</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> TARGET_OS_IPHONE</span></span><br><span class="line"><span class="built_in">UIColor</span> *pink = [<span class="built_in">UIColor</span> colorWithRed:(<span class="number">255</span>/<span class="number">255.0</span>) green:(<span class="number">58</span>/<span class="number">255.0</span>) blue:(<span class="number">159</span>/<span class="number">255.0</span>) alpha:<span class="number">1.0</span>];</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="built_in">NSColor</span> *pink = [<span class="built_in">NSColor</span> colorWithCalibratedRed:(<span class="number">255</span>/<span class="number">255.0</span>) green:(<span class="number">58</span>/<span class="number">255.0</span>) blue:(<span class="number">159</span>/<span class="number">255.0</span>) alpha:<span class="number">1.0</span>];</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">[[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:<span class="literal">nil</span> forFlag:DDLogFlagInfo];</span><br><span class="line"></span><br><span class="line">DDLogInfo(<span class="string">@"Warming up printer"</span>); <span class="comment">// Prints in Pink !</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Let&#x27;s customize our colors.</span></span><br><span class="line"><span class="comment">// DDLogInfo : Pink</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> TARGET_OS_IPHONE</span></span><br><span class="line"><span class="built_in">UIColor</span> *pink = [<span class="built_in">UIColor</span> colorWithRed:(<span class="number">255</span>/<span class="number">255.0</span>) green:(<span class="number">58</span>/<span class="number">255.0</span>) blue:(<span class="number">159</span>/<span class="number">255.0</span>) alpha:<span class="number">1.0</span>];</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="built_in">NSColor</span> *pink = [<span class="built_in">NSColor</span> colorWithCalibratedRed:(<span class="number">255</span>/<span class="number">255.0</span>) green:(<span class="number">58</span>/<span class="number">255.0</span>) blue:(<span class="number">159</span>/<span class="number">255.0</span>) alpha:<span class="number">1.0</span>];</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">[[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:<span class="literal">nil</span> forFlag:DDLogFlagInfo];</span><br><span class="line"></span><br><span class="line">DDLogInfo(<span class="string">@&quot;Warming up printer&quot;</span>); <span class="comment">// Prints in Pink !</span></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p></br></br></br></p>
 <p>####有个小技巧：</p>
 <p>创建一个pch文件，在这个文件里面引入</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;CocoaLumberjack/CocoaLumberjack.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="string">&lt;CocoaLumberjack/CocoaLumberjack.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>然后设置log等级</p>
-<pre><code class="objectivec">static const DDLogLevel ddLogLevel = DDLogLevelDebug;</code></pre>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> DDLogLevel ddLogLevel = DDLogLevelDebug;</span><br></pre></td></tr></table></figure>
+
 <p>整个项目的其它文件就都可以正常使用<code>DDLog</code>了~</p>
 <blockquote>
 <p>对于如何创建pch文件，以及什么是pch文件有疑问的同学<a href="http://caoyudong.com/2016/01/21/%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0PCH%E6%96%87%E4%BB%B6/">传送门</a></p>
@@ -303,182 +329,62 @@
     
     
 
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/IOS/" rel="tag"># IOS</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2015/12/22/JGProgressHUD/" rel="prev" title="JGProgressHUD">
-      <i class="fa fa-chevron-left"></i> JGProgressHUD
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2015/12/23/MBProgressHUD/" rel="next" title="MBProgressHUD">
-      MBProgressHUD <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/12/22/JGProgressHUD/" rel="prev" title="JGProgressHUD">
+                  <i class="fa fa-chevron-left"></i> JGProgressHUD
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/12/23/MBProgressHUD/" rel="next" title="MBProgressHUD">
+                  MBProgressHUD <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BE%93%E5%87%BA%E6%9C%89%E9%A2%9C%E8%89%B2%E7%9A%84Log%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">如何输出有颜色的Log？</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">BAZINGA</p>
-  <div class="site-description" itemprop="description"></div>
+    </footer>
+  </article>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">132</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">29</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://gaomingfei.xyz/" title="http:&#x2F;&#x2F;gaomingfei.xyz&#x2F;" rel="noopener" target="_blank">高明飞的博客</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
-  &copy; 2015 – 
+  &copy; 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">BAZINGA</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/utils.js"></script>
+  
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
 
 
 
@@ -488,42 +394,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'de6f6e5b077875cca55f',
-      clientSecret: 'a6c825094427a48f3476af87d9673767683fbd84',
-      repo        : 'cydjohn.github.io',
-      owner       : 'cydjohn',
-      admin       : ['cydjohn'],
-      id          : '1a5fa6f4d028b3325f004b809bcc8211',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cydjohn","repo":"cydjohn.github.io","client_id":"de6f6e5b077875cca55f","client_secret":"a6c825094427a48f3476af87d9673767683fbd84","admin_user":["cydjohn"],"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"1a5fa6f4d028b3325f004b809bcc8211"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>

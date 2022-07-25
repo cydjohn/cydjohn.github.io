@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -13,14 +14,13 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"caoyudong.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="Typescript 和 Javascript 在过去的几年里增加了很多新特性，所以我们写代码时的一些习惯可能已经过时了, 其中一些可能已经永久的失去了存在意义。这篇文章列举了10个不应该有的习惯。 在下面的例子中，注意“应该是什么样”只是修复了讨论的问题，代码里面可能还会有别的问题这里不做讨论。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caoyudong.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Typescript 和 Javascript 在过去的几年里增加了很多新特性，所以我们写代码时的一些习惯可能已经过时了, 其中一些可能已经永久的失去了存在意义。这篇文章列举了10个不应该有的习惯。 在下面的例子中，注意“应该是什么样”只是修复了讨论的问题，代码里面可能还会有别的问题这里不做讨论。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10个TypeScript的坏习惯">
 <meta property="og:url" content="http://caoyudong.com/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/index.html">
@@ -33,82 +33,50 @@
 <meta property="article:tag" content="TypeScript">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="http://caoyudong.com/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>10个TypeScript的坏习惯 | BAZINGA</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://caoyudong.com/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/","path":"2021/02/14/10个TypeScript的坏习惯/","title":"10个TypeScript的坏习惯"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>10个TypeScript的坏习惯 | BAZINGA</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-68546647-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-68546647-1');
-      }
-    </script>
-
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-68546647-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BAZINGA</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <p class="site-title">BAZINGA</p>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
   </div>
@@ -121,29 +89,8 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
   </ul>
 </nav>
 
@@ -151,229 +98,18 @@
 
 
 </div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/cydjohn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="BAZINGA">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BAZINGA">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          10个TypeScript的坏习惯
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-14 13:48:20 / Modified: 13:49:54" itemprop="dateCreated datePublished" datetime="2021-02-14T13:48:20-08:00">2021-02-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>Typescript 和 Javascript 在过去的几年里增加了很多新特性，所以我们写代码时的一些习惯可能已经过时了, 其中一些可能已经永久的失去了存在意义。这篇文章列举了10个不应该有的习惯。</p>
-<p>在下面的例子中，注意“应该是什么样”只是修复了讨论的问题，代码里面可能还会有别的问题这里不做讨论。</p>
-<a id="more"></a>
-
-<h2 id="1-没有开启-strict-模式"><a href="#1-没有开启-strict-模式" class="headerlink" title="1. 没有开启 strict 模式"></a>1. 没有开启 <code>strict</code> 模式</h2><h3 id="错误例子"><a href="#错误例子" class="headerlink" title="错误例子"></a>错误例子</h3><p>在 <code>tsconfig.json</code>里面没有使用 strict 模式</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="string">"target"</span>: <span class="string">"ES2015"</span>,</span><br><span class="line">    <span class="string">"module"</span>: <span class="string">"commonjs"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）"><a href="#应该是什么样（正确写法）" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="string">"target"</span>: <span class="string">"ES2015"</span>,</span><br><span class="line">    <span class="string">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">    <span class="string">"strict"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写"><a href="#为什么会这么写" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>在现存项目里面开<code>strict</code>模式（严格模式）需要花额外时间修改代码</p>
-<h3 id="为什么不该这么写"><a href="#为什么不该这么写" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>开启<code>strict</code>模式 未来修改代码会很容易，磨刀不误砍柴工</p>
-<h2 id="2-使用-符号定义默认值"><a href="#2-使用-符号定义默认值" class="headerlink" title="2. 使用 || 符号定义默认值"></a>2. 使用 <code>||</code> 符号定义默认值</h2><h3 id="错误例子-1"><a href="#错误例子-1" class="headerlink" title="错误例子"></a>错误例子</h3><p>用<code>||</code>定义备用默认值</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createBlogPost</span> (<span class="params">text: <span class="built_in">string</span>, author: <span class="built_in">string</span>, date?: <span class="built_in">Date</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    text: text,</span><br><span class="line">    author: author,</span><br><span class="line">    date: date || <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="应该是什么样（正确写法）-1"><a href="#应该是什么样（正确写法）-1" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>使用新的 <code>??</code> 符号，或者直接在参数声明的地方定义fallback value(备用值)</p>
-<blockquote>
-<p>A fallback value is a value you would use when the main thing you requested is not available.</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createBlogPost</span> (<span class="params">text: <span class="built_in">string</span>, author: <span class="built_in">string</span>, date: <span class="built_in">Date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>()</span>)</span></span><br><span class="line"><span class="function">  <span class="title">return</span> </span>&#123;</span><br><span class="line">    text: text,</span><br><span class="line">    author: author,</span><br><span class="line">    date: date</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-1"><a href="#为什么会这么写-1" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p><code>??</code> 符号在去年发布3.7版本的时候才引入。以及如果在一个超长的函数中间设置默认值的话可能会比较困难。</p>
-<h3 id="为什么不该这么写-1"><a href="#为什么不该这么写-1" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>与 <code>||</code> 符号不同， <code>??</code> 只有在前面参数是<code>null</code> 或者 <code>undefined</code>的时候才起作用，如果是false的话就不会。以及如果有个函数很长以至于无法在一开始设置默认值，分开来（splitting）写也是个好办法。</p>
-<h2 id="3-使用-any-作为一种类型"><a href="#3-使用-any-作为一种类型" class="headerlink" title="3. 使用 any 作为一种类型"></a>3. 使用 <code>any</code> 作为一种类型</h2><h3 id="错误例子-2"><a href="#错误例子-2" class="headerlink" title="错误例子"></a>错误例子</h3><p>当你不确定变量内容的时候使用<code>any</code>作为一种类型来存放变量</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">loadProducts</span>(<span class="params"></span>): <span class="title">Promise</span>&lt;<span class="title">Product</span>[]&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://api.mysite.com/products'</span>)</span><br><span class="line">  <span class="keyword">const</span> products: <span class="built_in">any</span> = <span class="keyword">await</span> response.json()</span><br><span class="line">  <span class="keyword">return</span> products</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-2"><a href="#应该是什么样（正确写法）-2" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>大多数情况下（几乎所有情况），在你用<code>any</code>的时候其实你应该用<code>unknown</code>。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">loadProducts</span>(<span class="params"></span>): <span class="title">Promise</span>&lt;<span class="title">Product</span>[]&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://api.mysite.com/products'</span>)</span><br><span class="line">  <span class="keyword">const</span> products: unknown = <span class="keyword">await</span> response.json()</span><br><span class="line">  <span class="keyword">return</span> products <span class="keyword">as</span> Product[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-2"><a href="#为什么会这么写-2" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p><code>any</code>使用起来很方便，因为完全没有类型检查。<code>any</code>通常只会用在官方代码里面（例如 上面例子TypeScript 团队写的<code>response.json()</code> 是一个 <code>Promise&lt;any&gt;</code>类型。</p>
-<h3 id="为什么不该这么写-2"><a href="#为什么不该这么写-2" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>因为完全没有类型检查。而规避了类型检查之后很难debug，代码只会在运行的时候，并且数据类型跟我们原先假设的不一样的时候出错。</p>
-<h2 id="4-变量-as-某种类型"><a href="#4-变量-as-某种类型" class="headerlink" title="4. 变量 as 某种类型"></a>4. 变量 <code>as</code> 某种类型</h2><h3 id="错误例子-3"><a href="#错误例子-3" class="headerlink" title="错误例子"></a>错误例子</h3><p>让编译器强制类型转换</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">loadProducts</span>(<span class="params"></span>): <span class="title">Promise</span>&lt;<span class="title">Product</span>[]&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://api.mysite.com/products'</span>)</span><br><span class="line">  <span class="keyword">const</span> products: unknown = <span class="keyword">await</span> response.json()</span><br><span class="line">  <span class="keyword">return</span> products <span class="keyword">as</span> Product[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-3"><a href="#应该是什么样（正确写法）-3" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>应该使用type guards（类型保护）</p>
-<blockquote>
-<p> type guards（类型保护）: Some expression that performs a runtime check that guarantees the type in some scope.</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArrayOfProducts</span> (<span class="params">obj: unknown</span>): <span class="title">obj</span> <span class="title">is</span> <span class="title">Product</span>[] </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(obj) &amp;&amp; obj.every(isProduct)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isProduct</span> (<span class="params">obj: unknown</span>): <span class="title">obj</span> <span class="title">is</span> <span class="title">Product</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj != <span class="literal">null</span></span><br><span class="line">    &amp;&amp; <span class="keyword">typeof</span> (obj <span class="keyword">as</span> Product).id === <span class="string">'string'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">loadProducts</span>(<span class="params"></span>): <span class="title">Promise</span>&lt;<span class="title">Product</span>[]&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'https://api.mysite.com/products'</span>)</span><br><span class="line">  <span class="keyword">const</span> products: unknown = <span class="keyword">await</span> response.json()</span><br><span class="line">  <span class="keyword">if</span> (!isArrayOfProducts(products)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Received malformed products API response'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> products</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-3"><a href="#为什么会这么写-3" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>当JavaScript转换到TypeScript时，TypeScript的编译器常常无法自动猜出JavaScript的类型。这样的话使用<code>as SomeOtherType</code> 能加速转换过程还可以避免产生错误(<code>tsconfig</code>中的设置)</p>
-<h3 id="为什么不该这么写-3"><a href="#为什么不该这么写-3" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>就算现在代码能正常运行，但是未来如果有代码改动，type guards（类型保护）能保证详细的检查。</p>
-<h2 id="5-测试中使用-as-any"><a href="#5-测试中使用-as-any" class="headerlink" title="5. 测试中使用 as any"></a>5. 测试中使用 <code>as any</code></h2><h3 id="错误例子-4"><a href="#错误例子-4" class="headerlink" title="错误例子"></a>错误例子</h3><p>写测试的时候创建了一个不完整的stand-ins（替身）</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> User &#123;</span><br><span class="line">  id: <span class="built_in">string</span></span><br><span class="line">  firstName: <span class="built_in">string</span></span><br><span class="line">  lastName: <span class="built_in">string</span></span><br><span class="line">  email: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="string">'createEmailText returns text that greats the user by first name'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> user: User = &#123;</span><br><span class="line">    firstName: <span class="string">'John'</span></span><br><span class="line">  &#125; <span class="keyword">as</span> <span class="built_in">any</span></span><br><span class="line">  </span><br><span class="line">  expect(createEmailText(user)).toContain(user.firstName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-4"><a href="#应该是什么样（正确写法）-4" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p> 如果你的测试需要模拟数据，把模拟数据的逻辑写在模拟对象旁边，并且实现复用。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> User &#123;</span><br><span class="line">  id: <span class="built_in">string</span></span><br><span class="line">  firstName: <span class="built_in">string</span></span><br><span class="line">  lastName: <span class="built_in">string</span></span><br><span class="line">  email: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> MockUser <span class="keyword">implements</span> User &#123;</span><br><span class="line">  id = <span class="string">'id'</span></span><br><span class="line">  firstName = <span class="string">'John'</span></span><br><span class="line">  lastName = <span class="string">'Doe'</span></span><br><span class="line">  email = <span class="string">'john@doe.com'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="string">'createEmailText returns text that greats the user by first name'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">new</span> MockUser()</span><br><span class="line"></span><br><span class="line">  expect(createEmailText(user)).toContain(user.firstName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-4"><a href="#为什么会这么写-4" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>刚开始在一个还没有大量测试覆盖率的代码库写测试的时候，常常会遇到一些复杂的数据结构，但是测试只会用到其中的一小部分。不用担心数据结构的其他部分是一个简单的短期解决办法。</p>
-<h3 id="为什么不该这么写-4"><a href="#为什么不该这么写-4" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>之前写的测试可能会把我们坑死，如果近期修改了某个变量那我们需要手动修改所有的测试。而且，可能存在一种情况就是某个测试用到了某个我们之前以为不重要的变量，那么关于那个功能的所有的测试都需要手动更新。</p>
-<h2 id="6-Optional-properties（可选属性）"><a href="#6-Optional-properties（可选属性）" class="headerlink" title="6. Optional properties（可选属性）"></a>6. Optional properties（可选属性）</h2><h3 id="错误例子-5"><a href="#错误例子-5" class="headerlink" title="错误例子"></a>错误例子</h3><p>对于一些可有可无的属性我们标记为Optional（可选的）</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Product &#123;</span><br><span class="line">  id: <span class="built_in">string</span></span><br><span class="line">  <span class="keyword">type</span>: <span class="string">'digital'</span> | <span class="string">'physical'</span></span><br><span class="line">  weightInKg?: <span class="built_in">number</span></span><br><span class="line">  sizeInMb?: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-5"><a href="#应该是什么样（正确写法）-5" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>对于每个可能存在的属性，详细对应的类型。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Product &#123;</span><br><span class="line">  id: <span class="built_in">string</span></span><br><span class="line">  <span class="keyword">type</span>: <span class="string">'digital'</span> | <span class="string">'physical'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> DigitalProduct <span class="keyword">extends</span> Product &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="string">'digital'</span></span><br><span class="line">  sizeInMb: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> PhysicalProduct <span class="keyword">extends</span> Product &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="string">'physical'</span></span><br><span class="line">  weightInKg: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-5"><a href="#为什么会这么写-5" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>把属性标记为可选的而不是分开来写成不同的类型能减少代码量。而且这种写法需要对产品本身和代码有更深的理解，以及产品需求的变更的时候能减少代码量。</p>
-<h3 id="为什么不该这么写-5"><a href="#为什么不该这么写-5" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>类型最大的好处就是编译的时候就能完成对代码的检查而不是运行的时候才发现错误。根据更详细的类型，在编译的时候就能找出一些bug，不然的话会无法注意到。 例如 保证 每个<code>DigitalProduct</code>都有一个<code>sizeInMb</code>。</p>
-<h2 id="7-只有一个字母的泛型"><a href="#7-只有一个字母的泛型" class="headerlink" title="7. 只有一个字母的泛型"></a>7. 只有一个字母的泛型</h2><h3 id="错误例子-6"><a href="#错误例子-6" class="headerlink" title="错误例子"></a>错误例子</h3><p>只用一个字母来命名一个泛型</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">head</span>&lt;<span class="title">T</span>&gt; (<span class="params">arr: T[]</span>): <span class="title">T</span> | <span class="title">undefined</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-6"><a href="#应该是什么样（正确写法）-6" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>给一个完整的，描述性的名字。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">head</span>&lt;<span class="title">Element</span>&gt; (<span class="params">arr: Element[]</span>): <span class="title">Element</span> | <span class="title">undefined</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-6"><a href="#为什么会这么写-6" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>这个习惯可能是因为官方文档都是用一个字母来写泛型的。这样子写起来很快，只用写一个T就好，不用去费力想一个名字。</p>
-<h3 id="为什么不该这么写-6"><a href="#为什么不该这么写-6" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>泛型变量依旧是变量。由于IDE的发展我们已经开始放弃了在变量上描述变量技术细节的想法了。例如 <code>const strName = &#39;Daniel&#39;</code> 现在只会写成 <code>const name = &#39;Daniel&#39;</code>。并且一个字母的变量大多数情况下是不推荐的，因为很难不看声明来弄明白他们的含义。</p>
-<h2 id="8-非布尔值的布尔检查"><a href="#8-非布尔值的布尔检查" class="headerlink" title="8. 非布尔值的布尔检查"></a>8. 非布尔值的布尔检查</h2><h3 id="错误例子-7"><a href="#错误例子-7" class="headerlink" title="错误例子"></a>错误例子</h3><p>直接用<code>if</code>来检查一个一个变量有没有声明。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createNewMessagesResponse</span> (<span class="params">countOfNewMessages?: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Error: Could not retrieve number of new messages'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-7"><a href="#应该是什么样（正确写法）-7" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>明确检查我们关心的那种情况</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createNewMessagesResponse</span> (<span class="params">countOfNewMessages?: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Error: Could not retrieve number of new messages'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-7"><a href="#为什么会这么写-7" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>把检查写的很短看起来简洁，还可以避免去思考到底要检查什么</p>
-<h3 id="为什么不该这么写-7"><a href="#为什么不该这么写-7" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>我们需要想清楚自己到底要检查什么。上面的例子对于<code>countOfNewMessages</code> 是 <code>0</code> 的情况会有不同的结果。</p>
-<h2 id="9-Bang-Bang-运算符（-）"><a href="#9-Bang-Bang-运算符（-）" class="headerlink" title="9. Bang Bang 运算符（!!）"></a>9. Bang Bang 运算符（!!）</h2><h3 id="错误例子-8"><a href="#错误例子-8" class="headerlink" title="错误例子"></a>错误例子</h3><p>把一个非布尔值变成布尔值</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createNewMessagesResponse</span> (<span class="params">countOfNewMessages?: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!!countOfNewMessages) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Error: Could not retrieve number of new messages'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-8"><a href="#应该是什么样（正确写法）-8" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>明确检查我们关心的那种情况</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createNewMessagesResponse</span> (<span class="params">countOfNewMessages?: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Error: Could not retrieve number of new messages'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-8"><a href="#为什么会这么写-8" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>理解 <code>!!</code> 符号就像Javascript的入门技巧一样。它看起来简短且简介，如果你已经习惯了它的存在，那你是知道它是什么的。他是一个把任何值转为布尔值的捷径。尤其是项目里面对于<code>null</code>, <code>undefined</code>, and <code>&#39;&#39; </code>没有明确的区分.</p>
-<h3 id="为什么不该这么写-8"><a href="#为什么不该这么写-8" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>与其他捷径或者入门技巧一样，使用!!会使代码含义不清。这会使新的开发者很难看懂代码，不管是刚入门编程的或者是刚入门JavaScript的。这也很容易引入一些微妙的bug。上面的例子对于<code>countOfNewMessages</code> 是 <code>0</code> 的情况会也有不同的结果。</p>
-<h2 id="10-null"><a href="#10-null" class="headerlink" title="10. != null"></a>10. <code>!= null</code></h2><h3 id="错误例子-9"><a href="#错误例子-9" class="headerlink" title="错误例子"></a>错误例子</h3><p>Bang Bang 运算符的姐妹，<code>!= null</code> 允许我们同时检查<code>null</code> 和 <code>undefined</code>的情况。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createNewMessagesResponse</span> (<span class="params">countOfNewMessages?: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Error: Could not retrieve number of new messages'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="应该是什么样（正确写法）-9"><a href="#应该是什么样（正确写法）-9" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>明确检查我们关心的那种情况</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createNewMessagesResponse</span> (<span class="params">countOfNewMessages?: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Error: Could not retrieve number of new messages'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么会这么写-9"><a href="#为什么会这么写-9" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>如果你看到这里了说明你的代码量和代码技巧都可圈可点。即使最严格的linting规则，强制使用 <code>!==</code> 而不是 <code>!=</code> 的规则都对 <code>!= null</code> 做了例外处理。如果项目代码中对于 <code>null</code> 和 <code>undefined</code> 没有明确的区分，那么<code>!= null</code>是一个检查两者是否存在的捷径。</p>
-<h3 id="为什么不该这么写-9"><a href="#为什么不该这么写-9" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>在Javascript早期 <code>null</code> 值是个大麻烦，但是在TypeScript <code>strict</code>模式下他们可以变成十分有价值的工具袋。 一个常见的模式是用 null 代表一个完全不存在的东西，而undefined 代表存在但是未知的量。例如，<code>user.firstName === null</code> 可能代表用户确实没有名字， 但是 <code>user.firstName === undefined</code> 可以代表我们还没问到用户的名字（<code>user.firstName === &#39;&#39;</code> 代表用户名字叫 <code>&#39;&#39;</code>）。</p>
-<blockquote>
-<p>原文：<a href="https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/" target="_blank" rel="noopener">https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/</a></p>
-</blockquote>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
-          </div>
-
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/" rel="prev" title="C++，python运行速度比较程序">
-      <i class="fa fa-chevron-left"></i> C++，python运行速度比较程序
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
-      </footer>
-    
-  </article>
   
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
         </li>
@@ -382,43 +118,42 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B2%A1%E6%9C%89%E5%BC%80%E5%90%AF-strict-%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">1. 没有开启 strict 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99"><span class="nav-number">1.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99"><span class="nav-number">1.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">2. 使用 || 符号定义默认值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-1"><span class="nav-number">2.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-1"><span class="nav-number">2.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-1"><span class="nav-number">2.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-1"><span class="nav-number">2.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8-any-%E4%BD%9C%E4%B8%BA%E4%B8%80%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 使用 any 作为一种类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-2"><span class="nav-number">3.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-2"><span class="nav-number">3.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-2"><span class="nav-number">3.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-2"><span class="nav-number">3.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8F%98%E9%87%8F-as-%E6%9F%90%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">4. 变量 as 某种类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-3"><span class="nav-number">4.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-3"><span class="nav-number">4.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-3"><span class="nav-number">4.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-3"><span class="nav-number">4.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%B5%8B%E8%AF%95%E4%B8%AD%E4%BD%BF%E7%94%A8-as-any"><span class="nav-number">5.</span> <span class="nav-text">5. 测试中使用 as any</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-4"><span class="nav-number">5.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-4"><span class="nav-number">5.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-4"><span class="nav-number">5.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-4"><span class="nav-number">5.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Optional-properties%EF%BC%88%E5%8F%AF%E9%80%89%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">6. Optional properties（可选属性）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-5"><span class="nav-number">6.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-5"><span class="nav-number">6.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-5"><span class="nav-number">6.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-5"><span class="nav-number">6.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AF%8D%E7%9A%84%E6%B3%9B%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">7. 只有一个字母的泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-6"><span class="nav-number">7.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-6"><span class="nav-number">7.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-6"><span class="nav-number">7.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-6"><span class="nav-number">7.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E9%9D%9E%E5%B8%83%E5%B0%94%E5%80%BC%E7%9A%84%E5%B8%83%E5%B0%94%E6%A3%80%E6%9F%A5"><span class="nav-number">8.</span> <span class="nav-text">8. 非布尔值的布尔检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-7"><span class="nav-number">8.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-7"><span class="nav-number">8.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-7"><span class="nav-number">8.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-7"><span class="nav-number">8.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Bang-Bang-%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">9. Bang Bang 运算符（!!）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-8"><span class="nav-number">9.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-8"><span class="nav-number">9.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-8"><span class="nav-number">9.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-8"><span class="nav-number">9.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-null"><span class="nav-number">10.</span> <span class="nav-text">10. !&#x3D; null</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-9"><span class="nav-number">10.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-9"><span class="nav-number">10.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-9"><span class="nav-number">10.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-9"><span class="nav-number">10.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B2%A1%E6%9C%89%E5%BC%80%E5%90%AF-strict-%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">1. 没有开启 strict 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99"><span class="nav-number">1.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99"><span class="nav-number">1.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">2. 使用 || 符号定义默认值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-1"><span class="nav-number">2.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-1"><span class="nav-number">2.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-1"><span class="nav-number">2.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-1"><span class="nav-number">2.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8-any-%E4%BD%9C%E4%B8%BA%E4%B8%80%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 使用 any 作为一种类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-2"><span class="nav-number">3.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-2"><span class="nav-number">3.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-2"><span class="nav-number">3.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-2"><span class="nav-number">3.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8F%98%E9%87%8F-as-%E6%9F%90%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">4. 变量 as 某种类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-3"><span class="nav-number">4.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-3"><span class="nav-number">4.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-3"><span class="nav-number">4.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-3"><span class="nav-number">4.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%B5%8B%E8%AF%95%E4%B8%AD%E4%BD%BF%E7%94%A8-as-any"><span class="nav-number">5.</span> <span class="nav-text">5. 测试中使用 as any</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-4"><span class="nav-number">5.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-4"><span class="nav-number">5.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-4"><span class="nav-number">5.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-4"><span class="nav-number">5.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Optional-properties%EF%BC%88%E5%8F%AF%E9%80%89%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">6. Optional properties（可选属性）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-5"><span class="nav-number">6.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-5"><span class="nav-number">6.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-5"><span class="nav-number">6.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-5"><span class="nav-number">6.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AF%8D%E7%9A%84%E6%B3%9B%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">7. 只有一个字母的泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-6"><span class="nav-number">7.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-6"><span class="nav-number">7.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-6"><span class="nav-number">7.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-6"><span class="nav-number">7.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E9%9D%9E%E5%B8%83%E5%B0%94%E5%80%BC%E7%9A%84%E5%B8%83%E5%B0%94%E6%A3%80%E6%9F%A5"><span class="nav-number">8.</span> <span class="nav-text">8. 非布尔值的布尔检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-7"><span class="nav-number">8.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-7"><span class="nav-number">8.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-7"><span class="nav-number">8.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-7"><span class="nav-number">8.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Bang-Bang-%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">9. Bang Bang 运算符（!!）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-8"><span class="nav-number">9.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-8"><span class="nav-number">9.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-8"><span class="nav-number">9.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-8"><span class="nav-number">9.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-null"><span class="nav-number">10.</span> <span class="nav-text">10. !&#x3D; null</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90-9"><span class="nav-number">10.1.</span> <span class="nav-text">错误例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%88%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95%EF%BC%89-9"><span class="nav-number">10.2.</span> <span class="nav-text">应该是什么样（正确写法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%BF%99%E4%B9%88%E5%86%99-9"><span class="nav-number">10.3.</span> <span class="nav-text">为什么会这么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E8%BF%99%E4%B9%88%E5%86%99-9"><span class="nav-number">10.4.</span> <span class="nav-text">为什么不该这么写</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">BAZINGA</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+        <a href="/archives/">
           <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
+          <a href="/tags/">
         <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author motion-element">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
       Links
     </div>
     <ul class="links-of-blogroll-list">
@@ -428,61 +163,231 @@
     </ul>
   </div>
 
+        </div>
       </div>
-
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+    </header>
 
-    <footer class="footer">
-      <div class="footer-inner">
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="10个TypeScript的坏习惯 | BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10个TypeScript的坏习惯
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-02-14 13:48:20 / Modified: 13:49:54" itemprop="dateCreated datePublished" datetime="2021-02-14T13:48:20-08:00">2021-02-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Typescript 和 Javascript 在过去的几年里增加了很多新特性，所以我们写代码时的一些习惯可能已经过时了, 其中一些可能已经永久的失去了存在意义。这篇文章列举了10个不应该有的习惯。</p>
+<p>在下面的例子中，注意“应该是什么样”只是修复了讨论的问题，代码里面可能还会有别的问题这里不做讨论。</p>
+<span id="more"></span>
+
+<h2 id="1-没有开启-strict-模式"><a href="#1-没有开启-strict-模式" class="headerlink" title="1. 没有开启 strict 模式"></a>1. 没有开启 <code>strict</code> 模式</h2><h3 id="错误例子"><a href="#错误例子" class="headerlink" title="错误例子"></a>错误例子</h3><p>在 <code>tsconfig.json</code>里面没有使用 strict 模式</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;ES2015&quot;</span>,</span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;commonjs&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）"><a href="#应该是什么样（正确写法）" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;ES2015&quot;</span>,</span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;commonjs&quot;</span>,</span><br><span class="line">    <span class="string">&quot;strict&quot;</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写"><a href="#为什么会这么写" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>在现存项目里面开<code>strict</code>模式（严格模式）需要花额外时间修改代码</p>
+<h3 id="为什么不该这么写"><a href="#为什么不该这么写" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>开启<code>strict</code>模式 未来修改代码会很容易，磨刀不误砍柴工</p>
+<h2 id="2-使用-符号定义默认值"><a href="#2-使用-符号定义默认值" class="headerlink" title="2. 使用 || 符号定义默认值"></a>2. 使用 <code>||</code> 符号定义默认值</h2><h3 id="错误例子-1"><a href="#错误例子-1" class="headerlink" title="错误例子"></a>错误例子</h3><p>用<code>||</code>定义备用默认值</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createBlogPost</span> (<span class="attr">text</span>: <span class="built_in">string</span>, <span class="attr">author</span>: <span class="built_in">string</span>, date?: <span class="title class_">Date</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">text</span>: text,</span><br><span class="line">    <span class="attr">author</span>: author,</span><br><span class="line">    <span class="attr">date</span>: date || <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应该是什么样（正确写法）-1"><a href="#应该是什么样（正确写法）-1" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>使用新的 <code>??</code> 符号，或者直接在参数声明的地方定义fallback value(备用值)</p>
+<blockquote>
+<p>A fallback value is a value you would use when the main thing you requested is not available.</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createBlogPost</span> (<span class="attr">text</span>: <span class="built_in">string</span>, <span class="attr">author</span>: <span class="built_in">string</span>, <span class="attr">date</span>: <span class="title class_">Date</span> = <span class="keyword">new</span> <span class="title class_">Date</span>())</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">text</span>: text,</span><br><span class="line">    <span class="attr">author</span>: author,</span><br><span class="line">    <span class="attr">date</span>: date</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-1"><a href="#为什么会这么写-1" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p><code>??</code> 符号在去年发布3.7版本的时候才引入。以及如果在一个超长的函数中间设置默认值的话可能会比较困难。</p>
+<h3 id="为什么不该这么写-1"><a href="#为什么不该这么写-1" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>与 <code>||</code> 符号不同， <code>??</code> 只有在前面参数是<code>null</code> 或者 <code>undefined</code>的时候才起作用，如果是false的话就不会。以及如果有个函数很长以至于无法在一开始设置默认值，分开来（splitting）写也是个好办法。</p>
+<h2 id="3-使用-any-作为一种类型"><a href="#3-使用-any-作为一种类型" class="headerlink" title="3. 使用 any 作为一种类型"></a>3. 使用 <code>any</code> 作为一种类型</h2><h3 id="错误例子-2"><a href="#错误例子-2" class="headerlink" title="错误例子"></a>错误例子</h3><p>当你不确定变量内容的时候使用<code>any</code>作为一种类型来存放变量</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadProducts</span>(<span class="params"></span>): <span class="title class_">Promise</span>&lt;<span class="title class_">Product</span>[]&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.mysite.com/products&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">products</span>: <span class="built_in">any</span> = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">  <span class="keyword">return</span> products</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-2"><a href="#应该是什么样（正确写法）-2" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>大多数情况下（几乎所有情况），在你用<code>any</code>的时候其实你应该用<code>unknown</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadProducts</span>(<span class="params"></span>): <span class="title class_">Promise</span>&lt;<span class="title class_">Product</span>[]&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.mysite.com/products&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">products</span>: <span class="built_in">unknown</span> = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">  <span class="keyword">return</span> products <span class="keyword">as</span> <span class="title class_">Product</span>[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-2"><a href="#为什么会这么写-2" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p><code>any</code>使用起来很方便，因为完全没有类型检查。<code>any</code>通常只会用在官方代码里面（例如 上面例子TypeScript 团队写的<code>response.json()</code> 是一个 <code>Promise&lt;any&gt;</code>类型。</p>
+<h3 id="为什么不该这么写-2"><a href="#为什么不该这么写-2" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>因为完全没有类型检查。而规避了类型检查之后很难debug，代码只会在运行的时候，并且数据类型跟我们原先假设的不一样的时候出错。</p>
+<h2 id="4-变量-as-某种类型"><a href="#4-变量-as-某种类型" class="headerlink" title="4. 变量 as 某种类型"></a>4. 变量 <code>as</code> 某种类型</h2><h3 id="错误例子-3"><a href="#错误例子-3" class="headerlink" title="错误例子"></a>错误例子</h3><p>让编译器强制类型转换</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadProducts</span>(<span class="params"></span>): <span class="title class_">Promise</span>&lt;<span class="title class_">Product</span>[]&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.mysite.com/products&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">products</span>: <span class="built_in">unknown</span> = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">  <span class="keyword">return</span> products <span class="keyword">as</span> <span class="title class_">Product</span>[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-3"><a href="#应该是什么样（正确写法）-3" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>应该使用type guards（类型保护）</p>
+<blockquote>
+<p> type guards（类型保护）: Some expression that performs a runtime check that guarantees the type in some scope.</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">isArrayOfProducts</span> (<span class="attr">obj</span>: <span class="built_in">unknown</span>): obj is <span class="title class_">Product</span>[] &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Array</span>.<span class="title function_">isArray</span>(obj) &amp;&amp; obj.<span class="title function_">every</span>(isProduct)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isProduct</span> (<span class="attr">obj</span>: <span class="built_in">unknown</span>): obj is <span class="title class_">Product</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> obj != <span class="literal">null</span></span><br><span class="line">    &amp;&amp; <span class="keyword">typeof</span> (obj <span class="keyword">as</span> <span class="title class_">Product</span>).<span class="property">id</span> === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadProducts</span>(<span class="params"></span>): <span class="title class_">Promise</span>&lt;<span class="title class_">Product</span>[]&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.mysite.com/products&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">products</span>: <span class="built_in">unknown</span> = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">isArrayOfProducts</span>(products)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;Received malformed products API response&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> products</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-3"><a href="#为什么会这么写-3" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>当JavaScript转换到TypeScript时，TypeScript的编译器常常无法自动猜出JavaScript的类型。这样的话使用<code>as SomeOtherType</code> 能加速转换过程还可以避免产生错误(<code>tsconfig</code>中的设置)</p>
+<h3 id="为什么不该这么写-3"><a href="#为什么不该这么写-3" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>就算现在代码能正常运行，但是未来如果有代码改动，type guards（类型保护）能保证详细的检查。</p>
+<h2 id="5-测试中使用-as-any"><a href="#5-测试中使用-as-any" class="headerlink" title="5. 测试中使用 as any"></a>5. 测试中使用 <code>as any</code></h2><h3 id="错误例子-4"><a href="#错误例子-4" class="headerlink" title="错误例子"></a>错误例子</h3><p>写测试的时候创建了一个不完整的stand-ins（替身）</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">User</span> &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">firstName</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">lastName</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">email</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;createEmailText returns text that greats the user by first name&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">user</span>: <span class="title class_">User</span> = &#123;</span><br><span class="line">    <span class="attr">firstName</span>: <span class="string">&#x27;John&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">as</span> <span class="built_in">any</span></span><br><span class="line">  </span><br><span class="line">  <span class="title function_">expect</span>(<span class="title function_">createEmailText</span>(user)).<span class="title function_">toContain</span>(user.<span class="property">firstName</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-4"><a href="#应该是什么样（正确写法）-4" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p> 如果你的测试需要模拟数据，把模拟数据的逻辑写在模拟对象旁边，并且实现复用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">User</span> &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">firstName</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">lastName</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">email</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MockUser</span> <span class="keyword">implements</span> <span class="title class_">User</span> &#123;</span><br><span class="line">  id = <span class="string">&#x27;id&#x27;</span></span><br><span class="line">  firstName = <span class="string">&#x27;John&#x27;</span></span><br><span class="line">  lastName = <span class="string">&#x27;Doe&#x27;</span></span><br><span class="line">  email = <span class="string">&#x27;john@doe.com&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;createEmailText returns text that greats the user by first name&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">new</span> <span class="title class_">MockUser</span>()</span><br><span class="line"></span><br><span class="line">  <span class="title function_">expect</span>(<span class="title function_">createEmailText</span>(user)).<span class="title function_">toContain</span>(user.<span class="property">firstName</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-4"><a href="#为什么会这么写-4" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>刚开始在一个还没有大量测试覆盖率的代码库写测试的时候，常常会遇到一些复杂的数据结构，但是测试只会用到其中的一小部分。不用担心数据结构的其他部分是一个简单的短期解决办法。</p>
+<h3 id="为什么不该这么写-4"><a href="#为什么不该这么写-4" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>之前写的测试可能会把我们坑死，如果近期修改了某个变量那我们需要手动修改所有的测试。而且，可能存在一种情况就是某个测试用到了某个我们之前以为不重要的变量，那么关于那个功能的所有的测试都需要手动更新。</p>
+<h2 id="6-Optional-properties（可选属性）"><a href="#6-Optional-properties（可选属性）" class="headerlink" title="6. Optional properties（可选属性）"></a>6. Optional properties（可选属性）</h2><h3 id="错误例子-5"><a href="#错误例子-5" class="headerlink" title="错误例子"></a>错误例子</h3><p>对于一些可有可无的属性我们标记为Optional（可选的）</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;digital&#x27;</span> | <span class="string">&#x27;physical&#x27;</span></span><br><span class="line">  weightInKg?: <span class="built_in">number</span></span><br><span class="line">  sizeInMb?: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-5"><a href="#应该是什么样（正确写法）-5" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>对于每个可能存在的属性，详细对应的类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;digital&#x27;</span> | <span class="string">&#x27;physical&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">DigitalProduct</span> <span class="keyword">extends</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;digital&#x27;</span></span><br><span class="line">  <span class="attr">sizeInMb</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">PhysicalProduct</span> <span class="keyword">extends</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;physical&#x27;</span></span><br><span class="line">  <span class="attr">weightInKg</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-5"><a href="#为什么会这么写-5" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>把属性标记为可选的而不是分开来写成不同的类型能减少代码量。而且这种写法需要对产品本身和代码有更深的理解，以及产品需求的变更的时候能减少代码量。</p>
+<h3 id="为什么不该这么写-5"><a href="#为什么不该这么写-5" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>类型最大的好处就是编译的时候就能完成对代码的检查而不是运行的时候才发现错误。根据更详细的类型，在编译的时候就能找出一些bug，不然的话会无法注意到。 例如 保证 每个<code>DigitalProduct</code>都有一个<code>sizeInMb</code>。</p>
+<h2 id="7-只有一个字母的泛型"><a href="#7-只有一个字母的泛型" class="headerlink" title="7. 只有一个字母的泛型"></a>7. 只有一个字母的泛型</h2><h3 id="错误例子-6"><a href="#错误例子-6" class="headerlink" title="错误例子"></a>错误例子</h3><p>只用一个字母来命名一个泛型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> head&lt;T&gt; (<span class="attr">arr</span>: T[]): T | <span class="literal">undefined</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-6"><a href="#应该是什么样（正确写法）-6" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>给一个完整的，描述性的名字。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> head&lt;<span class="title class_">Element</span>&gt; (<span class="attr">arr</span>: <span class="title class_">Element</span>[]): <span class="title class_">Element</span> | <span class="literal">undefined</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-6"><a href="#为什么会这么写-6" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>这个习惯可能是因为官方文档都是用一个字母来写泛型的。这样子写起来很快，只用写一个T就好，不用去费力想一个名字。</p>
+<h3 id="为什么不该这么写-6"><a href="#为什么不该这么写-6" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>泛型变量依旧是变量。由于IDE的发展我们已经开始放弃了在变量上描述变量技术细节的想法了。例如 <code>const strName = &#39;Daniel&#39;</code> 现在只会写成 <code>const name = &#39;Daniel&#39;</code>。并且一个字母的变量大多数情况下是不推荐的，因为很难不看声明来弄明白他们的含义。</p>
+<h2 id="8-非布尔值的布尔检查"><a href="#8-非布尔值的布尔检查" class="headerlink" title="8. 非布尔值的布尔检查"></a>8. 非布尔值的布尔检查</h2><h3 id="错误例子-7"><a href="#错误例子-7" class="headerlink" title="错误例子"></a>错误例子</h3><p>直接用<code>if</code>来检查一个一个变量有没有声明。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createNewMessagesResponse</span> (countOfNewMessages?: <span class="built_in">number</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Error: Could not retrieve number of new messages&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-7"><a href="#应该是什么样（正确写法）-7" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>明确检查我们关心的那种情况</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createNewMessagesResponse</span> (countOfNewMessages?: <span class="built_in">number</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Error: Could not retrieve number of new messages&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-7"><a href="#为什么会这么写-7" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>把检查写的很短看起来简洁，还可以避免去思考到底要检查什么</p>
+<h3 id="为什么不该这么写-7"><a href="#为什么不该这么写-7" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>我们需要想清楚自己到底要检查什么。上面的例子对于<code>countOfNewMessages</code> 是 <code>0</code> 的情况会有不同的结果。</p>
+<h2 id="9-Bang-Bang-运算符（-）"><a href="#9-Bang-Bang-运算符（-）" class="headerlink" title="9. Bang Bang 运算符（!!）"></a>9. Bang Bang 运算符（!!）</h2><h3 id="错误例子-8"><a href="#错误例子-8" class="headerlink" title="错误例子"></a>错误例子</h3><p>把一个非布尔值变成布尔值</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createNewMessagesResponse</span> (countOfNewMessages?: <span class="built_in">number</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!!countOfNewMessages) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Error: Could not retrieve number of new messages&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-8"><a href="#应该是什么样（正确写法）-8" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>明确检查我们关心的那种情况</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createNewMessagesResponse</span> (countOfNewMessages?: <span class="built_in">number</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Error: Could not retrieve number of new messages&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-8"><a href="#为什么会这么写-8" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>理解 <code>!!</code> 符号就像Javascript的入门技巧一样。它看起来简短且简介，如果你已经习惯了它的存在，那你是知道它是什么的。他是一个把任何值转为布尔值的捷径。尤其是项目里面对于<code>null</code>, <code>undefined</code>, and <code>&#39;&#39; </code>没有明确的区分.</p>
+<h3 id="为什么不该这么写-8"><a href="#为什么不该这么写-8" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>与其他捷径或者入门技巧一样，使用!!会使代码含义不清。这会使新的开发者很难看懂代码，不管是刚入门编程的或者是刚入门JavaScript的。这也很容易引入一些微妙的bug。上面的例子对于<code>countOfNewMessages</code> 是 <code>0</code> 的情况会也有不同的结果。</p>
+<h2 id="10-null"><a href="#10-null" class="headerlink" title="10. != null"></a>10. <code>!= null</code></h2><h3 id="错误例子-9"><a href="#错误例子-9" class="headerlink" title="错误例子"></a>错误例子</h3><p>Bang Bang 运算符的姐妹，<code>!= null</code> 允许我们同时检查<code>null</code> 和 <code>undefined</code>的情况。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createNewMessagesResponse</span> (countOfNewMessages?: <span class="built_in">number</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Error: Could not retrieve number of new messages&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="应该是什么样（正确写法）-9"><a href="#应该是什么样（正确写法）-9" class="headerlink" title="应该是什么样（正确写法）"></a>应该是什么样（正确写法）</h3><p>明确检查我们关心的那种情况</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createNewMessagesResponse</span> (countOfNewMessages?: <span class="built_in">number</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (countOfNewMessages !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`You have <span class="subst">$&#123;countOfNewMessages&#125;</span> new messages`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Error: Could not retrieve number of new messages&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么会这么写-9"><a href="#为什么会这么写-9" class="headerlink" title="为什么会这么写"></a>为什么会这么写</h3><p>如果你看到这里了说明你的代码量和代码技巧都可圈可点。即使最严格的linting规则，强制使用 <code>!==</code> 而不是 <code>!=</code> 的规则都对 <code>!= null</code> 做了例外处理。如果项目代码中对于 <code>null</code> 和 <code>undefined</code> 没有明确的区分，那么<code>!= null</code>是一个检查两者是否存在的捷径。</p>
+<h3 id="为什么不该这么写-9"><a href="#为什么不该这么写-9" class="headerlink" title="为什么不该这么写"></a>为什么不该这么写</h3><p>在Javascript早期 <code>null</code> 值是个大麻烦，但是在TypeScript <code>strict</code>模式下他们可以变成十分有价值的工具袋。 一个常见的模式是用 null 代表一个完全不存在的东西，而undefined 代表存在但是未知的量。例如，<code>user.firstName === null</code> 可能代表用户确实没有名字， 但是 <code>user.firstName === undefined</code> 可以代表我们还没问到用户的名字（<code>user.firstName === &#39;&#39;</code> 代表用户名字叫 <code>&#39;&#39;</code>）。</p>
+<blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/">https://startup-cto.net/10-bad-typescript-habits-to-break-this-year/</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+          </div>
+
         
 
-        
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/12/%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8EC-%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%AF%94python%E5%BF%AB/" rel="prev" title="C++，python运行速度比较程序">
+                  <i class="fa fa-chevron-left"></i> C++，python运行速度比较程序
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
-  &copy; 2015 – 
+  &copy; 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">BAZINGA</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/utils.js"></script>
+  
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
 
 
 
@@ -492,42 +397,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'de6f6e5b077875cca55f',
-      clientSecret: 'a6c825094427a48f3476af87d9673767683fbd84',
-      repo        : 'cydjohn.github.io',
-      owner       : 'cydjohn',
-      admin       : ['cydjohn'],
-      id          : 'b2fae89619bdc187528dde3f712a668c',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cydjohn","repo":"cydjohn.github.io","client_id":"de6f6e5b077875cca55f","client_secret":"a6c825094427a48f3476af87d9673767683fbd84","admin_user":["cydjohn"],"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b2fae89619bdc187528dde3f712a668c"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>
