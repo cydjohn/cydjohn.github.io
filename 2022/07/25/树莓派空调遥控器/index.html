@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caoyudong.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="我有一个便携式空调放在客厅，天热的时候需要开着卧室的门睡因为卧室里面没发放空调，所以就想用树莓派来弄一个空调遥控器。这样加一个简单的后台就可以直接用手机遥控，实现一个超简易版“智能家居”。 准备工具 树莓派 红外接收管 HS0038B 红外发射管 TSAL6200 空调 空调遥控器   其中 红外接收管 和 红外发射管 在美国不太容易买到，可以在亚马逊上买这种一套，然后把塑料遥控器剪开拿里面的发射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派空调遥控器">
+<meta property="og:url" content="http://caoyudong.com/2022/07/25/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8/index.html">
+<meta property="og:site_name" content="BAZINGA">
+<meta property="og:description" content="我有一个便携式空调放在客厅，天热的时候需要开着卧室的门睡因为卧室里面没发放空调，所以就想用树莓派来弄一个空调遥控器。这样加一个简单的后台就可以直接用手机遥控，实现一个超简易版“智能家居”。 准备工具 树莓派 红外接收管 HS0038B 红外发射管 TSAL6200 空调 空调遥控器   其中 红外接收管 和 红外发射管 在美国不太容易买到，可以在亚马逊上买这种一套，然后把塑料遥控器剪开拿里面的发射">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://caoyudong.com/image/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A81.jpg">
+<meta property="og:image" content="http://caoyudong.com/image/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A82.jpg">
+<meta property="article:published_time" content="2022-07-25T07:43:04.000Z">
+<meta property="article:modified_time" content="2022-07-25T07:48:04.325Z">
+<meta property="article:author" content="BAZINGA">
+<meta property="article:tag" content="树莓派">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://caoyudong.com/image/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A81.jpg">
+
+
+<link rel="canonical" href="http://caoyudong.com/2022/07/25/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://caoyudong.com/2022/07/25/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8/","path":"2022/07/25/树莓派空调遥控器/","title":"树莓派空调遥控器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树莓派空调遥控器 | BAZINGA</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-68546647-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-68546647-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="BAZINGA" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">BAZINGA</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">BAZINGA's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">准备工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">硬件连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9config-txt"><span class="nav-number">4.</span> <span class="nav-text">修改config.txt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%93%BE%E6%8E%A5%E6%98%AF%E5%90%A6%E6%AD%A3%E5%B8%B8"><span class="nav-number">5.</span> <span class="nav-text">测试链接是否正常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E5%A4%96%E5%8F%91%E5%B0%84%E7%AE%A1%E6%A3%80%E6%B5%8B"><span class="nav-number">5.1.</span> <span class="nav-text">红外发射管检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E5%A4%96%E6%8E%A5%E6%94%B6%E7%AE%A1%E6%A3%80%E6%B5%8B"><span class="nav-number">5.2.</span> <span class="nav-text">红外接收管检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%95%E5%85%A5%E7%BA%A2%E5%A4%96%E4%BF%A1%E5%8F%B7"><span class="nav-number">6.</span> <span class="nav-text">录入红外信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%95%E5%88%B6%E5%85%B6%E5%AE%83%E6%8C%89%E9%92%AE"><span class="nav-number">6.1.</span> <span class="nav-text">录制其它按钮</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BAZINGA</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cydjohn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cydjohn" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://gaomingfei.xyz/" title="http:&#x2F;&#x2F;gaomingfei.xyz&#x2F;" rel="noopener" target="_blank">高明飞的博客</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://caoyudong.com/2022/07/25/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BAZINGA">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树莓派空调遥控器 | BAZINGA">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派空调遥控器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-25 00:43:04 / Modified: 00:48:04" itemprop="dateCreated datePublished" datetime="2022-07-25T00:43:04-07:00">2022-07-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>我有一个便携式空调放在客厅，天热的时候需要开着卧室的门睡因为卧室里面没发放空调，所以就想用树莓派来弄一个空调遥控器。这样加一个简单的后台就可以直接用手机遥控，实现一个超简易版“智能家居”。</p>
+<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ol>
+<li>树莓派</li>
+<li>红外接收管 HS0038B</li>
+<li>红外发射管 TSAL6200</li>
+<li>空调</li>
+<li>空调遥控器</li>
+</ol>
+<p><img src="../../../../image/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A81.jpg"></p>
+<p>其中 红外接收管 和 红外发射管 在美国不太容易买到，可以在亚马逊上买这种一套，然后把塑料遥控器剪开拿里面的发射管就好</p>
+<span id="more"></span>
+
+<h2 id="硬件连接"><a href="#硬件连接" class="headerlink" title="硬件连接"></a>硬件连接</h2><p>红外接收管信号输出脚 -&gt; GPIO18<br>红外发射管正极 -&gt; GPIO17</p>
+<blockquote>
+<p>电阻随便加一个限流就好</p>
+</blockquote>
+<p><img src="../../../../image/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A9%BA%E8%B0%83%E9%81%A5%E6%8E%A7%E5%99%A82.jpg"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install lirc</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改config-txt"><a href="#修改config-txt" class="headerlink" title="修改config.txt"></a>修改config.txt</h2><p>修改文件 /boot/config.txt# ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /boot/config.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改 infrared communication 部分，修改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Uncomment this to enable infrared communication.</span><br><span class="line">dtoverlay=gpio-ir,gpio_pin=18</span><br><span class="line">dtoverlay=gpio-ir-tx,gpio_pin=17</span><br></pre></td></tr></table></figure>
+
+<p>修改驱动(LIRC)配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/lirc/lirc_options.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找到</span></span><br><span class="line">driver = devinput</span><br><span class="line">device = auto</span><br><span class="line"><span class="comment"># 修改为</span></span><br><span class="line">driver = default</span><br><span class="line">device = /dev/lirc1</span><br></pre></td></tr></table></figure>
+
+<p>修改完后重启树莓派。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot now</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试链接是否正常"><a href="#测试链接是否正常" class="headerlink" title="测试链接是否正常"></a>测试链接是否正常</h2><p>重启之后 <code>/dev</code> 目录下会多出两个 lirc文件 <code>lirc0</code> <code>lirc1</code>，分别 对应发射管和接收管</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~ $ ls /dev|grep lirc</span><br><span class="line">lirc0</span><br><span class="line">lirc1</span><br></pre></td></tr></table></figure>
+
+<h3 id="红外发射管检测"><a href="#红外发射管检测" class="headerlink" title="红外发射管检测"></a>红外发射管检测</h3><p>通过命令给红外发射管一个高电平</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpio write 0 1</span><br></pre></td></tr></table></figure>
+
+<p>这时发射管会被点亮，不过由于人眼看不见红外线，这里可以借助手机相机查看红外发射管是否处于发光状态。然后关掉发射管</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpio write 0 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="红外接收管检测"><a href="#红外接收管检测" class="headerlink" title="红外接收管检测"></a>红外接收管检测</h3><p>然后检测红外接收管</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 必须停止lircd服务才能进入接收红外信号模式</span><br><span class="line">sudo service lircd stop</span><br><span class="line">mode2 -d /dev/lirc1</span><br></pre></td></tr></table></figure>
+
+<p>用遥控器对着红外接收管按下一个键，如果得到如下形式的输出就表示正常：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sing driver default on device /dev/lirc1</span><br><span class="line">Trying device: /dev/lirc1</span><br><span class="line">Using device: /dev/lirc1</span><br><span class="line">pulse 44</span><br><span class="line"><span class="built_in">timeout</span> 27327</span><br><span class="line">pulse 133</span><br><span class="line"><span class="built_in">timeout</span> 28081</span><br><span class="line">pulse 9041</span><br><span class="line">space 4478</span><br><span class="line">pulse 582</span><br><span class="line">space 552</span><br><span class="line">pulse 562</span><br><span class="line">space 1680</span><br><span class="line">pulse 585</span><br><span class="line">space 547</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="录入红外信号"><a href="#录入红外信号" class="headerlink" title="录入红外信号"></a>录入红外信号</h2><p>进入红外接收模式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mode2 -m -d /dev/lirc1</span><br></pre></td></tr></table></figure>
+
+<p>然后按下遥控器上的“开”按钮，得到以下输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~ $ mode2 -m -d /dev/lirc1</span><br><span class="line">Using driver default on device /dev/lirc1</span><br><span class="line">Trying device: /dev/lirc1</span><br><span class="line">Using device: /dev/lirc1</span><br><span class="line"> 16777215</span><br><span class="line"></span><br><span class="line">     9042     4481      582      524      610     1653</span><br><span class="line">      587      545      561      580      553      571</span><br><span class="line">      589      544      594      542      584     1653</span><br><span class="line">      586     1654      588      544      561     1680</span><br><span class="line">      589     1663      551     1679      591     1651</span><br><span class="line">      586     1654      590      543      588      549</span><br><span class="line">      583      546      590      542      587     1654</span><br><span class="line">      587      546      588     1652      562     1687</span><br><span class="line">      558      569      599     1640      562     1679</span><br><span class="line">      590     1652      588      544      588     1660</span><br><span class="line">      581      544      588      545      588     1653</span><br><span class="line">      588    13339-pulse    63245-space</span><br><span class="line"></span><br><span class="line">    39763-space</span><br><span class="line"></span><br><span class="line">     9049     2232      588    31692-pulse</span><br></pre></td></tr></table></figure>
+
+<p>上述输出，删除第一个很大的数字16777215及前面的内容以及 <code>xxxx-pluse</code>和<code>xxxx-space</code> 格式的内容，然后复制，就得到了“开空调”的红外信号。</p>
+<p>接下来，创建配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/lirc/lircd.conf.d/aircon.lircd.conf</span><br></pre></td></tr></table></figure>
+
+<p>填入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">begin remote</span><br><span class="line"></span><br><span class="line">    name  aircon</span><br><span class="line">    flags RAW_CODES</span><br><span class="line">    eps            30</span><br><span class="line">    aeps          100</span><br><span class="line"></span><br><span class="line">    gap          19991</span><br><span class="line"></span><br><span class="line">    begin raw_codes</span><br><span class="line">        name on</span><br><span class="line">            9042     4481      582      524      610     1653</span><br><span class="line">            587      545      561      580      553      571</span><br><span class="line">            589      544      594      542      584     1653</span><br><span class="line">            586     1654      588      544      561     1680</span><br><span class="line">            589     1663      551     1679      591     1651</span><br><span class="line">            586     1654      590      543      588      549</span><br><span class="line">            583      546      590      542      587     1654</span><br><span class="line">            587      546      588     1652      562     1687</span><br><span class="line">            558      569      599     1640      562     1679</span><br><span class="line">            590     1652      588      544      588     1660</span><br><span class="line">            581      544      588      545      588     1653</span><br><span class="line">            588    </span><br><span class="line"></span><br><span class="line">  end raw_codes</span><br><span class="line"></span><br><span class="line">end remote</span><br></pre></td></tr></table></figure>
+
+<p>保存配置文件后，需要重启LIRC服务才能生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart lircd</span><br></pre></td></tr></table></figure>
+
+<p>测试开空调指令是否生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">irsend SEND_ONCE aircon on</span><br></pre></td></tr></table></figure>
+
+<p>上述命令中，aircon是遥控器名称，对应配置文件中的name aircon；on是遥控器的指令，对应配置文件中begin raw_codes后面的name on。指令执行后，如果没有任何输出，说明指令正确执行了，正确情况下空调应该“嘀”的一声，然后打开了。如果空调没有反应，可以打开手机摄像头，对准红外发射管，再次执行开空调指令，并观察红外发射管是否闪动。如果能观察到闪动，说明信号已经发射出去，可以考虑将红外发射管移近空调（测试时4米可以控制，偶尔失灵）。<br>如果执行指令后，提示找不到遥控器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unknown remote: &quot;aircon&quot;</span><br><span class="line">Error running command: Input/output error</span><br></pre></td></tr></table></figure>
+<p>说明配置文件格式不对.</p>
+<h3 id="录制其它按钮"><a href="#录制其它按钮" class="headerlink" title="录制其它按钮"></a>录制其它按钮</h3><p>接下来可以按照同样的方法录制更多红外信号，比如关空调，升温，降温等。需要注意的是有些空调红外遥控器会把每个状态都对应一个红外信号。比如现在是23度，按下 + 键 空调变为24度 并获得了红外信号。 通过自己的设备重新发送一遍红外信号会发现空调还是24度，并没有变成25度。对于这种情况就需要把自己的常见温度录制一遍。<br>我的空调比较蠢，垃圾意大利货开和关的信号都是一样的，而且还只有+ 和 - 两个信号控制升温和降温，所以我录制三个信号就可以覆盖使用场景了。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="http://www.maoyingdong.com/dorzy/">http://www.maoyingdong.com/dorzy/</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000014135418">https://segmentfault.com/a/1190000014135418</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag"># 树莓派</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/14/10%E4%B8%AATypeScript%E7%9A%84%E5%9D%8F%E4%B9%A0%E6%83%AF/" rel="prev" title="10个TypeScript的坏习惯">
+                  <i class="fa fa-chevron-left"></i> 10个TypeScript的坏习惯
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BAZINGA</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cydjohn","repo":"cydjohn.github.io","client_id":"de6f6e5b077875cca55f","client_secret":"a6c825094427a48f3476af87d9673767683fbd84","admin_user":["cydjohn"],"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"94946fbd08f2be54324407904b6a4441"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
