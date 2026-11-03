@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import Archive from '../../components/Archive.astro';
+import { getPosts } from '../../lib/posts';
+
+const posts = await getPosts();
+---
+<Base title="归档">
+  <h1 class="page-title">归档 <small class="meta">共 {posts.length} 篇</small></h1>
+  <Archive posts={posts} />
+</Base>

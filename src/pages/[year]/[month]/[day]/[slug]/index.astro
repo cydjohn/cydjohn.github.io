@@ -1,0 +1,33 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../../../layouts/Base.astro';
+import { getPosts, postParams, postPath, fmtDate, tagPath, type Post } from '../../../../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: postParams(post),
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props { post: Post; newer?: Post; older?: Post }
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={post.data.title}>
+  <article>
+    <h1 class="post-title">{post.data.title}</h1>
+    <div class="meta">
+      <time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
+      {post.data.tags.map((t) => <a class="tag" href={tagPath(t)}>{t}</a>)}
+    </div>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+  <nav class="post-nav">
+    <div>{newer && <a href={postPath(newer)}><small>← 较新</small>{newer.data.title}</a>}</div>
+    <div class="next">{older && <a href={postPath(older)}><small>较旧 →</small>{older.data.title}</a>}</div>
+  </nav>
+</Base>
