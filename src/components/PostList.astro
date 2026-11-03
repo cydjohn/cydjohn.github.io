@@ -1,0 +1,33 @@
+---
+import { postPath, fmtDate, tagPath, type Post } from '../lib/posts';
+
+interface Props { posts: Post[] }
+const { posts } = Astro.props;
+
+// Plain-text excerpt from the raw markdown body.
+function excerpt(body: string | undefined, n = 110) {
+  if (!body) return '';
+  const text = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/^#+\s.*$/gm, ' ')
+    .replace(/[*_`>#|-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return text.length > n ? text.slice(0, n) + '…' : text;
+}
+---
+<ul class="post-list">
+  {posts.map((p) => (
+    <li>
+      <h2><a href={postPath(p)}>{p.data.title}</a></h2>
+      <div class="meta">
+        <time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time>
+        {p.data.tags.map((t) => <a class="tag" href={tagPath(t)}>{t}</a>)}
+      </div>
+      {excerpt(p.body) && <p>{excerpt(p.body)}</p>}
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,94 @@
+:root {
+  --bg: #fbfaf8;
+  --fg: #1f2328;
+  --muted: #6b7078;
+  --line: #e6e2dc;
+  --accent: #b4462b;
+  --code-bg: #f3f1ed;
+  --card: #ffffff;
+  --maxw: 44rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --fg: #e4e6ea;
+    --muted: #9aa0a8;
+    --line: #2b2f35;
+    --accent: #f08a6c;
+    --code-bg: #1d2024;
+    --card: #1b1e22;
+    color-scheme: dark;
+  }
+  .astro-code, .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.8 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans CJK SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+
+.site-header { border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.25rem; padding-bottom: 1rem; }
+.brand { font-weight: 700; font-size: 1.25rem; letter-spacing: .04em; color: var(--fg); }
+.nav { display: flex; gap: 1.1rem; font-size: .95rem; }
+.nav a { color: var(--muted); }
+.nav a[aria-current="page"], .nav a:hover { color: var(--fg); text-decoration: none; }
+
+main.wrap { padding-top: 2rem; padding-bottom: 3rem; }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; padding: 1.5rem 0 2.5rem; }
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list li { padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+.post-list li:last-child { border-bottom: 0; }
+.post-list h2 { font-size: 1.2rem; margin: 0 0 .25rem; line-height: 1.45; }
+.post-list h2 a { color: var(--fg); }
+.post-list h2 a:hover { color: var(--accent); text-decoration: none; }
+.post-list p { margin: .35rem 0 0; color: var(--muted); font-size: .95rem; }
+
+.meta { color: var(--muted); font-size: .88rem; display: flex; flex-wrap: wrap; gap: .25rem .75rem; }
+.tag { color: var(--muted); }
+.tag::before { content: "#"; }
+.tag:hover { color: var(--accent); }
+
+.pager { display: flex; justify-content: space-between; margin-top: 2rem; font-size: .95rem; }
+
+.post-title { font-size: 1.85rem; line-height: 1.35; margin: 0 0 .5rem; }
+.prose { overflow-wrap: anywhere; }
+.prose h1, .prose h2, .prose h3, .prose h4 { line-height: 1.4; margin: 2rem 0 .75rem; }
+.prose h1 { font-size: 1.5rem; } .prose h2 { font-size: 1.35rem; } .prose h3 { font-size: 1.15rem; }
+.prose img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 6px; }
+.prose blockquote { margin: 1rem 0; padding: .1rem 1rem; border-left: 3px solid var(--line); color: var(--muted); }
+.prose code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em; }
+.prose :not(pre) > code { background: var(--code-bg); padding: .1em .35em; border-radius: 4px; }
+.prose pre { padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: .9rem; line-height: 1.6; background: var(--code-bg); }
+.prose table { border-collapse: collapse; display: block; overflow-x: auto; max-width: 100%; }
+.prose th, .prose td { border: 1px solid var(--line); padding: .4rem .7rem; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: .95rem; }
+.post-nav .next { text-align: right; }
+.post-nav small { display: block; color: var(--muted); }
+
+.archive-year { font-size: 1.3rem; margin: 2rem 0 .5rem; }
+.archive-year:first-child { margin-top: 0; }
+.archive { list-style: none; padding: 0; margin: 0; }
+.archive li { display: flex; gap: 1rem; padding: .3rem 0; }
+.archive time { color: var(--muted); font-variant-numeric: tabular-nums; flex: none; font-size: .92rem; padding-top: .1rem; }
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: .5rem .9rem; }
+.tag-cloud a { color: var(--fg); }
+.tag-cloud sup { color: var(--muted); margin-left: .15rem; }
+h1.page-title { font-size: 1.5rem; margin: 0 0 1.5rem; }

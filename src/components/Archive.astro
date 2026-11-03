@@ -1,0 +1,21 @@
+---
+import { postPath, fmtDate, year, type Post } from '../lib/posts';
+
+interface Props { posts: Post[] }
+const { posts } = Astro.props;
+const groups = new Map<string, Post[]>();
+for (const p of posts) {
+  const y = year(p.data.date);
+  groups.set(y, [...(groups.get(y) ?? []), p]);
+}
+---
+{[...groups.entries()].map(([y, list]) => (
+  <section>
+    <h2 class="archive-year"><a href={`/archives/${y}/`}>{y}</a> <small class="meta">· {list.length} 篇</small></h2>
+    <ul class="archive">
+      {list.map((p) => (
+        <li><time>{fmtDate(p.data.date).slice(5)}</time><a href={postPath(p)}>{p.data.title}</a></li>
+      ))}
+    </ul>
+  </section>
+))}

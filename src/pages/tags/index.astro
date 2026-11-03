@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, allTags, tagPath } from '../../lib/posts';
+
+const tags = allTags(await getPosts());
+---
+<Base title="标签">
+  <h1 class="page-title">标签 <small class="meta">共 {tags.length} 个</small></h1>
+  <div class="tag-cloud">
+    {tags.map(([t, list]) => <a href={tagPath(t)}>{t}<sup>{list.length}</sup></a>)}
+  </div>
+</Base>

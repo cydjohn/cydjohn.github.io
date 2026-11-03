@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import { SITE } from '../lib/posts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.title}` : SITE.title;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/', label: '首页' },
+  { href: '/archives/', label: '归档' },
+  { href: '/tags/', label: '标签' },
+  { href: '/about/', label: '关于' },
+];
+const isActive = (href: string) => (href === '/' ? path === '/' || path.startsWith('/page/') : path.startsWith(href));
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(path, Astro.site)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">{SITE.title}</a>
+        <nav class="nav">
+          {nav.map((n) => <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        © 2015–{new Date().getFullYear()} {SITE.author} · <a href={SITE.github}>GitHub</a> · <a href="/rss.xml">RSS</a>
+      </div>
+    </footer>
+  </body>
+</html>

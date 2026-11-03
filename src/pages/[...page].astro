@@ -1,0 +1,28 @@
+---
+// Home page with pagination: "/" and "/page/2/", "/page/3/"… (same URLs as the old Hexo site)
+import type { GetStaticPaths } from 'astro';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/posts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPosts();
+  const pages = paginate(posts, { pageSize: 10 });
+  // paginate() yields "/" and "/2/"; rewrite page params to "page/N"
+  return pages.map((p) => ({
+    params: { page: p.params.page ? `page/${p.params.page}` : undefined },
+    props: p.props,
+  }));
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const href = (n: number) => (n === 1 ? '/' : `/page/${n}/`);
+---
+<Base title={page.currentPage > 1 ? `第 ${page.currentPage} 页` : undefined}>
+  <PostList posts={page.data} />
+  <nav class="pager">
+    <span>{page.currentPage > 1 && <a href={href(page.currentPage - 1)}>← 较新的文章</a>}</span>
+    <span>{page.currentPage} / {page.lastPage}</span>
+    <span>{page.currentPage < page.lastPage && <a href={href(page.currentPage + 1)}>较旧的文章 →</a>}</span>
+  </nav>
+</Base>

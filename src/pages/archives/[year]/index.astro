@@ -1,0 +1,18 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Archive from '../../../components/Archive.astro';
+import { getPosts, year, type Post } from '../../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const years = [...new Set(posts.map((p) => year(p.data.date)))];
+  return years.map((y) => ({ params: { year: y }, props: { posts: posts.filter((p) => year(p.data.date) === y) } }));
+}
+
+const { posts } = Astro.props as { posts: Post[] };
+const { year: y } = Astro.params;
+---
+<Base title={`${y} 年归档`}>
+  <h1 class="page-title"><a href="/archives/">归档</a> / {y}</h1>
+  <Archive posts={posts} />
+</Base>
